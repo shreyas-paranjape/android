@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Admin</string>
+    <string name="title_activity_home">Admin</string>
+    <string name="btn_save">Save</string>
+    <string name="btnAdd">Add</string>
+    <string name="link_image">drawer link image</string>
+    <string name="btnEditDesc">Edit description</string>
+    <string name="btnDeleteDesc">Delete button</string>
+</resources>

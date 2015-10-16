@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Customer</string>
+    <string name="title_activity_home">Food amigo</string>
+    <string name="link_image">link image</string>
+    <string name="product_add">Add</string>
+    <string name="desc_product_image">Product image</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="cart">Cart</string>
+    <string name="divider">|</string>
+    <string name="checkout">Checkout</string>
+    <string name="Rs"> \u20B9 </string>
+    <string name="edit_name">Edit profile name</string>
+    <string name="address">Address</string>
+    <string name="add_address">Add address</string>
+    <string name="name">Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="hint_name">Enter full name</string>
+    <string name="hint_mobile">Enter mobile number</string>
+    <string name="menu_profile">profile</string>
+    <string name="use_location">Use current location</string>
+    <string name="enter_address">Enter address</string>
+    <string name="enterLocality">Enter locality. eg. St.inez</string>
+    <string name="enterAddressName">Enter a name for the address. E.g Home,Work</string>
+</resources>

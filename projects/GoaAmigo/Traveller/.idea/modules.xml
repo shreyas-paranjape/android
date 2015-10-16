@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Traveller.iml" filepath="$PROJECT_DIR$/Traveller.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../libraries/common/common.iml" filepath="$PROJECT_DIR$/../../../libraries/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Model/model.iml" filepath="$PROJECT_DIR$/../Model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../libraries/persist/sugar/sugar.iml" filepath="$PROJECT_DIR$/../../../libraries/persist/sugar/sugar.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../libraries/network/volley/volley.iml" filepath="$PROJECT_DIR$/../../../libraries/network/volley/volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../../libraries/network/android-websockets/websocket.iml" filepath="$PROJECT_DIR$/../../../libraries/network/android-websockets/websocket.iml" />

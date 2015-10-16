@@ -36,7 +36,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
     protected void replaceContent(Fragment newFragment) {
         int containerId = getContentContainerId();
-        if (containerId != 0) {
+        if (containerId != 0 && newFragment != null) {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(containerId, newFragment).commit();

@@ -1,6 +1,6 @@
 include ':app'
 include ':volley'
-project(':volley').projectDir = new File(rootDir, '../../../libraries/net/volley')
+project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':common'
 project(':common').projectDir = new File(rootDir, '../../../libraries/common')
 include ':sugar'

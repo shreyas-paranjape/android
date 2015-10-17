@@ -4,16 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnSearchTrip"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_search_trip" />
-
-    <Button
-        android:id="@+id/btnFindDeals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_find_deals" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

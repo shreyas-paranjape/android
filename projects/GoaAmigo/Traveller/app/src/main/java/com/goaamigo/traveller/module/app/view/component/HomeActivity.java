@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
+import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
 import com.goaamigo.traveller.module.trip.view.component.TripActivity;
 import com.view.activity.AbstractActivity;
 
@@ -72,12 +73,7 @@ public class HomeActivity extends AbstractActivity {
     }
 
     public class EventListener {
-        public void onEvent(MenuFragment.SearchTripButtonClickedEvent event) {
-            Log.i(TAG, "in on event");
-            startTripActivity(event);
-        }
-
-        public void onEvent(MenuFragment.FindDealsButtonClickedEvent event) {
+        public void onEvent(MenuRVAdapter.MenuButtonClicked event) {
             Log.i(TAG, "in on event");
             startTripActivity(event);
         }
@@ -89,7 +85,7 @@ public class HomeActivity extends AbstractActivity {
     }
 
 
-    private void startTripActivity(MenuButtonEvent event) {
+    private void startTripActivity(Serializable event) {
         Intent intent = new Intent(this, TripActivity.class);
         intent.putExtra(Constant.EVENT, event);
         startActivity(intent);

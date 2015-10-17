@@ -14,6 +14,13 @@ public class DrawerFragment extends ListNavigationDrawer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        drawerItems.add(new Item("Home", R.drawable.ic_home_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new MenuFragment();
+            }
+        });
         drawerItems.add(new Item("Feedback", R.drawable.ic_feedback_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
@@ -23,13 +30,13 @@ public class DrawerFragment extends ListNavigationDrawer {
         drawerItems.add(new Item("Help", R.drawable.ic_help_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return null;
+                return new HelpFragment();
             }
         });
-        drawerItems.add(new Item("test", R.drawable.ic_accessibility_black_24dp) {
+        drawerItems.add(new Item("Contact Us", R.drawable.ic_contact_phone_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return null;
+                return new ContactUsFragment();
             }
         });
     }

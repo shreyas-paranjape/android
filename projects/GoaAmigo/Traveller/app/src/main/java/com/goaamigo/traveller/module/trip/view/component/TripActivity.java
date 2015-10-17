@@ -3,20 +3,34 @@ package com.goaamigo.traveller.module.trip.view.component;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 
+import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
+import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
 import com.goaamigo.traveller.module.app.view.component.HomeActivity;
 import com.view.activity.AbstractActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TripActivity extends AbstractActivity {
 
+    private static final String TAG = TripActivity.class.getName();
     private EventListener listener = new EventListener();
+    private Map<MenuData, Fragment> menuFragMap = new HashMap<>();
+
+
+    public TripActivity() {
+        menuFragMap.put(new MenuData("Home"),new SearchTripFragment());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerListener(listener);
+
     }
 
     @Override
@@ -42,7 +56,12 @@ public class TripActivity extends AbstractActivity {
 
     @Override
     protected Fragment getInitContent() {
-       return ((HomeActivity.MenuButtonEvent)getIntent().getSerializableExtra(Constant.EVENT)).getFragment();
+        MenuData menuItem = ((MenuRVAdapter.MenuButtonClicked)getIntent()
+                .getSerializableExtra(Constant.EVENT)).getMenuData();
+        Log.i(TAG,"item :" + menuItem);
+        Fragment frag = menuFragMap.get(menuItem);
+        Log.i(TAG," Frag :" + frag);
+       return frag;
     }
 
     @Override

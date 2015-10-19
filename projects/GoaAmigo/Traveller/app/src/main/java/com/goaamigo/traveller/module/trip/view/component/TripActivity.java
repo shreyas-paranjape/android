@@ -9,7 +9,6 @@ import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
-import com.goaamigo.traveller.module.app.view.component.HomeActivity;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;
@@ -24,6 +23,7 @@ public class TripActivity extends AbstractActivity {
 
     public TripActivity() {
         menuFragMap.put(new MenuData("Home"),new SearchTripFragment());
+        menuFragMap.put(new MenuData("login to trip"),new LoginFragment());
     }
 
     @Override
@@ -78,6 +78,12 @@ public class TripActivity extends AbstractActivity {
 
         public void onEvent(SearchTripFragment.FindTripButtonClickEvent event) {
             replaceContent(new TripResultsFragment());
+        }
+        public  void onEvent(LoginFragment.FindLoginButtonClickEvent event){
+            replaceContent(new TripResultsFragment());
+        }
+        public void onEvent(LoginFragment.FindSignUpButtonClickEvent event){
+            replaceContent(new SignUpFragment());
         }
 
     }

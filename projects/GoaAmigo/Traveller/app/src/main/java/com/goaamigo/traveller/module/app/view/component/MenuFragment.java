@@ -5,23 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
-import com.goaamigo.traveller.module.deal.view.component.FindDealsFragment;
-import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 public class MenuFragment extends Fragment {
     private List<MenuData> list;
@@ -39,8 +32,9 @@ public class MenuFragment extends Fragment {
 
     private void initView(View v) {
         list = new ArrayList<>();
-        MenuData data = new MenuData("Home", R.drawable.ic_home_black_24dp, "Home description");
-        list.add(data);
+        list.add(new MenuData("Search Trip", R.drawable.ic_home_black_24dp, "Home description"));
+        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
 

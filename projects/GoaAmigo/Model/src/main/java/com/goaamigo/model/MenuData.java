@@ -1,8 +1,5 @@
 package com.goaamigo.model;
 
-
-import android.app.Fragment;
-
 import java.io.Serializable;
 
 public class MenuData implements Serializable {

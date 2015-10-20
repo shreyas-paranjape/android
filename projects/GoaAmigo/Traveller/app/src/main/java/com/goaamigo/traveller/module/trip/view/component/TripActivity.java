@@ -1,9 +1,14 @@
 package com.goaamigo.traveller.module.trip.view.component;
 
 import android.app.Fragment;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
@@ -16,10 +21,10 @@ import java.util.Map;
 
 public class TripActivity extends AbstractActivity {
 
+
     private static final String TAG = TripActivity.class.getName();
     private EventListener listener = new EventListener();
     private Map<MenuData, Fragment> menuFragMap = new HashMap<>();
-
 
     public TripActivity() {
         menuFragMap.put(new MenuData("Home"),new SearchTripFragment());
@@ -30,7 +35,6 @@ public class TripActivity extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerListener(listener);
-
     }
 
     @Override
@@ -58,9 +62,7 @@ public class TripActivity extends AbstractActivity {
     protected Fragment getInitContent() {
         MenuData menuItem = ((MenuRVAdapter.MenuButtonClicked)getIntent()
                 .getSerializableExtra(Constant.EVENT)).getMenuData();
-        Log.i(TAG,"item :" + menuItem);
         Fragment frag = menuFragMap.get(menuItem);
-        Log.i(TAG," Frag :" + frag);
        return frag;
     }
 
@@ -85,6 +87,5 @@ public class TripActivity extends AbstractActivity {
         public void onEvent(LoginFragment.FindSignUpButtonClickEvent event){
             replaceContent(new SignUpFragment());
         }
-
     }
 }

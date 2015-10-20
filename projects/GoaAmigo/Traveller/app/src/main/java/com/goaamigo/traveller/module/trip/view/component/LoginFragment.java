@@ -37,7 +37,6 @@ public class LoginFragment extends Fragment {
     Button facebook;
     Button googlePlus;
 
-    Boolean userPassMatched = false;
     private android.util.Log log;
 
     public LoginFragment() {
@@ -51,15 +50,12 @@ public class LoginFragment extends Fragment {
         return v;
 
     }
-
     private void initView(View v) {
         username = (EditText)v.findViewById(R.id.etbUsername);
         password = (EditText)v.findViewById(R.id.etxPassword);
         forgot = (TextView)v.findViewById(R.id.tvForgot);
         String uName = username.getText().toString();
         String pass = password.getText().toString();
-        final RequestQueue queue = Volley.newRequestQueue(getActivity());
-        final String uri = new String("https://192.168.10.252:8443/google");
 
         Login = (Button)v.findViewById(R.id.btnLogin);
         singUp = (Button)v.findViewById(R.id.btnSignUp);
@@ -84,7 +80,6 @@ public class LoginFragment extends Fragment {
             }
         });
     }
-
     class FindLoginButtonClickEvent {
     }
     class FindSignUpButtonClickEvent {

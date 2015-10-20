@@ -16,6 +16,7 @@ import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
 import com.goaamigo.traveller.module.app.view.adapter.SearchableActivity;
 import com.goaamigo.traveller.module.trip.view.component.TripActivity;
+import com.goaamigo.traveller.module.trip.view.component.TripFragment;
 import com.view.activity.AbstractActivity;
 
 import java.io.Serializable;
@@ -54,7 +55,7 @@ public class HomeActivity extends AbstractActivity {
     }
 
     protected Fragment getInitContent() {
-        return new MenuFragment();
+        return new TripFragment();
     }
 
     protected DrawerLayout getDrawerLayout() {
@@ -75,7 +76,7 @@ public class HomeActivity extends AbstractActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == R.id.action_search){
+        } else if (id == R.id.action_search) {
             onSearchRequested();
         }
         return super.onOptionsItemSelected(item);

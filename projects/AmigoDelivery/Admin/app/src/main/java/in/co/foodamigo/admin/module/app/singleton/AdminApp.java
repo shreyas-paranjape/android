@@ -1,4 +1,4 @@
-package in.co.foodamigo.admin.module.app;
+package in.co.foodamigo.admin.module.app.singleton;
 
 import android.app.Application;
 

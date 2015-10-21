@@ -82,7 +82,7 @@ public class TripActivity extends AbstractActivity {
             replaceContent(new TripResultsFragment());
         }
         public  void onEvent(LoginFragment.FindLoginButtonClickEvent event){
-            replaceContent(new TripResultsFragment());
+            replaceContent(new TripFragment());
         }
         public void onEvent(LoginFragment.FindSignUpButtonClickEvent event){
             replaceContent(new SignUpFragment());

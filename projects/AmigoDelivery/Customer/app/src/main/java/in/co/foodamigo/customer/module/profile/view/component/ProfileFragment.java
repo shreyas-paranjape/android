@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Profile");
         FragmentProfileBinding rootBinding =
                 FragmentProfileBinding.inflate(inflater, container, false);
         rootBinding.setParty(party);
@@ -59,6 +58,7 @@ public class ProfileFragment extends Fragment {
                 showForm(Constant.PERSONAL_DETAILS);
             }
         });
+
         rootBinding.addresses.setAdapter(
                 new AddressAdapter(getActivity(),
                         R.layout.item_address,
@@ -70,13 +70,12 @@ public class ProfileFragment extends Fragment {
         showForm();
     }
 
-    private void showForm(String which) {
+    private void showForm() {
         Intent intent = new Intent(getActivity(), FormActivity.class);
         Bundle args = new Bundle();
         args.putString(Constant.FORM, which);
         intent.putExtras(args);
         getActivity().startActivityForResult(intent, 999);
     }
-
 
 }

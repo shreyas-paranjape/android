@@ -2,12 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.co.foodamigo.admin">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".module.app.singleton.AdminApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".module.app.AdminApp"
         android:theme="@style/AppTheme.NoActionBar">
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="delivery_admin.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="delivery.model" />
+
         <service
             android:name=".module.app.infra.socket.SocketConnectionManager"
             android:enabled="true"

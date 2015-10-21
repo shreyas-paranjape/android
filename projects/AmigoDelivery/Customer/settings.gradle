@@ -1,9 +1,11 @@
 include ':app'
-include ':volley'
-project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':common'
 project(':common').projectDir = new File(rootDir, '../../../libraries/common')
 include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
 include ':model'
 project(':model').projectDir = new File(rootDir, '../Model')
+include ':volley'
+project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
+include ':cog'
+project(':cog').projectDir = new File(rootDir,'../../../libraries/cognalys')

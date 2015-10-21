@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import org.apache.http.*;
-import org.apache.http.client.HttpResponseException;
+//import org.apache.http.client.HttpResponseException;
 import org.apache.http.message.BasicLineParser;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -106,7 +106,7 @@ public class WebSocketClient {
                     // Read HTTP response status line.
                     StatusLine statusLine = parseStatusLine(readLine(stream));
                     if (statusLine == null) {
-                        throw new HttpException("Received no reply from server.");
+                        throw new HttpResponseException("Received no reply from server.");
                     } else if (statusLine.getStatusCode() != HttpStatus.SC_SWITCHING_PROTOCOLS) {
                         throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
                     }

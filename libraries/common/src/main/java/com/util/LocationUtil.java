@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.provider.Settings;
 
-public class GpsUtil {
+import java.util.List;
+
+public class LocationUtil {
 
     public static void displayPromptForEnablingGPS(
             final Activity activity) {
@@ -30,5 +34,24 @@ public class GpsUtil {
                             }
                         });
         builder.create().show();
+    }
+
+    public static Location getLastKnownLocation(LocationManager mLocationManager) {
+        List<String> providers = mLocationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = mLocationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null
+                    || l.getAccuracy() < bestLocation.getAccuracy()) {
+                bestLocation = l;
+            }
+        }
+        if (bestLocation == null) {
+            return null;
+        }
+        return bestLocation;
     }
 }

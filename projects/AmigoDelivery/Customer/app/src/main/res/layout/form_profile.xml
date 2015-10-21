@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_margin="10dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etMobile"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="@string/hint_mobile"
-        android:inputType="phone"
-        android:textSize="16sp" />
+        android:text="@string/label_name"
+        android:paddingBottom="5dp"
+        android:textSize="25sp"/>
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:hint="@string/hint_name"
         android:inputType="text"
+        android:padding="15px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/input_box_bg"
         android:textSize="16sp" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_mobile"
+        android:paddingBottom="5dp"
+        android:textSize="25sp"/>
+
+    <EditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_mobile"
+        android:inputType="phone"
+        android:padding="15px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/input_box_bg"
+        android:textSize="16sp" />
+
+
+
+</LinearLayout>

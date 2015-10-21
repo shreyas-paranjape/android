@@ -13,6 +13,7 @@ import delivery.model.profile.Party;
 import delivery.repository.PartyRepo;
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.databinding.FragmentProfileBinding;
+import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.app.view.component.FormActivity;
 import in.co.foodamigo.customer.module.profile.view.adapter.AddressAdapter;
 
@@ -42,22 +43,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTitle("Profile");
         FragmentProfileBinding rootBinding =
                 FragmentProfileBinding.inflate(inflater, container, false);
         rootBinding.setParty(party);
         rootBinding.btnAddressAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showForm();
+                showForm(Constant.ADDRESS);
             }
         });
         rootBinding.ibEditName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showForm();
+                showForm(Constant.PERSONAL_DETAILS);
             }
         });
-
         rootBinding.addresses.setAdapter(
                 new AddressAdapter(getActivity(),
                         R.layout.item_address,
@@ -69,9 +70,13 @@ public class ProfileFragment extends Fragment {
         showForm();
     }
 
-    private void showForm() {
+    private void showForm(String which) {
         Intent intent = new Intent(getActivity(), FormActivity.class);
-        getActivity().startActivityForResult(intent,999);
+        Bundle args = new Bundle();
+        args.putString(Constant.FORM, which);
+        intent.putExtras(args);
+        getActivity().startActivityForResult(intent, 999);
     }
+
 
 }

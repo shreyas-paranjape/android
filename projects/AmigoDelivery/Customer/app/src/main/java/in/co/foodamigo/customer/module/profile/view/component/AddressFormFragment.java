@@ -20,6 +20,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.util.LocationUtil;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -32,9 +34,7 @@ import java.util.List;
 public class AddressFormFragment extends FormFragment {
     private final String TAG = AddressFormFragment.class.getName();
     private EditText etAddress;
-    private EditText etAddressLabel;
     private AutoCompleteTextView acLocality;
-    private LocationManager mLocationManager;
     private Location lastKnown;
 
     private String[] localities = new String[]{"St.inez", "Taleigao", "Caranzalem", "Miramar"};
@@ -42,9 +42,9 @@ public class AddressFormFragment extends FormFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLocationManager =
-                (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        lastKnown = getLastKnownLocation();
+        lastKnown = LocationUtil.getLastKnownLocation(
+                (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE)
+        );
     }
 
     @Nullable
@@ -52,19 +52,18 @@ public class AddressFormFragment extends FormFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.form_address, container, false);
+        getActivity().setTitle("Address");
+        initView(root);
+        showKeyboard();
+        return root;
+    }
 
+    private void initView(View root) {
         etAddress = (EditText) root.findViewById(R.id.etAddress);
-        etAddressLabel = (EditText) root.findViewById(R.id.etAddressLabel);
-
         acLocality = (AutoCompleteTextView) root.findViewById(R.id.acLocality);
         acLocality.setAdapter(new ArrayAdapter<String>(getActivity(),
                 android.R.layout.select_dialog_item, localities));
         acLocality.setThreshold(2);
-
-        getActivity().setTitle("Address");
-        showKeyboard();
-
-        return root;
     }
 
     @Override
@@ -75,10 +74,6 @@ public class AddressFormFragment extends FormFragment {
         if ("".equals(etAddress.getText().toString())) {
             done = false;
             messageBuilder.append(" Address,");
-        }
-        if ("".equals(etAddressLabel.getText().toString())) {
-            done = false;
-            messageBuilder.append(" Address label,");
         }
         if ("".equals(acLocality.getText().toString())) {
             done = false;
@@ -94,25 +89,6 @@ public class AddressFormFragment extends FormFragment {
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
 
-    }
-
-    private Location getLastKnownLocation() {
-        List<String> providers = mLocationManager.getProviders(true);
-        Location bestLocation = null;
-        for (String provider : providers) {
-            Location l = mLocationManager.getLastKnownLocation(provider);
-            if (l == null) {
-                continue;
-            }
-            if (bestLocation == null
-                    || l.getAccuracy() < bestLocation.getAccuracy()) {
-                bestLocation = l;
-            }
-        }
-        if (bestLocation == null) {
-            return null;
-        }
-        return bestLocation;
     }
 
 }

@@ -16,6 +16,7 @@ import de.greenrobot.event.EventBus;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
+    protected final EventBus eventBus = EventBus.getDefault();
     private EventListener listener;
 
     @Override
@@ -37,16 +38,18 @@ public abstract class AbstractActivity extends AppCompatActivity {
     protected void replaceContent(Fragment newFragment) {
         int containerId = getContentContainerId();
         if (containerId != 0 && newFragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            ft.replace(containerId, newFragment).commit();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(containerId, newFragment, newFragment.getClass().getName())
+                    .addToBackStack(newFragment.getClass().getName())
+                    .commit();
         }
     }
 
     protected void setupDrawer() {
         int drawerId = getDrawerFragmentId();
         if (drawerId != 0) {
-            EventBus.getDefault().post(
+            eventBus.post(
                     new NavigationDrawer.SetupDrawerEvent(
                             getDrawerLayout(),
                             drawerId));
@@ -71,19 +74,20 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     protected void unRegisterListener(Object listener) {
-        if (EventBus.getDefault().isRegistered(listener)) {
-            EventBus.getDefault().unregister(listener);
+        if (eventBus.isRegistered(listener)) {
+            eventBus.unregister(listener);
         }
     }
 
     protected void registerListener(Object listener) {
-        if (!EventBus.getDefault().isRegistered(listener)) {
-            EventBus.getDefault().register(listener);
+        if (!eventBus.isRegistered(listener)) {
+            eventBus.register(listener);
         }
     }
 
     private class EventListener {
         public void onEvent(NavigationDrawer.DrawerItemClickedEvent event) {
+            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             replaceContent(event.getItem().getDisplayFragment());
         }
     }

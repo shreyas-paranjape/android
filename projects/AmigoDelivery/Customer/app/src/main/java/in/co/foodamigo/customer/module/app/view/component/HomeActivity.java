@@ -9,7 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.matesnetwork.Cognalys.VerifyMobile;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
@@ -31,6 +33,8 @@ public class HomeActivity extends AbstractActivity {
         //initListeners();
         initCart();
         initView();
+        Intent intent = new Intent(this,EnterMobileActivity.class);
+        startActivity(intent);
     }
 
     @Override

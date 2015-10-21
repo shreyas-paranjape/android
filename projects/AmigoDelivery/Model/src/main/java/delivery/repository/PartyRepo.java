@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import delivery.model.common.Address;
-import delivery.model.common.GeoLocation;
 import delivery.model.profile.Party;
 
 public class PartyRepo {
@@ -16,7 +15,11 @@ public class PartyRepo {
         //for (PartyAddress partyAddress : partyAddresses) {
         //    res.add(partyAddress.getAddress());
         //}
-        res.add(new Address("settertertsgterst", "ewatewtw4e5t34eftwa45q", new GeoLocation()));
+        res.add(new Address("settertertsgterst", "ewatewtw4e5t34eftwa45q"));
         return res;
+    }
+
+    public static Party getLoggedInParty() {
+        return null;
     }
 }

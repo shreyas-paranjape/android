@@ -55,4 +55,6 @@ public class Party {
         this.description = description;
     }
 
+
+
 }

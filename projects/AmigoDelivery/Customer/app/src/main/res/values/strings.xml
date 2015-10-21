@@ -16,11 +16,18 @@
     <string name="name">Name</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="hint_name">Enter full name</string>
-    <string name="hint_mobile">Enter mobile number</string>
+    <string name="hint_name">Firstname Lastname</string>
+    <string name="hint_mobile">10 Digits</string>
     <string name="menu_profile">profile</string>
     <string name="use_location">Use current location</string>
-    <string name="enter_address">Enter address</string>
-    <string name="enterLocality">Enter locality. eg. St.inez</string>
+    <string name="enter_address">H. no. 007 X street, A-403 X Society</string>
+    <string name="enterLocality">St.inez , Miramar</string>
     <string name="enterAddressName">Enter a name for the address. E.g Home,Work</string>
+    <string name="label_locality">Locality</string>
+    <string name="label_address">Address</string>
+    <string name="label_geo">Latitude/Longitude</string>
+    <string name="btn_use_current">Use current</string>
+    <string name="btn_select_on_map">Select on map</string>
+    <string name="label_name">Name</string>
+    <string name="label_mobile">Mobile</string>
 </resources>

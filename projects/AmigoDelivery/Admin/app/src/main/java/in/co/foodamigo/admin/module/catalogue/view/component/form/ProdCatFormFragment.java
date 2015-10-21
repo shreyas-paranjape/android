@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.Constant;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.model.ProductCategory;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.spinner.ProdCatSpinnerAdapter;
 

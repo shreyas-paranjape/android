@@ -21,7 +21,7 @@ public class PersonalDetailsFormFragment extends FormFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.form_profile, container, false);
         etName = (EditText) root.findViewById(R.id.etName);
-        etMobile = (EditText) root.findViewById(R.id.etName);
+        etMobile = (EditText) root.findViewById(R.id.etMobile);
         return root;
     }
 

@@ -13,7 +13,7 @@ import com.orm.SugarRecord;
 import java.util.Random;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.Constant;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.model.Supplier;
 
 public class SupplierFormFragment extends Fragment {

@@ -19,10 +19,10 @@ public class AdminApp extends Application {
         SugarContext.init(getApplicationContext());
         FontsOverride.setDefaultFont(this, "MONOSPACE", "Raleway-Thin.ttf");
         FontsOverride.setDefaultFont(this, "SERIF", "Raleway-Regular.ttf");
-        createDummyData();
+        //createDummyData();
     }
 
-    private void createDummyData() {
+    /*private void createDummyData() {
         ProductCategory root = new ProductCategory(1, "root");
         SugarRecord.save(root);
         ProductCategory goan = new ProductCategory(2, "goan",root);
@@ -46,7 +46,7 @@ public class AdminApp extends Application {
                 snacks,
                 awesomeRest));
 
-    }
+    }*/
 
     @Override
     public void onTerminate() {

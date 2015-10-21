@@ -16,7 +16,7 @@ public class SocketConnectionManager extends Service {
 
     private static final String TAG = SocketConnectionManager.class.getName();
     private final WebSocketClient client;
-    private static final String endPoint = "ws://";
+    private static final String endPoint = "ws://192.168.10.250:3000/connect";
     private static final EventBus eventBus = EventBus.getDefault();
 
     public SocketConnectionManager() {

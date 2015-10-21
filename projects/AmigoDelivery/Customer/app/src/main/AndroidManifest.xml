@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:name=".module.app.singleton.CustomerApp"
@@ -11,6 +14,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+	
+	<meta-data
+            android:name="DATABASE"
+            android:value="delivery_customer.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="delivery.model" />
 
         <activity
             android:name=".module.app.view.component.HomeActivity"
@@ -24,6 +40,23 @@
         </activity>
 
         <activity android:name=".module.app.view.component.FormActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.component.HomeActivity" />
+        </activity>
+
+        <receiver android:name=".module.app.view.component.VerificationListner">
+            <intent-filter>
+                <action android:name="com.matesnetwork.cognalys" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.matesnetwork.Cognalys.VerifyMobile"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+
+        <activity
+            android:name=".module.app.view.component.EnterMobileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".module.app.view.component.HomeActivity" />

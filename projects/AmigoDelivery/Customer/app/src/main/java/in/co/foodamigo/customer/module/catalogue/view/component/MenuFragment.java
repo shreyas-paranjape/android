@@ -20,23 +20,12 @@ import in.co.foodamigo.customer.module.catalogue.view.adapter.CategoryAdapter;
 public class MenuFragment extends Fragment {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setHasOptionsMenu(true);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //getActivity().setTitle("Panaji, Goa");
+        getActivity().setTitle("Menu");
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
         initView(rootView);
         return rootView;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void initView(View rootView) {

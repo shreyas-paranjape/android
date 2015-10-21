@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="GPSAlertDialogMessage">Please ensure location</string>
+    <string name="cancel">cancel</string>
+    <string name="settings">settings</string>
+
+</resources>

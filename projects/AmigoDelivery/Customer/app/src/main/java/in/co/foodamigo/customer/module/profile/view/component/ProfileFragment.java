@@ -25,6 +25,7 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         party = new Party(1, "Shreyas Paranjape", "");
+
     }
 
     @Override
@@ -71,7 +72,7 @@ public class ProfileFragment extends Fragment {
 
     private void showForm() {
         Intent intent = new Intent(getActivity(), FormActivity.class);
-        getActivity().startActivityForResult(intent,999);
+        getActivity().startActivityForResult(intent, 999);
     }
 
 }

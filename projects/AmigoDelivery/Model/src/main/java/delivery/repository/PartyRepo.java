@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import delivery.model.common.Address;
-import delivery.model.common.GeoLocation;
 import delivery.model.profile.Party;
 
 public class PartyRepo {

@@ -1,15 +1,21 @@
 package in.co.foodamigo.customer.module.order.controller;
 
+import android.os.Bundle;
+
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import delivery.model.catalogue.ProductParty;
+import delivery.model.common.Address;
 import delivery.model.order.Order;
 import delivery.model.order.OrderItem;
+import in.co.foodamigo.customer.module.app.view.event.ChangeContentEvent;
+import in.co.foodamigo.customer.module.order.view.component.CheckoutActivity;
 
 public class OrderManager {
 
     private final Order order;
+    private Address deliveryAddress;
 
     public OrderManager() {
         order = new Order();
@@ -43,8 +49,15 @@ public class OrderManager {
     }
 
     public void checkOut() {
+        // if logged in goto address selection page
+        // if not logged in show add profile
         EventBus.getDefault().post(
-                new OrderManager.CheckOutEvent(getOrder().getId()));
+                new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, new Bundle()) {
+                    @Override
+                    public Class getContentClass() {
+                        return CheckoutActivity.class;
+                    }
+                });
     }
 
 
@@ -88,6 +101,14 @@ public class OrderManager {
             total += orderItem.getPrice();
         }
         order.total.set(total);
+    }
+
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 
     public static class CartModifiedEvent {

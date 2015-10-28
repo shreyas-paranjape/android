@@ -55,7 +55,7 @@ public class HomeActivity extends AbstractActivity {
     }
 
     protected Fragment getInitContent() {
-        return new TripFragment();
+        return new MenuFragment();
     }
 
     protected DrawerLayout getDrawerLayout() {

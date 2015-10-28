@@ -2,7 +2,6 @@ package com.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -41,6 +40,16 @@ public abstract class AbstractActivity extends AppCompatActivity {
             getFragmentManager()
                     .beginTransaction()
                     .replace(containerId, newFragment, newFragment.getClass().getName())
+                    .commit();
+        }
+    }
+
+    protected void replaceContent(Fragment newFragment, boolean addToBackStack) {
+        int containerId = getContentContainerId();
+        if (containerId != 0 && newFragment != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(containerId, newFragment, newFragment.getClass().getName())
                     .addToBackStack(newFragment.getClass().getName())
                     .commit();
         }
@@ -73,15 +82,19 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
-    protected void unRegisterListener(Object listener) {
-        if (eventBus.isRegistered(listener)) {
-            eventBus.unregister(listener);
+    protected void unRegisterListener(Object... listeners) {
+        for (Object listener : listeners) {
+            if (eventBus.isRegistered(listener)) {
+                eventBus.unregister(listener);
+            }
         }
     }
 
-    protected void registerListener(Object listener) {
-        if (!eventBus.isRegistered(listener)) {
-            eventBus.register(listener);
+    protected void registerListener(Object... listeners) {
+        for (Object listener : listeners) {
+            if (!eventBus.isRegistered(listener)) {
+                eventBus.register(listener);
+            }
         }
     }
 

@@ -53,10 +53,16 @@
 
         <activity
             android:name="com.matesnetwork.Cognalys.VerifyMobile"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <activity
             android:name=".module.app.view.component.EnterMobileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.component.HomeActivity" />
+        </activity>
+
+        <activity android:name=".module.order.view.component.CheckoutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".module.app.view.component.HomeActivity" />

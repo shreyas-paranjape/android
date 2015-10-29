@@ -3,10 +3,12 @@ package delivery.model.catalogue;
 import com.orm.dsl.Column;
 import com.orm.dsl.Table;
 
+import java.io.Serializable;
+
 import delivery.model.profile.Party;
 
 @Table
-public class ProductParty {
+public class ProductParty implements Serializable {
 
     private long id;
     @Column(name = "product_id")

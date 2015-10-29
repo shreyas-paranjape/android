@@ -2,6 +2,9 @@ package in.co.foodamigo.customer.module.order.controller;
 
 import android.os.Bundle;
 
+import com.event.ChangeContentEvent;
+
+import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -9,17 +12,18 @@ import delivery.model.catalogue.ProductParty;
 import delivery.model.common.Address;
 import delivery.model.order.Order;
 import delivery.model.order.OrderItem;
-import in.co.foodamigo.customer.module.app.view.event.ChangeContentEvent;
+import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.order.view.component.CheckoutActivity;
+import in.co.foodamigo.customer.module.order.view.component.OrderStatusFragment;
 
-public class OrderManager {
+public class CurrentOrderManager {
 
-    private final Order order;
-    private Address deliveryAddress;
+    private Order order;
+    private final EventBus eventBus = EventBus.getDefault();
 
-    public OrderManager() {
+    public CurrentOrderManager() {
         order = new Order();
-        EventBus.getDefault().register(this, 1);
+        eventBus.register(this, 1);
     }
 
     public Order getOrder() {
@@ -51,26 +55,13 @@ public class OrderManager {
     public void checkOut() {
         // if logged in goto address selection page
         // if not logged in show add profile
-        EventBus.getDefault().post(
+        eventBus.post(
                 new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, new Bundle()) {
                     @Override
                     public Class getContentClass() {
                         return CheckoutActivity.class;
                     }
                 });
-    }
-
-
-    public void onEvent(ModifyCartEvent event) {
-        switch (event.getAction()) {
-            case ADD:
-                modifyItem(event.getProductParty(), 1);
-                break;
-            case REMOVE:
-                modifyItem(event.getProductParty(), -1);
-                break;
-        }
-        EventBus.getDefault().post(new CartModifiedEvent(cartSize()));
     }
 
     private OrderItem getItemForProduct(ProductParty productParty) {
@@ -82,6 +73,7 @@ public class OrderManager {
         }
         return null;
     }
+
 
     private void changeProductQuantity(OrderItem productOrderItem, int quantity) {
         productOrderItem.setQuantity(productOrderItem.getQuantity() + quantity);
@@ -104,11 +96,43 @@ public class OrderManager {
     }
 
     public Address getDeliveryAddress() {
-        return deliveryAddress;
+        return order.getDeliveryAddress();
     }
 
     public void setDeliveryAddress(Address deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
+        order.setDeliveryAddress(deliveryAddress);
+    }
+
+
+    public void onEvent(ModifyCartEvent event) {
+        switch (event.getAction()) {
+            case ADD:
+                modifyItem(event.getProductParty(), 1);
+                break;
+            case REMOVE:
+                modifyItem(event.getProductParty(), -1);
+                break;
+        }
+        eventBus.post(new CartModifiedEvent(cartSize()));
+    }
+
+    public void placeOrder() {
+        order.setPlacedAt(new Date());
+        order.setStatus("PENDING");
+        Bundle data = new Bundle();
+        data.putSerializable(Constant.ORDER, order);
+        //TODO Send order to server
+        //TODO Save order
+        eventBus.post(
+                new ChangeContentEvent(
+                        ChangeContentEvent.ContentType.FRAGMENT,
+                        data) {
+                    @Override
+                    public Class getContentClass() {
+                        return OrderStatusFragment.class;
+                    }
+                });
+        //TODO order = new Order();
     }
 
     public static class CartModifiedEvent {
@@ -146,15 +170,4 @@ public class OrderManager {
         }
     }
 
-    public static class CheckOutEvent {
-        private final long orderId;
-
-        public CheckOutEvent(long orderId) {
-            this.orderId = orderId;
-        }
-
-        public long getOrderId() {
-            return orderId;
-        }
-    }
 }

@@ -23,7 +23,7 @@ public class CartManager {
         }
     }
 
-    public void onEvent(OrderManager.CartModifiedEvent event) {
+    public void onEvent(CurrentOrderManager.CartModifiedEvent event) {
         if (event.getCartSize() == 0) {
             cartHolder.setPanelHeight(0);
             collapseCartPanel();

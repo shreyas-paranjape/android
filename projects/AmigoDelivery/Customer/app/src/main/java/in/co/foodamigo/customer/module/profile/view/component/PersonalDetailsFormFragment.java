@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.view.component.FormFragment;
+import in.co.foodamigo.customer.module.app.view.fragment.FormFragment;
 
 public class PersonalDetailsFormFragment extends FormFragment {
 

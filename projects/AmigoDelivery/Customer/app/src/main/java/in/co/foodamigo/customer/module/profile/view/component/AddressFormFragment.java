@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.util.LocationUtil;
 
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.view.component.FormFragment;
+import in.co.foodamigo.customer.module.app.view.fragment.FormFragment;
 
 public class AddressFormFragment extends FormFragment {
     private EditText etAddress;

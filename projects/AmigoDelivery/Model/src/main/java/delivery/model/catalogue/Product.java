@@ -3,8 +3,10 @@ package delivery.model.catalogue;
 import com.orm.dsl.Column;
 import com.orm.dsl.Table;
 
+import java.io.Serializable;
+
 @Table
-public class Product {
+public class Product implements Serializable {
 
     private long id;
     @Column(name = "name")

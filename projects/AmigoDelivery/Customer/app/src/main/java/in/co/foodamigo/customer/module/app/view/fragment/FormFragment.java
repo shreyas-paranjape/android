@@ -1,4 +1,4 @@
-package in.co.foodamigo.customer.module.app.view.component;
+package in.co.foodamigo.customer.module.app.view.fragment;
 
 import android.app.Fragment;
 import android.content.Context;

@@ -1,9 +1,8 @@
-package in.co.foodamigo.customer.module.app.view.component;
+package in.co.foodamigo.customer.module.app.view.activity;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -71,13 +70,8 @@ public class FormActivity extends AbstractActivity {
         );
     }
 
-    protected int getDrawerFragmentId() {
-        return 0;
+    @Override
+    protected int getTitleId() {
+        return R.id.tvTitle;
     }
-
-    protected DrawerLayout getDrawerLayout() {
-        return null;
-    }
-
-
 }

@@ -12,7 +12,7 @@ import de.greenrobot.event.EventBus;
 import delivery.model.catalogue.ProductParty;
 import delivery.model.order.OrderItem;
 import in.co.foodamigo.customer.databinding.ItemOrderCurrentBinding;
-import in.co.foodamigo.customer.module.order.controller.OrderManager;
+import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 
 public class CartItemAdapter extends ArrayAdapter<OrderItem> {
 
@@ -37,20 +37,20 @@ public class CartItemAdapter extends ArrayAdapter<OrderItem> {
         rootBinding.btnAddQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyItem(getItem(position).getProductParty(), OrderManager.CartAction.ADD);
+                modifyItem(getItem(position).getProductParty(), CurrentOrderManager.CartAction.ADD);
             }
         });
 
         rootBinding.btnRemoveQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyItem(getItem(position).getProductParty(), OrderManager.CartAction.REMOVE);
+                modifyItem(getItem(position).getProductParty(), CurrentOrderManager.CartAction.REMOVE);
             }
         });
     }
 
-    private void modifyItem(ProductParty productParty, OrderManager.CartAction action) {
+    private void modifyItem(ProductParty productParty, CurrentOrderManager.CartAction action) {
         EventBus.getDefault().post(
-                new OrderManager.ModifyCartEvent(productParty, action));
+                new CurrentOrderManager.ModifyCartEvent(productParty, action));
     }
 }

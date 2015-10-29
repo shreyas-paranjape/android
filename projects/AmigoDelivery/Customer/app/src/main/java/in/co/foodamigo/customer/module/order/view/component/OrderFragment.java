@@ -12,12 +12,12 @@ import de.greenrobot.event.EventBus;
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.databinding.FragmentOrderBinding;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.OrderManager;
+import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 import in.co.foodamigo.customer.module.order.view.adapter.CartItemAdapter;
 
 public class OrderFragment extends Fragment {
 
-    private OrderManager orderManager;
+    private CurrentOrderManager currentOrderManager;
     private ArrayAdapter cartItemsAdapter;
 
     public OrderFragment() {
@@ -42,21 +42,21 @@ public class OrderFragment extends Fragment {
     }
 
     private void initCart() {
-        orderManager = ((CustomerApp) getActivity().getApplication()).getOrderManager();
-        if (orderManager.cartSize() > 0) {
+        currentOrderManager = ((CustomerApp) getActivity().getApplication()).getCurrentOrderManager();
+        if (currentOrderManager.cartSize() > 0) {
             EventBus.getDefault().post(
-                    new OrderManager.CartModifiedEvent(orderManager.cartSize()));
+                    new CurrentOrderManager.CartModifiedEvent(currentOrderManager.cartSize()));
         }
     }
 
     private void initView(FragmentOrderBinding rootBinding) {
         cartItemsAdapter = getCartItemAdapter();
         rootBinding.lvCartItems.setAdapter(cartItemsAdapter);
-        rootBinding.setOrder(orderManager.getOrder());
+        rootBinding.setOrder(currentOrderManager.getOrder());
         rootBinding.btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orderManager.checkOut();
+                currentOrderManager.checkOut();
             }
         });
     }
@@ -66,10 +66,10 @@ public class OrderFragment extends Fragment {
         return new CartItemAdapter(
                 getActivity(),
                 R.layout.item_order_current,
-                orderManager.getOrder().getOrderItems());
+                currentOrderManager.getOrder().getOrderItems());
     }
 
-    public void onEvent(OrderManager.ModifyCartEvent event) {
+    public void onEvent(CurrentOrderManager.ModifyCartEvent event) {
         cartItemsAdapter.notifyDataSetChanged();
     }
 

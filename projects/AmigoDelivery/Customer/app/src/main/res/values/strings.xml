@@ -33,4 +33,9 @@
     <string name="no_saved_address">No saved addresses</string>
     <string name="label_items">Items</string>
     <string name="label_total">Total</string>
+    <string name="place_order">Place order</string>
+    <string name="placed_at">Placed at:</string>
+    <string name="order_status">Order status</string>
+    <string name="skip">Skip</string>
+    <string name="img_desc_tut">Tutorial image</string>
 </resources>

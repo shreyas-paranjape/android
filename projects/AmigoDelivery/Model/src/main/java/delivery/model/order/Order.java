@@ -7,19 +7,28 @@ import com.orm.dsl.Column;
 import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import delivery.model.common.Address;
 import delivery.model.profile.Party;
 
 @Table(name = "Ordr")
-public class Order {
+public class Order implements Serializable {
 
     private long id;
     @Column(name = "party_id")
     private Party party;
     @Column(name = "code")
     private String code;
+    @Column(name = "delivery_address_id")
+    private Address deliveryAddress;
+    @Column(name = "placed_at")
+    private Date placedAt;
+    @Column(name = "status")
+    private String status;
 
     @Ignore
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -27,13 +36,6 @@ public class Order {
     public final ObservableDouble total = new ObservableDouble();
     @Ignore
     public final ObservableInt cartSize = new ObservableInt();
-
-    public Order() {
-    }
-
-    public Order(long id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -82,4 +84,29 @@ public class Order {
     public void setParty(Party party) {
         this.party = party;
     }
+
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public Date getPlacedAt() {
+        return placedAt;
+    }
+
+    public void setPlacedAt(Date placedAt) {
+        this.placedAt = placedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

@@ -1,4 +1,4 @@
-package in.co.foodamigo.customer.module.app.view.component;
+package in.co.foodamigo.customer.module.app.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

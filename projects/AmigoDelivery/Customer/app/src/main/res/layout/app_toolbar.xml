@@ -4,4 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
-    android:minHeight="?attr/actionBarSize" />
+    android:minHeight="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="serif" />
+
+</android.support.v7.widget.Toolbar>

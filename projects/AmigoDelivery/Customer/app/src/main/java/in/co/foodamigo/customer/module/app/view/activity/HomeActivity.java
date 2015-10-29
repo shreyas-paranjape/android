@@ -1,9 +1,8 @@
-package in.co.foodamigo.customer.module.app.view.component;
+package in.co.foodamigo.customer.module.app.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 
@@ -11,7 +10,6 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.view.event.ChangeContentEvent;
 import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
 import in.co.foodamigo.customer.module.order.controller.CartManager;
 import in.co.foodamigo.customer.module.order.view.component.OrderFragment;
@@ -19,17 +17,16 @@ import in.co.foodamigo.customer.module.order.view.component.OrderFragment;
 public class HomeActivity extends AbstractActivity {
 
     private CartManager cartManager;
-    private EventListener listener;
+    private final EventListener listener = new EventListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("");
-        listener = new EventListener();
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        registerListener(cartManager, listener);
+        registerListener(cartManager);
         addCartFragment();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -66,6 +63,11 @@ public class HomeActivity extends AbstractActivity {
         return new MenuFragment();
     }
 
+    @Override
+    protected int getTitleId() {
+        return R.id.tvTitle;
+    }
+
     protected DrawerLayout getDrawerLayout() {
         return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
@@ -77,24 +79,5 @@ public class HomeActivity extends AbstractActivity {
     }
 
     private class EventListener {
-
-        public void onEvent(ChangeContentEvent event) {
-            switch (event.getNewContent()) {
-                case ACTIVITY:
-                    Intent intent = new Intent(HomeActivity.this, event.getContentClass());
-                    intent.putExtras(event.getData());
-                    startActivity(intent);
-                    break;
-                case FRAGMENT:
-                    try {
-                        Fragment frag = (Fragment) event.getContentClass().newInstance();
-                        frag.setArguments(event.getData());
-                        replaceContent(frag);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                    break;
-            }
-        }
     }
 }

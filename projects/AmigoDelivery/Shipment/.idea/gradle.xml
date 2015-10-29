@@ -10,9 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/../../../libraries/common" />
-            <option value="$PROJECT_DIR$/../../../libraries/map" />
-            <option value="$PROJECT_DIR$/../../../libraries/net/android-websockets" />
-            <option value="$PROJECT_DIR$/../../../libraries/net/volley" />
+            <option value="$PROJECT_DIR$/../../../libraries/network/android-websockets" />
+            <option value="$PROJECT_DIR$/../../../libraries/network/volley" />
             <option value="$PROJECT_DIR$/../../../libraries/persist/sugar" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />

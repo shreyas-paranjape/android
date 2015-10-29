@@ -1,4 +1,4 @@
-package in.co.foodamigo.customer.module.app.view.event;
+package com.event;
 
 import android.os.Bundle;
 

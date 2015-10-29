@@ -2,23 +2,22 @@ package in.co.foodamigo.customer.module.order.view.component;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 
 import com.view.activity.AbstractActivity;
 
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.OrderManager;
+import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 
 public class CheckoutActivity extends AbstractActivity {
 
-    private OrderManager orderManager;
+    private CurrentOrderManager currentOrderManager;
     private final EventListener eventListener = new EventListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        currentOrderManager = ((CustomerApp) getApplication()).getCurrentOrderManager();
         super.onCreate(savedInstanceState);
-        orderManager = ((CustomerApp) getApplication()).getOrderManager();
         registerListener(eventListener);
     }
 
@@ -49,19 +48,14 @@ public class CheckoutActivity extends AbstractActivity {
     }
 
     @Override
-    protected DrawerLayout getDrawerLayout() {
-        return null;
-    }
-
-    @Override
-    protected int getDrawerFragmentId() {
-        return 0;
+    protected int getTitleId() {
+        return R.id.tvTitle;
     }
 
     private class EventListener {
 
         public void onEvent(DeliveryAddressFragment.AddressSelectedEvent event) {
-            orderManager.setDeliveryAddress(event.getAddress());
+            currentOrderManager.setDeliveryAddress(event.getAddress());
             replaceContent(new ConfirmOrderFragment());
         }
     }

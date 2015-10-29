@@ -10,7 +10,7 @@
     </style>
 
     <style name="button">
-        <item name="android:textColor">@color/grey_darkest</item>
+        <item name="android:textColor">@color/grey_900</item>
         <item name="android:textSize">12sp</item>
         <item name="android:background">@drawable/selectable_bg</item>
         <item name="android:textStyle">bold</item>

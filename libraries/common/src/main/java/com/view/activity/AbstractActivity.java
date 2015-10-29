@@ -2,13 +2,16 @@ package com.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
+import com.event.ChangeContentEvent;
 import com.view.fragment.NavigationDrawer;
 
 import de.greenrobot.event.EventBus;
@@ -16,16 +19,32 @@ import de.greenrobot.event.EventBus;
 public abstract class AbstractActivity extends AppCompatActivity {
 
     protected final EventBus eventBus = EventBus.getDefault();
-    private EventListener listener;
+    private final EventListener listener;
+    private TextView tvTitle;
+
+    protected AbstractActivity() {
+        listener = new EventListener();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        initListeners();
+        registerListener(listener);
         setupDrawer();
         setupToolbar();
         replaceContent(getInitContent());
+        setTitle("");
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        if (tvTitle != null) {
+            super.setTitle("");
+            tvTitle.setText(title);
+        } else {
+            super.setTitle(title);
+        }
     }
 
     @Override
@@ -55,6 +74,12 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
+    protected void startNewActivity(Class clazz, Bundle data) {
+        Intent intent = new Intent(AbstractActivity.this, clazz);
+        intent.putExtras(data);
+        startActivity(intent);
+    }
+
     protected void setupDrawer() {
         int drawerId = getDrawerFragmentId();
         if (drawerId != 0) {
@@ -72,6 +97,9 @@ public abstract class AbstractActivity extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(toolBarId);
             if (toolbar != null) {
                 toolbar.setTitleTextColor(Color.BLACK);
+                if (getTitleId() != 0) {
+                    tvTitle = (TextView) toolbar.findViewById(getTitleId());
+                }
                 setSupportActionBar(toolbar);
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
@@ -103,23 +131,51 @@ public abstract class AbstractActivity extends AppCompatActivity {
             getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             replaceContent(event.getItem().getDisplayFragment());
         }
+
+        public void onEvent(ChangeContentEvent event) {
+            switch (event.getNewContent()) {
+                case ACTIVITY:
+                    startNewActivity(event.getContentClass(), event.getData());
+                    break;
+                case FRAGMENT:
+                    try {
+                        Fragment frag = (Fragment) event.getContentClass().newInstance();
+                        frag.setArguments(event.getData());
+                        replaceContent(frag);
+                    } catch (Exception e) {
+                        // Do nothing
+                    }
+                    break;
+            }
+        }
     }
 
-    private void initListeners() {
-        listener = new EventListener();
-        registerListener(listener);
+    protected int getLayoutId() {
+        return 0;
     }
 
-    protected abstract int getLayoutId();
+    protected int getDrawerFragmentId() {
+        return 0;
+    }
 
-    protected abstract int getDrawerFragmentId();
+    protected int getToolbarId() {
+        return 0;
+    }
 
-    protected abstract int getToolbarId();
+    protected Fragment getInitContent() {
+        return null;
+    }
 
-    protected abstract Fragment getInitContent();
+    protected int getContentContainerId() {
+        return 0;
+    }
 
-    protected abstract int getContentContainerId();
+    protected DrawerLayout getDrawerLayout() {
+        return null;
+    }
 
-    protected abstract DrawerLayout getDrawerLayout();
+    protected int getTitleId() {
+        return 0;
+    }
 
 }

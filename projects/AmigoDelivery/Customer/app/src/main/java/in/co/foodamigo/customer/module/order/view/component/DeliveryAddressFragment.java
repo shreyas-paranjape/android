@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.Arrays;
@@ -15,6 +14,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import delivery.model.common.Address;
 import in.co.foodamigo.customer.R;
+import in.co.foodamigo.customer.module.order.view.adapter.DeliveryAddressAdapter;
 
 public class DeliveryAddressFragment extends Fragment {
 
@@ -42,7 +42,7 @@ public class DeliveryAddressFragment extends Fragment {
 
     private void initView(View root) {
         ListView addressListView = (ListView) root.findViewById(android.R.id.list);
-        addressListView.setAdapter(new ArrayAdapter<>(
+        addressListView.setAdapter(new DeliveryAddressAdapter(
                 getActivity(),
                 R.layout.item_select_address,
                 savedAddresses));

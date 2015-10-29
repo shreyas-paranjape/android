@@ -1,11 +1,11 @@
-package in.co.foodamigo.customer.module.app.view.component;
+package in.co.foodamigo.customer.module.app.listener;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class VerificationListner extends BroadcastReceiver {
+public class VerificationListener extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

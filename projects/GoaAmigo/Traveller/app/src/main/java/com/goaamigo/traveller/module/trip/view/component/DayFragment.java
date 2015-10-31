@@ -39,7 +39,7 @@ public class DayFragment extends Fragment {
     private void initListView(View rootView) {
         RecyclerView eventsRecycler = (RecyclerView) rootView.findViewById(R.id.rv_day_events);
         eventsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        eventsRecycler.setAdapter(new EventAdapter(getActivity(), day));
+        eventsRecycler.setAdapter(new EventAdapter(getActivity()));
     }
 
 

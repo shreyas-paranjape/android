@@ -8,24 +8,31 @@ import java.io.Serializable;
 @Table
 public class Event implements Serializable {
 
-    private long id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "day_id")
-    private Day day;
+    private String description;
 
-    public Event() {
-    }
-
-    public Event(String name) {
+    public Event(int id, String name, String description) {
+        this.id = id;
         this.name = name;
+        this.description = description;
     }
 
-    public long getId() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

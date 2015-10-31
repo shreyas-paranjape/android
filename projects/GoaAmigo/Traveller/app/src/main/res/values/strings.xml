@@ -3,6 +3,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="link_image">link image</string>
+    <string name="facebook_app_id">1723716827856072</string>
 
     <string name="btn_search_trip">Search trip</string>
     <string name="btn_find_deals">Find deals</string>

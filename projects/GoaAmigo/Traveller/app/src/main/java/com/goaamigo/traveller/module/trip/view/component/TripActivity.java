@@ -27,7 +27,7 @@ public class TripActivity extends AbstractActivity {
     private Map<MenuData, Fragment> menuFragMap = new HashMap<>();
 
     public TripActivity() {
-        menuFragMap.put(new MenuData("Home"),new SearchTripFragment());
+        menuFragMap.put(new MenuData("Search Trip"),new SearchTripFragment());
         menuFragMap.put(new MenuData("login to trip"),new LoginFragment());
     }
 

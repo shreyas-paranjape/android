@@ -1,7 +1,6 @@
 package com.goaamigo.traveller.module.trip.view.adapter;
 
 import android.content.Context;
-import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -22,6 +21,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         this.data = new ArrayList<>();
         data.add(new Event("event 1"));
         data.add(new Event("event 2"));
+        data.add(new Event("EVENT 3"));
+        data.add(new Event("EVENT 4"));
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

@@ -6,4 +6,8 @@ public class HttpResponseException extends RuntimeException {
         throw new RuntimeException(s);
     }
 
+    public HttpResponseException(String s) {
+        throw new RuntimeException(s);
+    }
+
 }

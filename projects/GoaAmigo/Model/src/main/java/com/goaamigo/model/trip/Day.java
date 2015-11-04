@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class Day implements Serializable {
 
     private long id;
+    private int mThumbnail;
+
     @Column(name = "name")
     private String name;
 
@@ -34,5 +36,13 @@ public class Day implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getmThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setmThumbnail(int mThumbnail) {
+        this.mThumbnail = mThumbnail;
     }
 }

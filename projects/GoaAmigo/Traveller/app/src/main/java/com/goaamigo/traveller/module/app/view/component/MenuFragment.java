@@ -1,7 +1,6 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
@@ -34,8 +32,13 @@ public class MenuFragment extends Fragment {
 
     private void initView(View v) {
         list = new ArrayList<>();
-        list.add(new MenuData("Search Trip", R.drawable.ic_home_black_24dp, "Home description"));
+        list.add(new MenuData("Home", R.drawable.ic_home_black_24dp, "Home description"));
         list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+
+
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);

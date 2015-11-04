@@ -9,16 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.goaamigo.model.trip.Day;
 import com.goaamigo.model.trip.Event;
 import com.goaamigo.traveller.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
-    protected final LayoutInflater inflater;
     protected final List<Event> data;
     protected final Context context;
 

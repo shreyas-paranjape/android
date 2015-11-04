@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
+import com.goaamigo.traveller.module.app.view.model.MenuData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +32,9 @@ public class MenuFragment extends Fragment {
 
     private void initView(View v) {
         list = new ArrayList<>();
-        list.add(new MenuData("Home", R.drawable.ic_home_black_24dp, "Home description"));
+        list.add(new MenuData("Search Trip", R.drawable.ic_home_black_24dp, "Home description"));
         list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
-//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
-//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
-//        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
-
-
+        list.add(new MenuData("Start map activity",R.drawable.ic_add_shopping_cart_black_24dp, "Description",MapsActivity.class));
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);

@@ -1,20 +1,11 @@
 package com.goaamigo.traveller.module.trip.view.component;
 
 import android.app.Fragment;
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.SearchView;
 
-import com.goaamigo.model.MenuData;
+import com.goaamigo.traveller.module.app.view.model.MenuData;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.app.singleton.Constant;
-import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
-import com.goaamigo.traveller.module.app.view.component.SearchableFragment;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;
@@ -61,8 +52,7 @@ public class TripActivity extends AbstractActivity {
 
     @Override
     protected Fragment getInitContent() {
-        MenuData menuItem = ((MenuRVAdapter.MenuButtonClicked)getIntent()
-                .getSerializableExtra(Constant.EVENT)).getMenuData();
+        MenuData menuItem = (MenuData)getIntent().getExtras().get("MENUDATA");
         Fragment frag = menuFragMap.get(menuItem);
        return frag;
     }

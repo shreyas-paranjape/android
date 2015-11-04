@@ -1,4 +1,6 @@
-package com.goaamigo.model;
+package com.goaamigo.traveller.module.app.view.model;
+
+import com.goaamigo.traveller.module.trip.view.component.TripActivity;
 
 import java.io.Serializable;
 
@@ -7,8 +9,10 @@ public class MenuData implements Serializable {
     String title;
     String description;
     int imageId;
+    private Class clazz = TripActivity.class;
 
     public MenuData() {
+
     }
 
     public MenuData(String title) {
@@ -19,6 +23,13 @@ public class MenuData implements Serializable {
         this.title = title;
         this.imageId = imageId;
         this.description = description;
+    }
+
+    public MenuData(String title, int imageId, String description, Class clazz) {
+        this.title = title;
+        this.imageId = imageId;
+        this.description = description;
+        this.clazz = clazz;
     }
 
     @Override
@@ -70,4 +81,11 @@ public class MenuData implements Serializable {
         this.imageId = imageId;
     }
 
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
+    }
 }

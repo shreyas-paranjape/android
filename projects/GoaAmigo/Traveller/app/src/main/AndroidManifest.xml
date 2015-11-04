@@ -43,7 +43,7 @@
                 android:value=".module.app.view.component.HomeActivity" />
         </activity>
         <activity
-            android:name=".module.app.view.adapter.SearchableActivity"
+            android:name=".module.app.view.component.SearchableActivity"
             android:label="@string/title_activity_searchable" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

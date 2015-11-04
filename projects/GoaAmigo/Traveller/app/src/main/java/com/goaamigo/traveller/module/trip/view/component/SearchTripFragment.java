@@ -55,7 +55,7 @@ public class SearchTripFragment extends DialogFragment implements
         img2 = (ImageView) v.findViewById(R.id.imageView3);
         spnr = (Spinner) v.findViewById(R.id.spinner);
         spnr2 = (Spinner) v.findViewById(R.id.spinner1);
-        btn=(Button) v.findViewById(R.id.buttondialog);
+        btn = (Button) v.findViewById(R.id.buttondialog);
 
 
         List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
@@ -171,7 +171,7 @@ public class SearchTripFragment extends DialogFragment implements
         Button yes, no;
         TextView tv, plus, minus;
         private View view;
-        private TextView childPlus,childMinus,childDisplay;
+        private TextView childPlus, childMinus, childDisplay;
 
 
         @Nullable
@@ -195,8 +195,8 @@ public class SearchTripFragment extends DialogFragment implements
             childMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Childern --;
-                    if(Childern<0){
+                    Childern--;
+                    if (Childern < 0) {
                         Childern = 0;
                     }
                     childDisplay.setText(String.valueOf(Childern));
@@ -222,7 +222,7 @@ public class SearchTripFragment extends DialogFragment implements
                 public void onClick(View v) {
                     adult--;
                     if (adult < 0) {
-                            adult = 0;
+                        adult = 0;
                     }
                     tv.setText(String.valueOf(adult));
                 }
@@ -242,7 +242,7 @@ public class SearchTripFragment extends DialogFragment implements
             } else {
                 Toast.makeText(getActivity(), "No button clicked", Toast.LENGTH_LONG).show();
                 dismiss();
-                adult=0;
+                adult = 0;
                 Childern = 0;
 
             }

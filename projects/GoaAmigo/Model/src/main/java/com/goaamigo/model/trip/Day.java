@@ -10,7 +10,6 @@ import java.util.List;
 public class Day implements Serializable {
 
     private long id;
-    private int mThumbnail;
 
     @Column(name = "name")
     private String name;
@@ -50,12 +49,5 @@ public class Day implements Serializable {
 
     public void setEvents(List<Event> events) {
         this.events = events;
-    }
-  public int getmThumbnail() {
-        return mThumbnail;
-    }
-
-    public void setmThumbnail(int mThumbnail) {
-        this.mThumbnail = mThumbnail;
     }
 }

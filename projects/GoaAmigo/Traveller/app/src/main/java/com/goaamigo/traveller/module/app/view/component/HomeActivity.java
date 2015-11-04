@@ -5,41 +5,35 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.app.singleton.Constant;
-import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
-import com.goaamigo.traveller.module.trip.view.component.TripActivity;
 import com.view.activity.AbstractActivity;
-
-import java.io.Serializable;
 
 public class HomeActivity extends AbstractActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     SearchableFragment searchableFragment;
-    private static final String TAG = HomeActivity.class.getName();
-    private EventListener eventListener = new EventListener();
+    //private static final String TAG = HomeActivity.class.getName();
+    //private EventListener eventListener = new EventListener();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerListener(eventListener);
-        fragmentManager = getFragmentManager();
+        //registerListener(eventListener);
+        /*fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         searchableFragment = new SearchableFragment();
+        fragmentTransaction.commit();*/
     }
 
     @Override
     protected void onDestroy() {
-        unRegisterListener(eventListener);
+        //unRegisterListener(eventListener);
         super.onDestroy();
     }
 
@@ -82,29 +76,15 @@ public class HomeActivity extends AbstractActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_search) {
-            onSearchRequested();
+            startNewActivity(SearchableActivity.class, new Bundle());
+           /* onSearchRequested();
             fragmentTransaction.replace(R.id.container, searchableFragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public class EventListener {
-        public void onEvent(MenuRVAdapter.MenuButtonClicked event) {
-            Log.i(TAG, "in on event");
-            startTripActivity(event);
-        }
+    //public class EventListener {
+    //}
 
-    }
-
-    public interface MenuButtonEvent extends Serializable {
-        Fragment getFragment();
-    }
-
-
-    private void startTripActivity(Serializable event) {
-        Intent intent = new Intent(this, TripActivity.class);
-        intent.putExtra(Constant.EVENT, event);
-        startActivity(intent);
-    }
 }

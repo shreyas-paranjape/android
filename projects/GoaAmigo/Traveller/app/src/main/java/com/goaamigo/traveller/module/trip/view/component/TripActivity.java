@@ -14,6 +14,7 @@ import com.goaamigo.model.MenuData;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
+import com.goaamigo.traveller.module.app.view.component.SearchableFragment;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;

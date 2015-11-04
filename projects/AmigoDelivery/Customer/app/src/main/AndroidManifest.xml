@@ -14,8 +14,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-	
-	<meta-data
+
+        <meta-data
             android:name="DATABASE"
             android:value="delivery_customer.db" />
         <meta-data
@@ -29,7 +29,7 @@
             android:value="delivery.model" />
 
         <activity
-            android:name=".module.app.view.component.HomeActivity"
+            android:name=".module.app.view.activity.LaunchActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,13 +39,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".module.app.view.component.FormActivity">
+        <activity android:name=".module.app.view.activity.HomeActivity" />
+
+        <activity android:name=".module.app.view.activity.FormActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".module.app.view.component.HomeActivity" />
+                android:value=".module.app.view.activity.HomeActivity" />
         </activity>
 
-        <receiver android:name=".module.app.view.component.VerificationListner">
+        <receiver android:name=".module.app.listener.VerificationListener">
             <intent-filter>
                 <action android:name="com.matesnetwork.cognalys" />
             </intent-filter>
@@ -55,17 +57,16 @@
             android:name="com.matesnetwork.Cognalys.VerifyMobile"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <activity
-            android:name=".module.app.view.component.EnterMobileActivity">
+        <activity android:name=".module.app.view.activity.EnterMobileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".module.app.view.component.HomeActivity" />
+                android:value=".module.app.view.activity.HomeActivity" />
         </activity>
 
         <activity android:name=".module.order.view.component.CheckoutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".module.app.view.component.HomeActivity" />
+                android:value=".module.app.view.activity.HomeActivity" />
         </activity>
 
     </application>

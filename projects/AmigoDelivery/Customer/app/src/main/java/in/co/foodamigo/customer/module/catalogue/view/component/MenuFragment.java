@@ -6,19 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.view.widget.SlidingTabLayout;
 
-import de.greenrobot.event.EventBus;
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.view.event.ChangeContentEvent;
 import in.co.foodamigo.customer.module.catalogue.view.adapter.CategoryAdapter;
-import in.co.foodamigo.customer.module.profile.view.component.ProfileFragment;
 
 
 public class MenuFragment extends Fragment {
@@ -26,32 +20,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_fragment, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_profile:
-                showProfileView();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showProfileView() {
-        EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, null) {
-            @Override
-            public Class getContentClass() {
-                return ProfileFragment.class;
-            }
-        });
     }
 
     @Override

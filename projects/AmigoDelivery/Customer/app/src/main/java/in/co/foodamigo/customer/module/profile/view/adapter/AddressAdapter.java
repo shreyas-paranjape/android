@@ -1,7 +1,6 @@
 package in.co.foodamigo.customer.module.profile.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import delivery.model.common.Address;
 import in.co.foodamigo.customer.databinding.ItemAddressBinding;
-import in.co.foodamigo.customer.module.app.view.component.FormActivity;
 
 public class AddressAdapter extends ArrayAdapter<Address> {
 

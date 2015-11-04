@@ -5,41 +5,44 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import in.co.foodamigo.customer.R;
+import delivery.model.order.OrderItem;
+import in.co.foodamigo.customer.databinding.FragmentConfirmOrderBinding;
+import in.co.foodamigo.customer.databinding.ItemOrderConfirmBinding;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.OrderManager;
+import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 
 public class ConfirmOrderFragment extends Fragment {
 
-    private OrderManager orderManager;
+    private CurrentOrderManager currentOrderManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        orderManager = ((CustomerApp) getActivity().getApplication()).getOrderManager();
+        currentOrderManager = ((CustomerApp) getActivity().getApplication()).getCurrentOrderManager();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_confirm_order, container, false);
-        initView(root);
-        return root;
+        getActivity().setTitle("Confirm order");
+        FragmentConfirmOrderBinding rootBinding = FragmentConfirmOrderBinding.inflate(inflater);
+        rootBinding.setOrder(currentOrderManager.getOrder());
+        rootBinding.btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentOrderManager.placeOrder();
+            }
+        });
+        setOrderItems(rootBinding.lvOrderItems, inflater);
+        return rootBinding.getRoot();
     }
 
-    private void initView(View root) {
-        ListView lvItems = (ListView) root.findViewById(R.id.lvOrderItems);
-        lvItems.setAdapter(new ArrayAdapter<>(
-                getActivity(),
-                R.layout.item_select_address,
-                orderManager.getOrder().getOrderItems()
-        ));
-        TextView tvAddress = (TextView) root.findViewById(R.id.tvAddress);
-        tvAddress.setText(orderManager.getDeliveryAddress().getAddressString());
-        TextView tvTotal = (TextView) root.findViewById(R.id.tvTotal);
-        tvTotal.setText(orderManager.getOrder().total.toString());
+    public void setOrderItems(LinearLayout orderItemsContainer, LayoutInflater inflater) {
+        for (OrderItem orderItem : currentOrderManager.getOrder().getOrderItems()) {
+            ItemOrderConfirmBinding rootBinding = ItemOrderConfirmBinding.inflate(inflater);
+            rootBinding.setOrderItem(orderItem);
+            orderItemsContainer.addView(rootBinding.getRoot());
+        }
     }
 }

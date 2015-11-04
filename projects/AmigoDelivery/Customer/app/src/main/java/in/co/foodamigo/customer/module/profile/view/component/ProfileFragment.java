@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,9 +14,7 @@ import delivery.repository.PartyRepo;
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.databinding.FragmentProfileBinding;
 import in.co.foodamigo.customer.module.app.singleton.Constant;
-import in.co.foodamigo.customer.module.app.view.component.FormActivity;
-import in.co.foodamigo.customer.module.app.view.event.ChangeContentEvent;
-import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
+import in.co.foodamigo.customer.module.app.view.activity.FormActivity;
 import in.co.foodamigo.customer.module.profile.view.adapter.AddressAdapter;
 
 public class ProfileFragment extends Fragment {
@@ -32,32 +27,6 @@ public class ProfileFragment extends Fragment {
         getActivity().setTitle("Profile");
         EventBus.getDefault().register(this);
         party = new Party(1, "Shreyas Paranjape", "");
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.profile_fragment, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_menu:
-                showMenuView();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showMenuView() {
-        EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, null) {
-            @Override
-            public Class getContentClass() {
-                return MenuFragment.class;
-            }
-        });
     }
 
     @Override

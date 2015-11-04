@@ -1,28 +1,30 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.SearchView;
-import android.app.SearchManager;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
-import com.goaamigo.traveller.module.app.view.adapter.SearchableActivity;
 import com.goaamigo.traveller.module.trip.view.component.TripActivity;
-import com.goaamigo.traveller.module.trip.view.component.TripFragment;
 import com.view.activity.AbstractActivity;
 
 import java.io.Serializable;
 
 public class HomeActivity extends AbstractActivity {
-
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    SearchableFragment searchableFragment;
     private static final String TAG = HomeActivity.class.getName();
     private EventListener eventListener = new EventListener();
 
@@ -30,6 +32,9 @@ public class HomeActivity extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerListener(eventListener);
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        searchableFragment = new SearchableFragment();
     }
 
     @Override
@@ -78,6 +83,8 @@ public class HomeActivity extends AbstractActivity {
             return true;
         } else if (id == R.id.action_search) {
             onSearchRequested();
+            fragmentTransaction.replace(R.id.container, searchableFragment);
+            fragmentTransaction.commit();
         }
         return super.onOptionsItemSelected(item);
     }

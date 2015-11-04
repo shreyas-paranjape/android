@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.skobbler.ngx.map.SKMapViewHolder
-        android:id="@+id/map_surface_holder"
+    <!--<com.mapbox.mapboxsdk.views.MapView-->
+        <!--android:id="@+id/mapview"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--app:accessToken="pk.eyJ1Ijoic2hyZXAiLCJhIjoiY2lmZ2hkZW5zOXdkOHN4bTcyYmNtN21tNSJ9.dTmIldGN5zB_we5B60njmw" />-->
+
+    <org.mapsforge.map.android.view.MapView
+        android:id="@+id/mapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
+
+    <TextView
+        android:id="@+id/attribution"
+        android:layout_width="fill_parent"
+        android:layout_height="10dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dip"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="cp"
+        android:textColor="#000"
+        android:textSize="4pt" />
+
 </RelativeLayout>

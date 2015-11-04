@@ -2,6 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/containerSearch"
+        android:layout_height="wrap_content"></FrameLayout>
 
     <include layout="@layout/app_toolbar"/>
 

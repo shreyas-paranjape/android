@@ -15,12 +15,16 @@ import com.goaamigo.traveller.module.trip.view.adapter.EventAdapter;
 
 public class DayFragment extends Fragment {
 
+    private Day day;
+
+    public DayFragment(Day day) {
+        this.day = day;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private Day day;
 
     @Override
     public void setArguments(Bundle args) {
@@ -39,8 +43,6 @@ public class DayFragment extends Fragment {
     private void initListView(View rootView) {
         RecyclerView eventsRecycler = (RecyclerView) rootView.findViewById(R.id.rv_day_events);
         eventsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        eventsRecycler.setAdapter(new EventAdapter(getActivity(), day));
+        eventsRecycler.setAdapter(new EventAdapter(getActivity(), day.getEvents()));
     }
-
-
 }

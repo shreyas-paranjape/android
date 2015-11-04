@@ -4,6 +4,7 @@ import com.orm.dsl.Column;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Table
 public class Day implements Serializable {
@@ -13,7 +14,12 @@ public class Day implements Serializable {
 
     @Column(name = "name")
     private String name;
+    private List<Event> events;
 
+    public Day(List<Event> events, String name) {
+        this.events = events;
+        this.name = name;
+    }
 
     public Day() {
     }
@@ -38,7 +44,14 @@ public class Day implements Serializable {
         this.name = name;
     }
 
-    public int getmThumbnail() {
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+  public int getmThumbnail() {
         return mThumbnail;
     }
 

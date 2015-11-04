@@ -4,48 +4,41 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:paddingTop="8dp"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    android:paddingTop="8dp">
 
     <LinearLayout
+        android:id="@+id/layoutProfile"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/layoutProfile"
-        >
+        android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:id="@+id/profileImage"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_account_circle_grey600_48dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:id="@+id/tvName" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:id="@+id/tvEmail" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp" />
     </LinearLayout>
 
     <ListView
-        android:paddingTop="8dp"
         android:id="@+id/elv_drawer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp" />
 
 </LinearLayout>

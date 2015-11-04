@@ -70,7 +70,8 @@
 
         <activity
             android:name=".module.app.view.component.MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".module.trip.view.component.TripActivity">
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"

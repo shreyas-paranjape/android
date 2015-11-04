@@ -7,6 +7,78 @@
     android:orientation="vertical">
 
     <include layout="@layout/app_toolbar" />
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarId"
+        android:background="@color/primary_color"
+        android:scrollbars="none"
+
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/hotel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+                android:text="hotels" />
+
+            <Button
+                android:id="@+id/rest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="restaurants" />
+
+            <Button
+                android:id="@+id/atm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="ATM" />
+
+            <Button
+                android:id="@+id/hospital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="Hospital" />
+
+            <Button
+                android:id="@+id/carWash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="car Wash" />
+
+            <Button
+                android:id="@+id/bars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="bars" />
+
+            <Button
+                android:id="@+id/pubs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_color"
+
+                android:text="pubs" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
 
     <fragment
         android:id="@+id/map"

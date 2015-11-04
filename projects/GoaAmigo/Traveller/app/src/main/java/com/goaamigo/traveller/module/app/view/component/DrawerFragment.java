@@ -2,12 +2,16 @@ package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
 import com.view.widget.NavigationDrawerListAdapter;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {
 
@@ -39,6 +43,7 @@ public class DrawerFragment extends ListNavigationDrawer {
                 return new ContactUsFragment();
             }
         });
+
     }
 
     @Override
@@ -54,5 +59,16 @@ public class DrawerFragment extends ListNavigationDrawer {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_navigation_drawer;
+    }
+
+    @Override
+    protected void initView(View v) {
+        super.initView(v);
+        CircleImageView profileImage = (CircleImageView)v.findViewById(R.id.profileImage);
+        TextView name = (TextView)v.findViewById(R.id.tvName);
+        TextView email = (TextView)v.findViewById(R.id.tvEmail);
+        profileImage.setImageResource(R.drawable.heisenberg);
+        name.setText("heisenberg");
+        email.setText("heisenberg@example.com");
     }
 }

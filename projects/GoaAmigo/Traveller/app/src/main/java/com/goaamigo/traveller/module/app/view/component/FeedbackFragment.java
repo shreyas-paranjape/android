@@ -12,8 +12,6 @@ import android.widget.Button;
 import com.goaamigo.traveller.R;
 
 public class FeedbackFragment extends Fragment {
-    Button maps;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,14 +21,5 @@ public class FeedbackFragment extends Fragment {
     }
 
     private void initView(View view) {
-        final Intent intent = new Intent(getActivity(),MapsActivity.class);
-
-        maps = (Button)view.findViewById(R.id.btnMaps);
-        maps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(intent);
-            }
-        });
     }
 }

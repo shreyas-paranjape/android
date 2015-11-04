@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.goaamigo.traveller.module.app.view.model.MenuData;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.deal.view.component.component.FindDealsFragment;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class TripActivity extends AbstractActivity {
     public TripActivity() {
         menuFragMap.put(new MenuData("Search Trip"),new SearchTripFragment());
         menuFragMap.put(new MenuData("login to trip"),new LoginFragment());
+        menuFragMap.put(new MenuData("Deals"),new FindDealsFragment());
     }
 
     @Override

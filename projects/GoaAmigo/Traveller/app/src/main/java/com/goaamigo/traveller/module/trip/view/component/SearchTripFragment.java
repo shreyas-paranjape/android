@@ -12,13 +12,12 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.goaamigo.traveller.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,6 +28,7 @@ import de.greenrobot.event.EventBus;
 public class SearchTripFragment extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
     TextView textView1, TextView2;
+    LinearLayout checkindate,checkoutdate;
     Button btn;
     private int Childern = 0;
     private int adult = 0;
@@ -37,8 +37,8 @@ public class SearchTripFragment extends DialogFragment implements
 
 
     Spinner spnr, spnr2;
-    String[] plants = new String[]{"1 Room", "2 Room", "3 Room", "4 Room"};
-    String[] plants1 = new String[]{"2 Adults", "3 Adults", "4 Adults", "5 Adults"};
+    String[] plants = new String[]{"Activities","Water Sport", "River cruise", "River rafting", "Casinos","Zoological park"};
+    String[] plants1 = new String[]{"Places","Mandrem Beach", "Agonda beach", "Baga Beach", "Candolim beach","cavelossim beach"};
 
 
     MyDialog dialogObj = new MyDialog();
@@ -48,9 +48,13 @@ public class SearchTripFragment extends DialogFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("Search trips");
+
         View v = inflater.inflate(R.layout.fragment_search_trip, container, false);
+        checkindate=(LinearLayout) v.findViewById(R.id.checkindate);
+        checkoutdate=(LinearLayout) v.findViewById(R.id.checkoutdate);
         textView1 = (TextView) v.findViewById(R.id.textView1);
         TextView2 = (TextView) v.findViewById(R.id.textView2);
+
         img1 = (ImageView) v.findViewById(R.id.imageView2);
         img2 = (ImageView) v.findViewById(R.id.imageView3);
         spnr = (Spinner) v.findViewById(R.id.spinner);
@@ -102,7 +106,7 @@ public class SearchTripFragment extends DialogFragment implements
                 EventBus.getDefault().post(new FindTripButtonClickEvent());
             }
         });
-        img1.setOnClickListener(new View.OnClickListener() {
+        checkindate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Tag Name", "Check in date");
@@ -123,7 +127,7 @@ public class SearchTripFragment extends DialogFragment implements
         });
 
 
-        img2.setOnClickListener(new View.OnClickListener() {
+       checkoutdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Tag Name", "Check out Date");
@@ -132,12 +136,15 @@ public class SearchTripFragment extends DialogFragment implements
                 int pMonth = cal.get(Calendar.MONTH);
                 int pDay = cal.get(Calendar.DAY_OF_MONTH);
                 Calendar now = Calendar.getInstance();
+
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
                         SearchTripFragment.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+                TextView2.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
             }
         });
         btn.setOnClickListener(new View.OnClickListener() {

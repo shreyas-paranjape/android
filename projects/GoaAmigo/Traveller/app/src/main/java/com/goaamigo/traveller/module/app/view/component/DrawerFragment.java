@@ -2,18 +2,24 @@ package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
 import com.view.widget.NavigationDrawerListAdapter;
+import com.wdullaer.materialdatetimepicker.time.CircleView;
 
 public class DrawerFragment extends ListNavigationDrawer {
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         drawerItems.add(new Item("Home", R.drawable.ic_home_black_24dp) {
             @Override
@@ -49,6 +55,18 @@ public class DrawerFragment extends ListNavigationDrawer {
     @Override
     protected NavigationDrawerListAdapter getAdapter() {
         return new DrawerAdapter(getActivity(), R.layout.item_drawer_link, drawerItems);
+    }
+
+    @Override
+    protected void initView(View v) {
+        super.initView(v);
+        CircleView circleView;
+        TextView fk;
+        Log.i("aya circle view", "bachao");
+        circleView=(CircleView) v.findViewById(R.id.profile_image);
+        fk=(TextView) v.findViewById(R.id.tao);
+        fk.setText("Jaguar");
+
     }
 
     @Override

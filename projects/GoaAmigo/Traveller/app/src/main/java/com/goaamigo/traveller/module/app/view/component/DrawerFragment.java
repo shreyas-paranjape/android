@@ -12,6 +12,7 @@ import com.event.ChangeContentEvent;
 import com.goaamigo.model.trip.Profile;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
+import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 import com.orm.SugarRecord;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
@@ -52,6 +53,12 @@ public class DrawerFragment extends ListNavigationDrawer {
             @Override
             public Fragment getDisplayFragment() {
                 return new ContactUsFragment();
+            }
+        });
+        drawerItems.add(new Item("Detail",R.drawable.ic_add_shopping_cart_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new DetailsFragment();
             }
         });
 

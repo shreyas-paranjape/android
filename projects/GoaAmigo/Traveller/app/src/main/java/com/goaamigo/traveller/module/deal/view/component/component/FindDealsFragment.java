@@ -3,6 +3,7 @@ package com.goaamigo.traveller.module.deal.view.component.component;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,16 +43,17 @@ public class FindDealsFragment extends Fragment {
 
     private void initView(View v) {
         list = new ArrayList<>();
-        list.add(new Deals("deal 1","this is deal 1",R.drawable.image4));
-        list.add(new Deals("deal 2","this is deal 2",R.drawable.image4));
-        list.add(new Deals("deal 3","this is deal 3",R.drawable.image4));
+        list.add(new Deals("deal 1", "this is deal 1", R.drawable.image4));
+        list.add(new Deals("deal 2", "this is deal 2", R.drawable.image4));
+        list.add(new Deals("deal 3", "this is deal 3", R.drawable.image4));
 
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        rv.setLayoutManager(llm);
+        GridLayoutManager glm = new GridLayoutManager(getActivity(),2);
+       LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(glm);
         adapter = new DealsRVAdapter(list,getActivity());
         rv.setAdapter(adapter);
     }

@@ -1,11 +1,11 @@
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
-    sothree:umanoPanelHeight="0dp"
-    sothree:umanoShadowHeight="0dp">
+    app:umanoPanelHeight="75dp"
+    app:umanoShadowHeight="5dp">
 
     <FrameLayout
         android:id="@+id/container"

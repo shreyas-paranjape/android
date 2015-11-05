@@ -9,3 +9,5 @@ include ':websocket'
 project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')
 include ':model'
 project(':model').projectDir = new File(rootDir, '../Model')
+include ':map'
+project(':map').projectDir = new File(rootDir, '../../../libraries/map/osm')

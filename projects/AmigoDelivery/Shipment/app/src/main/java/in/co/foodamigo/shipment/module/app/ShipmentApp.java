@@ -12,7 +12,7 @@ public class ShipmentApp extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(getApplicationContext());
-        AndroidGraphicFactory.createInstance(this);
+        //AndroidGraphicFactory.createInstance(this);
     }
 
     @Override

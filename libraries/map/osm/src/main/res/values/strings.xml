@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">library</string>
+    <string name="navigation_drawer_open">Drawer opened</string>
+    <string name="navigation_drawer_close">Drawer closed</string>
+    <color name="mdtp_accent_color">#009688</color>
+    <color name="mdtp_accent_color_dark">#00796b</color>
+</resources>

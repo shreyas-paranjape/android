@@ -1,8 +1,19 @@
 package com.goaamigo.model.trip;
 
-public class Profile {
+import com.orm.dsl.Column;
+import com.orm.dsl.Table;
+
+import java.io.Serializable;
+
+@Table
+public class Profile implements Serializable {
+
+    private long id;
+    @Column(name = "profile_name")
     private String profileName;
+    @Column(name = "profile_email")
     private String profileEmail;
+    @Column(name = "profile_image")
     private int profileImage;
 
     public Profile() {
@@ -36,5 +47,13 @@ public class Profile {
 
     public void setProfileImage(int profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

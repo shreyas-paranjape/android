@@ -9,6 +9,11 @@ public abstract class Item implements Serializable {
     private final String name;
     private final int imageId;
 
+    public Item(){
+        this.name = "";
+        this.imageId = 0;
+    }
+
     public Item(String name, int imageId) {
         this.name = name;
         this.imageId = imageId;

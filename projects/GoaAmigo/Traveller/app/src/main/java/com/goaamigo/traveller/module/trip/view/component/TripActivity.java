@@ -3,8 +3,11 @@ package com.goaamigo.traveller.module.trip.view.component;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.app.view.component.DrawerFragment;
+import com.goaamigo.traveller.module.app.view.component.ProfileFragment;
 import com.goaamigo.traveller.module.app.view.model.MenuData;
 import com.goaamigo.traveller.module.deal.view.component.component.FindDealsFragment;
 import com.view.activity.AbstractActivity;
@@ -80,5 +83,6 @@ public class TripActivity extends AbstractActivity {
         public void onEvent(LoginFragment.FindSignUpButtonClickEvent event){
             replaceContent(new SignUpFragment());
         }
+
     }
 }

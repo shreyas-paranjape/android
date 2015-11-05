@@ -2,7 +2,9 @@ package com.goaamigo.traveller.module.app.singleton;
 
 import android.app.Application;
 
+import com.goaamigo.model.trip.Profile;
 import com.orm.SugarContext;
+import com.orm.SugarRecord;
 
 public class TravellerApp extends Application {
 
@@ -10,6 +12,10 @@ public class TravellerApp extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(getApplicationContext());
+
+        Profile profile = new Profile();
+        // set properties
+        SugarRecord.save(profile);
     }
 
     @Override

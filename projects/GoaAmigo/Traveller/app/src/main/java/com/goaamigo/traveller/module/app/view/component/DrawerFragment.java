@@ -1,25 +1,34 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.event.ChangeContentEvent;
+import com.goaamigo.model.trip.Profile;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
+import com.orm.SugarRecord;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
 import com.view.widget.NavigationDrawerListAdapter;
-import com.wdullaer.materialdatetimepicker.time.CircleView;
+
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         drawerItems.add(new Item("Home", R.drawable.ic_home_black_24dp) {
             @Override
@@ -45,6 +54,7 @@ public class DrawerFragment extends ListNavigationDrawer {
                 return new ContactUsFragment();
             }
         });
+
     }
 
     @Override
@@ -58,19 +68,34 @@ public class DrawerFragment extends ListNavigationDrawer {
     }
 
     @Override
-    protected void initView(View v) {
-        super.initView(v);
-        CircleView circleView;
-        TextView fk;
-        Log.i("aya circle view", "bachao");
-        circleView=(CircleView) v.findViewById(R.id.profile_image);
-        fk=(TextView) v.findViewById(R.id.tao);
-        fk.setText("Jaguar");
-
+    protected int getLayoutId() {
+        return R.layout.fragment_navigation_drawer;
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_navigation_drawer;
+    protected void initView(View v) {
+        super.initView(v);
+        CircleImageView profileImage = (CircleImageView)v.findViewById(R.id.profileImage);
+        LinearLayout profile = (LinearLayout)v.findViewById(R.id.layoutProfile);
+        TextView name = (TextView)v.findViewById(R.id.tvName);
+        TextView email = (TextView)v.findViewById(R.id.tvEmail);
+        List<Profile> profiles = SugarRecord.listAll(Profile.class);
+        profileImage.setImageResource(R.drawable.heisenberg);
+        name.setText("heisenberg");
+        email.setText("heisenberg@example.com");
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerItemClicked(
+                        new Item() {
+                            @Override
+                            public Fragment getDisplayFragment() {
+                                return new ProfileFragment();
+                            }
+                        });
+            }
+        });
     }
 }

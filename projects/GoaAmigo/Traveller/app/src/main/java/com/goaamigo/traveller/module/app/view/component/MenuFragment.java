@@ -33,8 +33,9 @@ public class MenuFragment extends Fragment {
     private void initView(View v) {
         list = new ArrayList<>();
         list.add(new MenuData("Search Trip", R.drawable.ic_home_black_24dp, "Home description"));
-        list.add(new MenuData("login to trip", R.drawable.ic_home_black_24dp, "see your trip"));
+        list.add(new MenuData("login to trip", R.drawable.ic_account_circle_black_24dp, "see your trip"));
         list.add(new MenuData("Start map activity",R.drawable.ic_add_shopping_cart_black_24dp, "Description",MapsActivity.class));
+        list.add(new MenuData("Deals", R.drawable.ic_edit_black_24dp, "see our deals"));
 
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         rv.setHasFixedSize(true);

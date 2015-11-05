@@ -55,7 +55,6 @@ public class LoginFragment extends Fragment implements
     String personName;
     String personPhoto;
     String personGooglePlusProfile;
-    Button facebook;
     private boolean mIsResolving = false;
 
     /* Should we automatically resolve ConnectionResults when possible? */

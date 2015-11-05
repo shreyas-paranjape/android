@@ -93,22 +93,21 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="androidsvg-1.2.2-beta-1" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-core-0.6.0-rc1" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="mapsforge-map-0.5.2" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-android-extras-0.6.0-rc1" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-android-0.6.0-rc1" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-0.6.0-rc1" level="project" />
     <orderEntry type="library" exported="" name="slf4j-android-1.7.10" level="project" />
     <orderEntry type="library" exported="" name="kxml2-2.3.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="mapsforge-map-android-0.5.2" level="project" />
-    <orderEntry type="library" exported="" name="graphhopper-0.5.0" level="project" />
     <orderEntry type="library" exported="" name="support-v13-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="mapsforge-map-reader-0.5.2" level="project" />
-    <orderEntry type="library" exported="" name="mapsforge-core-0.5.2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="trove4j-3.0.3" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.7.10" level="project" />
+    <orderEntry type="library" exported="" name="mapsforge-map-reader-0.6.0-rc1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
-    <orderEntry type="library" exported="" name="slf4j-api-1.7.12" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="module" module-name="sugar" exported="" />
-    <orderEntry type="module" module-name="common" exported="" />
+    <orderEntry type="module" module-name="map" exported="" />
   </component>
 </module>

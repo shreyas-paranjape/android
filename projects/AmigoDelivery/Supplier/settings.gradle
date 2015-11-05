@@ -1,9 +1,9 @@
 include ':app'
 include ':volley'
-project(':volley').projectDir = new File(rootDir, '../../../libraries/net/volley')
+project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':common'
 project(':common').projectDir = new File(rootDir, '../../../libraries/common')
 include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
 include ':websocket'
-project(':websocket').projectDir = new File(rootDir, '../../../libraries/net/android-websockets')
+project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')

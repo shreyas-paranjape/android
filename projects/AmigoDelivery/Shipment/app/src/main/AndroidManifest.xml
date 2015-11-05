@@ -20,7 +20,7 @@
 
 
         <activity
-            android:name=".module.app.view.component.MapActivity"
+            android:name=".module.app.view.component.ShipmentMapActivity"
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

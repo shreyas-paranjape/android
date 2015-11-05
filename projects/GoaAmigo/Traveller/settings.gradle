@@ -1,13 +1,13 @@
 include ':app'
-include ':volley'
-project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':common'
 project(':common').projectDir = new File(rootDir, '../../../libraries/common')
 include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
-include ':websocket'
-project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')
 include ':model'
 project(':model').projectDir = new File(rootDir, '../Model')
+include ':volley'
+project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
+include ':cog'
+project(':cog').projectDir = new File(rootDir,'../../../libraries/cognalys')
 include ':map'
 project(':map').projectDir = new File(rootDir, '../../../libraries/map/osm')

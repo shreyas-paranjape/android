@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -66,6 +67,20 @@
             android:text="been here" />
     </LinearLayout>
 
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/detailFragName"/>
+
+    <RatingBar
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:id="@+id/ratingBar" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -75,5 +90,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="maps" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_weight="2"
+            android:layout_height="50dp" />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/primary_color_dark"
+            android:text="add room"/>
+    </LinearLayout>
 
 </LinearLayout>

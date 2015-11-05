@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -25,6 +26,7 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
     private Button rate;
     private Button beenHere;
     private TextView address;
+    private RatingBar rating;
 
 
     public DetailsFragment() {
@@ -43,6 +45,9 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mDemoSlider = (SliderLayout) getActivity().findViewById(R.id.slider);
+        rating = (RatingBar) getActivity().findViewById(R.id.ratingBar);
+
+        rating.setRating(4);
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("Vivanta",R.drawable.vivataimage1);

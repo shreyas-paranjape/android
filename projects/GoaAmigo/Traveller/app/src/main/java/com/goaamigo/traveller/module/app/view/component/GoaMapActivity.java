@@ -2,6 +2,8 @@ package com.goaamigo.traveller.module.app.view.component;
 
 import android.os.Bundle;
 
+import com.goaamigo.traveller.R;
+
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -39,7 +41,6 @@ public class GoaMapActivity extends MapActivity {
 
     protected void createLayers() {
         super.createLayers();
-
 
         // Add a balloon
         Util.addBalloonMarker(

@@ -1,12 +1,15 @@
 package map.view.component;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.util.MapViewerTemplateRuntimePermissions;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
+
+import map.R;
 
 
 public abstract class MapActivity extends MapViewerTemplateRuntimePermissions {
@@ -16,6 +19,7 @@ public abstract class MapActivity extends MapViewerTemplateRuntimePermissions {
         AndroidGraphicFactory.createInstance(getApplication());
         super.onCreate(savedInstanceState);
     }
+
 
     protected XmlRenderTheme getRenderTheme() {
         return InternalRenderTheme.OSMARENDER;

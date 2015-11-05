@@ -23,6 +23,7 @@ public class HomeActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
+        cartManager.hidePanel();
         registerListener(cartManager);
         addCartFragment();
     }
@@ -31,7 +32,7 @@ public class HomeActivity extends AbstractActivity {
     @Override
     public void onBackPressed() {
         if (cartManager.isCartExpanded()) {
-            cartManager.collapseCartPanel();
+            cartManager.collapsePanel();
         } else {
             super.onBackPressed();
         }

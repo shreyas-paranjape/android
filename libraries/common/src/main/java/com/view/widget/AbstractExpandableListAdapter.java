@@ -69,6 +69,6 @@ public abstract class AbstractExpandableListAdapter<G, C> extends BaseExpandable
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }

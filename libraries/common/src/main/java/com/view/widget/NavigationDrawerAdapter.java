@@ -68,7 +68,8 @@ public abstract class NavigationDrawerAdapter extends BaseExpandableListAdapter 
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
+        int offset = groupPosition * 100;
+        return childPosition + offset;
     }
 
     @Override

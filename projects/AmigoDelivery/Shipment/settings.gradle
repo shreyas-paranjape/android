@@ -7,4 +7,6 @@ include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
 include ':websocket'
 project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')
+include ':map'
+project(':map').projectDir = new File(rootDir, '../../../libraries/map/osm')
 

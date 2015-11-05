@@ -25,26 +25,7 @@ dependencies {
     compile 'com.android.support:support-v13:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
 
-    /*compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:2.1.0@aar'){
-        transitive=true
-    }*/
-
-    compile(group: 'com.graphhopper', name: 'graphhopper', version: '0.5.0') {
-        exclude group: 'com.google.protobuf', module: 'protobuf-java'
-        exclude group: 'org.openstreetmap.osmosis', module: 'osmosis-osm-binary'
-        exclude group: 'org.apache.xmlgraphics', module: 'xmlgraphics-commons'
-    }
-
-    compile group: 'org.mapsforge', name: 'mapsforge-core', version: '0.5.2'
-    compile group: 'org.mapsforge', name: 'mapsforge-map', version: '0.5.2'
-    compile group: 'org.mapsforge', name: 'mapsforge-map-android', version: '0.5.2'
-    compile group: 'org.mapsforge', name: 'mapsforge-map-reader', version: '0.5.2'
-
-    compile group: 'org.slf4j', name: 'slf4j-android', version: '1.7.10'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.10'
-
-
-    compile project(path: ':common')
+    compile project(path: ':map')
     compile project(path: ':sugar')
 
 }

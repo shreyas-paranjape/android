@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.goaamigo.model.trip.Day;
+import com.goaamigo.model.trip.trip.Day;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.trip.view.adapter.EventAdapter;

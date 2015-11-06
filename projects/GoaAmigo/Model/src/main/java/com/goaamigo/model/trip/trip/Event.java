@@ -1,4 +1,4 @@
-package com.goaamigo.model.trip;
+package com.goaamigo.model.trip.trip;
 
 import com.orm.dsl.Column;
 import com.orm.dsl.Table;

@@ -1,4 +1,4 @@
-package com.goaamigo.model.trip.MapData;
+package com.goaamigo.traveller.module.MapData;
 
 import com.google.android.gms.maps.model.LatLng;
 

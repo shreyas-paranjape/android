@@ -1,4 +1,4 @@
-package com.goaamigo.model.trip;
+package com.goaamigo.model.trip.trip;
 
 public class Deals {
     private int id;

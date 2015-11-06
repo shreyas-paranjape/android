@@ -2,7 +2,7 @@ package com.goaamigo.traveller.module.app.singleton;
 
 import android.app.Application;
 
-import com.goaamigo.model.trip.Profile;
+import com.goaamigo.model.trip.trip.Profile;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 

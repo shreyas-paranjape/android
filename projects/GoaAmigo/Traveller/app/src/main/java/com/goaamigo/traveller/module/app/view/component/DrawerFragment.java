@@ -1,15 +1,16 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.goaamigo.model.trip.Profile;
+import com.goaamigo.model.trip.trip.Profile;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
-import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 import com.orm.SugarRecord;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
@@ -17,9 +18,12 @@ import com.view.widget.NavigationDrawerListAdapter;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,12 +53,7 @@ public class DrawerFragment extends ListNavigationDrawer {
                 return new ContactUsFragment();
             }
         });
-        drawerItems.add(new Item("Detail",R.drawable.ic_add_shopping_cart_black_24dp) {
-            @Override
-            public Fragment getDisplayFragment() {
-                return new DetailsFragment();
-            }
-        });
+
     }
 
     @Override
@@ -79,10 +78,11 @@ public class DrawerFragment extends ListNavigationDrawer {
         LinearLayout profile = (LinearLayout)v.findViewById(R.id.layoutProfile);
         TextView name = (TextView)v.findViewById(R.id.tvName);
         TextView email = (TextView)v.findViewById(R.id.tvEmail);
-        //List<Profile> profiles = SugarRecord.listAll(Profile.class);
+        List<Profile> profiles = SugarRecord.listAll(Profile.class);
         profileImage.setImageResource(R.drawable.heisenberg);
         name.setText("heisenberg");
         email.setText("heisenberg@example.com");
+
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override

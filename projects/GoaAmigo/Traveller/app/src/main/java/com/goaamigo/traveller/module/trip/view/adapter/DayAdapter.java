@@ -5,8 +5,8 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
-import com.goaamigo.model.trip.Day;
-import com.goaamigo.model.trip.Event;
+import com.goaamigo.model.trip.trip.Day;
+import com.goaamigo.model.trip.trip.Event;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.singleton.Constant;
 import com.goaamigo.traveller.module.trip.view.component.DayFragment;

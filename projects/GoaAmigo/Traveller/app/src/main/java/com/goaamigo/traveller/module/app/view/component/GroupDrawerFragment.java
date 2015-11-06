@@ -42,7 +42,7 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
         book.getItems().add(new Item("Stay", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return new ContactUsFragment();
+                return new ProductMapFragment();
             }
         });
 

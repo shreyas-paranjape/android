@@ -75,6 +75,8 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
         }
     }
 
+
+
    /* public static class MenuButtonClicked implements Serializable {
         private final MenuData menuData;
 

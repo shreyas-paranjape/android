@@ -1,6 +1,7 @@
 package com.goaamigo.traveller.module.product.view.fragment;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.goaamigo.model.trip.catalogue.Product;
 import com.goaamigo.traveller.R;
@@ -23,13 +24,17 @@ public class ProductMapFragment extends MapFragment {
 
     private ProductAdapter productAdapter;
 
+    public ProductMapFragment(){
+        EventBus.getDefault().register(this);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
         productAdapter = (ProductAdapter) getArguments()
                 .getSerializable("PRODUCT_ADAPTER");
     }
+
 
     @Override
     public void onDestroy() {
@@ -59,20 +64,10 @@ public class ProductMapFragment extends MapFragment {
     }
 
     public void onEvent(ProductAdapter.ProductDataSetChanged event) {
-        refreshLayers();
+        //refreshLayers();
     }
 
-    private void refreshLayers() {
-        mapView.getLayerManager().getLayers().clear();
-        addProductsLayer();
-    }
 
-    private void addProductsLayer() {
-        List<Product> products = productAdapter.getProducts();
-        for (Product product : products) {
-            addBalloonForProduct(product);
-        }
-    }
 
     private void addBalloonForProduct(Product product) {
         Util.addBalloonMarker(

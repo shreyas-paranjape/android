@@ -78,11 +78,14 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".module.app.view.component.GoaMapActivity"></activity>
-        <activity
-            android:name=".module.trip.view.component.ProductActivity"
-            android:label="@string/title_activity_search_result"
-            android:parentActivityName=".module.trip.view.component.TripActivity"></activity>
+        <activity android:name=".module.app.view.component.GoaMapActivity">
+
+        </activity>
+
+        <activity android:name=".module.product.view.activity.ProductsActivity"
+            android:parentActivityName=".module.app.view.component.HomeActivity">
+
+        </activity>
     </application>
 
 </manifest>

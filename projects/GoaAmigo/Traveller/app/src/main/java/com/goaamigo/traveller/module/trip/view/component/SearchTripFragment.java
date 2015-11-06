@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.activity.ProductsActivity;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +110,7 @@ public class SearchTripFragment extends DialogFragment implements
                 EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, args) {
                     @Override
                     public Class getContentClass() {
-                        return ProductActivity.class;
+                        return ProductsActivity.class;
                     }
                 });
             }

@@ -109,7 +109,7 @@ public class SearchTripFragment extends DialogFragment implements
                 EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, args) {
                     @Override
                     public Class getContentClass() {
-                        return SearchResultActivity.class;
+                        return ProductActivity.class;
                     }
                 });
             }

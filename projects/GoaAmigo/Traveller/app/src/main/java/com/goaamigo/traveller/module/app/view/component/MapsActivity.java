@@ -11,9 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.goaamigo.model.trip.MapData.Hotels;
-import com.goaamigo.model.trip.MapData.MarkerEntity;
-import com.goaamigo.model.trip.MapData.Restaurants;
+import com.goaamigo.traveller.module.MapData.Hotels;
+import com.goaamigo.traveller.module.MapData.MarkerEntity;
+import com.goaamigo.traveller.module.MapData.Restaurants;
 import com.goaamigo.traveller.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;

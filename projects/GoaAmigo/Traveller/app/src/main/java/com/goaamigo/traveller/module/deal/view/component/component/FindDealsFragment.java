@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.goaamigo.model.trip.Deals;
+import com.goaamigo.model.trip.trip.Deals;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.deal.view.component.adapter.DealsRVAdapter;
 

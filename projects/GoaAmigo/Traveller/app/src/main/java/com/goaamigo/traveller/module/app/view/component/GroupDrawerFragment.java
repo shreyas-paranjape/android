@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.GroupDrawerAdapter;
+import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
 import com.view.fragment.ExpandableListNavigationDrawer;
 import com.view.model.Item;
 import com.view.model.ItemGroup;

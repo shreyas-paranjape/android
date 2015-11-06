@@ -41,6 +41,14 @@ public abstract class MapFragment extends Fragment {
     protected XmlRenderThemeStyleMenu renderThemeStyleMenu;
     protected List<TileCache> tileCaches = new ArrayList<TileCache>();
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (AndroidGraphicFactory.INSTANCE == null) {
+            AndroidGraphicFactory.createInstance(getActivity().getApplication());
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +59,21 @@ public abstract class MapFragment extends Fragment {
         createTileCaches();
         checkPermissionsAndCreateLayersAndControls();
         return v;
+    }
+
+
+    @Override
+    public void onPause() {
+        mapView.getModel().save(this.preferencesFacade);
+        this.preferencesFacade.save();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mapView.destroyAll();
+        tileCaches.clear();
+        super.onDestroy();
     }
 
     /*
@@ -249,19 +272,6 @@ public abstract class MapFragment extends Fragment {
         return mvp;
     }
 
-    @Override
-    public void onPause() {
-        mapView.getModel().save(this.preferencesFacade);
-        this.preferencesFacade.save();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mapView.destroyAll();
-        tileCaches.clear();
-        super.onDestroy();
-    }
 
     /**
      * Hook to purge tile caches.
@@ -278,15 +288,6 @@ public abstract class MapFragment extends Fragment {
         mapView.getLayerManager().redrawLayers();
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (AndroidGraphicFactory.INSTANCE == null) {
-            AndroidGraphicFactory.createInstance(getActivity().getApplication());
-        }
-
-    }
 
     protected XmlRenderTheme getRenderTheme() {
         return InternalRenderTheme.OSMARENDER;

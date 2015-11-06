@@ -39,12 +39,36 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
         ItemGroup feedback = new ItemGroup("Feedback");
         ItemGroup account = new ItemGroup("account");
 
-        book.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
+        book.getItems().add(new Item("Stay", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
                 return new ContactUsFragment();
             }
         });
+
+        book.getItems().add(new Item("Local travel", R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new ContactUsFragment();
+            }
+        });
+
+        book.getItems().add(new Item("Activity", R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new ContactUsFragment();
+            }
+        });
+
+        book.getItems().add(new Item("Trip", R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new ContactUsFragment();
+            }
+        });
+
+
+
 
         feedback.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override

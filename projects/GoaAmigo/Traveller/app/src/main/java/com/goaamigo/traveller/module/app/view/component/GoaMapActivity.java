@@ -28,7 +28,7 @@ public class GoaMapActivity extends MapActivity {
     }
 
     protected int getLayoutId() {
-        return R.layout.activity_map;
+        return R.layout.fragment_product_map;
     }
 
     protected int getMapViewId() {
@@ -41,7 +41,6 @@ public class GoaMapActivity extends MapActivity {
 
     protected void createLayers() {
         super.createLayers();
-
 
         // Add a balloon
         Util.addBalloonMarker(

@@ -16,7 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.activity.ProductsActivity;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,11 +102,17 @@ public class SearchTripFragment extends DialogFragment implements
         //below code for todays date
         textView1.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
 
+        final Bundle args = new Bundle();
         // Month is 0 based, just add 1
         btnFindTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new FindTripButtonClickEvent());
+                EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, args) {
+                    @Override
+                    public Class getContentClass() {
+                        return ProductsActivity.class;
+                    }
+                });
             }
         });
         checkindate.setOnClickListener(new View.OnClickListener() {

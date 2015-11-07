@@ -1,6 +1,8 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,6 +18,7 @@ import com.view.widget.NavigationDrawerListAdapter;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {

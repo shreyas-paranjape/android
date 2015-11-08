@@ -49,10 +49,8 @@ public class ProductAdapter
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
-
     }
 
     @Override
@@ -69,8 +67,6 @@ public class ProductAdapter
         EventBus.getDefault().post(new ProductDataSetChanged());
     }
 
-
-
     /*@Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
@@ -85,7 +81,6 @@ public class ProductAdapter
         ImageView imageView;
         CardView cv;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.productName);
@@ -93,9 +88,8 @@ public class ProductAdapter
             rating = (TextView) itemView.findViewById(R.id.productRating);
             discount = (TextView) itemView.findViewById(R.id.productDiscount);
             price = (TextView) itemView.findViewById(R.id.productPrice);
-            imageView = (ImageView) itemView.findViewById(R.id.profileImage);
+            imageView = (ImageView) itemView.findViewById(R.id.product_image);
             cv = (CardView) itemView.findViewById(R.id.cvProduct);
-
         }
     }
 }

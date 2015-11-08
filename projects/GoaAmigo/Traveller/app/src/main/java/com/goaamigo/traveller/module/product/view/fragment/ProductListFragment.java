@@ -34,10 +34,15 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         productList = new ArrayList<>();
-        productList.add(new Product("hotel 1","goa 1","5","50 %","3500",R.drawable.vivataimage1));
-        productList.add(new Product("hotel 2","goa 2","5","10 %","3530",R.drawable.vivataimage3));
-        productList.add(new Product("hotel 3","goa 3","5","40 %","3550",R.drawable.vivataimage1));
-        productList.add(new Product("hotel 4","goa 4","5","20 %","320",R.drawable.vivataimage2));
+        productList.add(new Product("hotel 1","mapusa","4","50 %","3500",R.drawable.vivataimage1));
+        productList.add(new Product("hotel 2","panajim","5","10 %","3530",R.drawable.vivataimage3));
+        productList.add(new Product("hotel 3","ponda","3","40 %","3550",R.drawable.vivataimage1));
+        productList.add(new Product("hotel 4","goa","5","20 %","320",R.drawable.vivataimage2));
+        productList.add(new Product("hotel 5","baga","2","20 %","320",R.drawable.vivataimage3));
+        productList.add(new Product("hotel 6","vasco","3","20 %","320",R.drawable.vivataimage1));
+        productList.add(new Product("hotel 7","ponda","4","20 %","320",R.drawable.vivataimage2));
+        productList.add(new Product("hotel 8","mapusa","5","20 %","320",R.drawable.vivataimage3));
+
         View v = inflater.inflate(R.layout.fragment_product_list, container, false);
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rvProducts);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));

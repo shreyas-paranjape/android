@@ -48,9 +48,9 @@ public class DrawerAdapter extends NavigationDrawerListAdapter {
 
             @Override
             public void onClick(View convertview) {
-
-                Toast.makeText(getContext(),"Notification", Toast.LENGTH_SHORT).show();
                 Log.i("Notification", "Notication");
+                Toast.makeText(getContext(),"Notification", Toast.LENGTH_SHORT).show();
+
             }
         });
 

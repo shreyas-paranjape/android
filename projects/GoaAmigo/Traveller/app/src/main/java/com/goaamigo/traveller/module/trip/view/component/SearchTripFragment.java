@@ -21,6 +21,7 @@ import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.activity.ProductsActivity;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -30,18 +31,21 @@ import de.greenrobot.event.EventBus;
 
 public class SearchTripFragment extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
-    TextView textView1, TextView2;
-    LinearLayout checkindate,checkoutdate;
-    Button btn;
+    TextView textView1, TextView2, TextView3,Bache;
+    LinearLayout checkindate, checkoutdate,dialog;
+
     private int Childern = 0;
     private int adult = 0;
-
+    final Calendar cal = Calendar.getInstance();
+    int pYear = cal.get(Calendar.YEAR);
+    int pMonth = cal.get(Calendar.MONTH);
+    int pDay = cal.get(Calendar.DAY_OF_MONTH);
     ImageView img1, img2;
 
 
     Spinner spnr, spnr2;
-    String[] plants = new String[]{"Activities","Water Sport", "River cruise", "River rafting", "Casinos","Zoological park"};
-    String[] plants1 = new String[]{"Places","Mandrem Beach", "Agonda beach", "Baga Beach", "Candolim beach","cavelossim beach"};
+    String[] plants = new String[]{"Activities", "Water Sport", "River cruise", "River rafting", "Casinos", "Zoological park"};
+    String[] plants1 = new String[]{"Places", "Mandrem Beach", "Agonda beach", "Baga Beach", "Candolim beach", "cavelossim beach"};
 
 
     MyDialog dialogObj = new MyDialog();
@@ -53,16 +57,19 @@ public class SearchTripFragment extends DialogFragment implements
         getActivity().setTitle("Search trips");
 
         View v = inflater.inflate(R.layout.fragment_search_trip, container, false);
-        checkindate=(LinearLayout) v.findViewById(R.id.checkindate);
-        checkoutdate=(LinearLayout) v.findViewById(R.id.checkoutdate);
+        checkindate = (LinearLayout) v.findViewById(R.id.checkindate);
+        checkoutdate = (LinearLayout) v.findViewById(R.id.checkoutdate);
         textView1 = (TextView) v.findViewById(R.id.textView1);
         TextView2 = (TextView) v.findViewById(R.id.textView2);
-
+        TextView3 = (TextView) v.findViewById(R.id.textView5);
+        Bache = (TextView) v.findViewById(R.id.bache);
         img1 = (ImageView) v.findViewById(R.id.imageView2);
         img2 = (ImageView) v.findViewById(R.id.imageView3);
         spnr = (Spinner) v.findViewById(R.id.spinner);
         spnr2 = (Spinner) v.findViewById(R.id.spinner1);
-        btn = (Button) v.findViewById(R.id.buttondialog);
+
+        dialog=(LinearLayout) v.findViewById(R.id.dialog);
+
 
 
         List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
@@ -94,10 +101,7 @@ public class SearchTripFragment extends DialogFragment implements
 
         TextView2 = (TextView) v.findViewById(R.id.textView2);
         Button btnFindTrip = (Button) v.findViewById(R.id.btnFindTrip);
-        final Calendar cal = Calendar.getInstance();
-        int pYear = cal.get(Calendar.YEAR);
-        int pMonth = cal.get(Calendar.MONTH);
-        int pDay = cal.get(Calendar.DAY_OF_MONTH);
+
 
         //below code for todays date
         textView1.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
@@ -136,34 +140,33 @@ public class SearchTripFragment extends DialogFragment implements
         });
 
 
-       checkoutdate.setOnClickListener(new View.OnClickListener() {
+        checkoutdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Tag Name", "Check out Date");
-                final Calendar cal = Calendar.getInstance();
-                int pYear = cal.get(Calendar.YEAR);
-                int pMonth = cal.get(Calendar.MONTH);
-                int pDay = cal.get(Calendar.DAY_OF_MONTH);
+                final Calendar cal1 = Calendar.getInstance();
+
                 Calendar now = Calendar.getInstance();
 
-                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                DatePickerDialog dpd1 = DatePickerDialog.newInstance(
                         SearchTripFragment.this,
                         now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH)
                 );
-                dpd.show(getFragmentManager(), "Datepickerdialog");
+                dpd1.show(getFragmentManager(), "Datepickerdialog");
+                final Bundle args = new Bundle();
                 TextView2.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
+
+
             }
         });
-        btn.setOnClickListener(new View.OnClickListener() {
+        dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FragmentManager manager = getFragmentManager();
                 MyDialog myDialog = new MyDialog();
                 myDialog.show(manager, "My Dialog");
-
             }
         });
     }
@@ -171,12 +174,14 @@ public class SearchTripFragment extends DialogFragment implements
     @Override
     public void onDateSet(DatePickerDialog datePickerDialog, int dayOfMonth, int monthOfYear, int year) {
         String date = +dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+        Log.i("On date set", "On date selected");
         textView1.setText(date);
     }
 
     public void onDateSet1(DatePickerDialog datePickerDialog, int dayOfMonth, int monthOfYear, int year) {
-        String date = +dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-        TextView2.setText(date);
+        String date1 = +dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+        Log.i("Check out date", "check out date selected");
+        TextView2.setText(date1);
     }
 
     public static class FindTripButtonClickEvent {
@@ -241,6 +246,7 @@ public class SearchTripFragment extends DialogFragment implements
                         adult = 0;
                     }
                     tv.setText(String.valueOf(adult));
+
                 }
             });
             yes.setOnClickListener(this);
@@ -253,11 +259,15 @@ public class SearchTripFragment extends DialogFragment implements
         public void onClick(View view) {
 
             if (view.getId() == R.id.yes) {
-                Toast.makeText(getActivity(), "Yes clicked", Toast.LENGTH_LONG).show();
+                //   Toast.makeText(getActivity(), "Yes clicked", Toast.LENGTH_LONG).show();
+                TextView3.setText(String.valueOf(adult));
+                Bache.setText(String.valueOf(Childern));
                 dismiss();
             } else {
                 Toast.makeText(getActivity(), "No button clicked", Toast.LENGTH_LONG).show();
+
                 dismiss();
+
                 adult = 0;
                 Childern = 0;
 

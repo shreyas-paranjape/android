@@ -46,12 +46,15 @@ public class ProductsActivity extends AbstractActivity {
             case R.id.action_filter:
                 break;
             case R.id.action_maps:
+//                if(mapsIcon == false){
+//                    replaceContent(getMapFragment());
+//                    mapsIcon = true;
+//                }else {
+//                    replaceContent(getListFragment());
+//                    mapsIcon = false;
+//                }
                 replaceContent(getMapFragment());
-                if(mapsIcon == false){
-                    menu.getItem(R.id.action_maps).setIcon(getResources().getDrawable(R.drawable.ic_map_black_24dp));
-                }else {
-                    menu.getItem(R.id.action_maps).setIcon(getResources().getDrawable(R.drawable.ic_home_black_24dp));
-                }
+
                 break;
         }
         return super.onOptionsItemSelected(item);

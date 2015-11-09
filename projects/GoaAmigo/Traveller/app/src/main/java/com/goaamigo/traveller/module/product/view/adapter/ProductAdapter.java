@@ -24,7 +24,7 @@ public class ProductAdapter
     private final List<Product> productsList;
 
     public ProductAdapter(List<Product> productsList) {
-       this.productsList = productsList;
+        this.productsList = productsList;
     }
 
     public ProductAdapter() {
@@ -43,8 +43,8 @@ public class ProductAdapter
         holder.name.setText(productsList.get(position).getName());
         holder.location.setText(productsList.get(position).getProductLocation());
         holder.rating.setText(productsList.get(position).getProductRating());
-        holder.discount.setText(productsList.get(position).getProductDiscount());
-        holder.price.setText(productsList.get(position).getProductPrice());
+        holder.discount.setText("-" + productsList.get(position).getProductDiscount());
+        holder.price.setText("Rs." + productsList.get(position).getProductPrice());
         holder.imageView.setImageResource(productsList.get(position).getProductImage());
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +62,10 @@ public class ProductAdapter
         return productsList;
     }
 
-    public void addProduct(Product product){
-        productsList.add(product);
-        EventBus.getDefault().post(new ProductDataSetChanged());
-    }
+//    public void addProduct(Product product){
+//        productsList.add(product);
+//        EventBus.getDefault().post(new ProductDataSetChanged());
+//    }
 
     /*@Override
     public void notifyDataSetChanged() {
@@ -77,7 +77,7 @@ public class ProductAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name,location,rating,discount,price;
+        TextView name, location, rating, discount, price;
         ImageView imageView;
         CardView cv;
 

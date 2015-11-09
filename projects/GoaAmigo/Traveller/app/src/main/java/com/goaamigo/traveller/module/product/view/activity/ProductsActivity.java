@@ -2,14 +2,11 @@ package com.goaamigo.traveller.module.product.view.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.goaamigo.model.trip.catalogue.Product;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
@@ -17,8 +14,6 @@ import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
 import com.view.activity.AbstractActivity;
 
 public class ProductsActivity extends AbstractActivity {
-    private Menu menu;
-    private Spinner productList;
     private boolean mapsIcon = false;
     private final ProductAdapter productAdapter = new ProductAdapter();
 
@@ -40,21 +35,19 @@ public class ProductsActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.action_sort:
                 break;
             case R.id.action_filter:
                 break;
             case R.id.action_maps:
-//                if(mapsIcon == false){
-//                    replaceContent(getMapFragment());
-//                    mapsIcon = true;
-//                }else {
-//                    replaceContent(getListFragment());
-//                    mapsIcon = false;
-//                }
-                replaceContent(getMapFragment());
-
+                if (mapsIcon == false) {
+                    replaceContent(getMapFragment());
+                    mapsIcon = true;
+                } else {
+                    replaceContent(getListFragment());
+                    mapsIcon = false;
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -63,7 +56,6 @@ public class ProductsActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_products, menu);
-        this.menu = menu;
         return true;
     }
 
@@ -77,18 +69,18 @@ public class ProductsActivity extends AbstractActivity {
 
     private void addArguments(Fragment frag) {
         Bundle b = new Bundle();
-        b.putSerializable("PRODUCT_ADAPTER",productAdapter);
+        b.putSerializable("PRODUCT_ADAPTER", productAdapter);
         frag.setArguments(b);
     }
 
-    private Fragment getMapFragment(){
+    private Fragment getMapFragment() {
         ProductMapFragment frag = new ProductMapFragment();
-        productAdapter.addProduct(new Product());
+//        productAdapter.addProduct(new Product());
         addArguments(frag);
         return frag;
     }
 
-    private Fragment getListFragment(){
+    private Fragment getListFragment() {
         ProductListFragment frag = new ProductListFragment();
         addArguments(frag);
         return frag;
@@ -97,5 +89,4 @@ public class ProductsActivity extends AbstractActivity {
     protected int getContentContainerId() {
         return R.id.container;
     }
-
 }

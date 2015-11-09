@@ -74,6 +74,7 @@
                     android:id="@+id/productDiscount"
                     android:layout_width="fill_parent"
                     android:gravity="right"
+                    android:textColor="@color/color_green"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 

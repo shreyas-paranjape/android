@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary_color"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImage"
@@ -21,55 +21,116 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:src="@drawable/ic_account_circle_grey600_48dp" />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp" />
-
-
-
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
         <LinearLayout
             android:layout_width="wrap_content"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/notification"
+            <TextView
+                android:id="@+id/tvName"
+                android:text="Name"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp" />
 
-                android:id="@+id/imageView4" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:text="Email id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
 
-            <View
-                android:layout_width="1dip"
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_height="fill_parent"
-                android:background="#FFFFFF"
-                />
+
+                android:id="@+id/notification1"
+                android:layout_height="wrap_content">
 
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_notifications_none_black_36dp"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/imageView4" />
+
+                <View
+                    android:layout_width="1dip"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="fill_parent"
+                    android:background="#757575"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/settings1"
+                android:layout_height="wrap_content">
 
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+
+                    android:background="@drawable/ic_settings_black_36dp"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/imageView5" />
+
+                <View
+                    android:layout_width="1dip"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="#757575"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/logout"
+                android:layout_height="wrap_content">
 
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_power_settings_new_black_36dp"
+                    android:layout_height="wrap_content"
 
+                    android:id="@+id/imageView6" />
 
+                <View
+                    android:layout_width="1dip"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="fill_parent"
+                    android:background="#757575"
+                    />
+            </LinearLayout>
+
+</LinearLayout>
         </LinearLayout>
+
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+
     </LinearLayout>
 
     <View

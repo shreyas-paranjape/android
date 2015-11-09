@@ -22,9 +22,6 @@ import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +32,7 @@ public class DrawerFragment extends ListNavigationDrawer {
                 return new MenuFragment();
             }
         });
+
         drawerItems.add(new Item("Feedback", R.drawable.ic_feedback_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {

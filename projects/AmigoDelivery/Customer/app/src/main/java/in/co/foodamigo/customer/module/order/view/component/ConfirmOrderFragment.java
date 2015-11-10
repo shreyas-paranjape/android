@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import delivery.model.order.OrderItem;
 import in.co.foodamigo.customer.databinding.FragmentConfirmOrderBinding;
 import in.co.foodamigo.customer.databinding.ItemOrderConfirmBinding;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
 import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
+import model.order.OrderItem;
 
 public class ConfirmOrderFragment extends Fragment {
 

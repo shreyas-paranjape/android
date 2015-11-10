@@ -3,13 +3,8 @@ package in.co.foodamigo.customer.module.app.singleton;
 import android.app.Application;
 
 import com.orm.SugarContext;
-import com.orm.SugarRecord;
 import com.util.FontsOverride;
 
-import delivery.model.catalogue.Product;
-import delivery.model.catalogue.ProductCategory;
-import delivery.model.catalogue.ProductParty;
-import delivery.model.profile.Party;
 import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 
 public class CustomerApp extends Application {
@@ -22,7 +17,7 @@ public class CustomerApp extends Application {
         SugarContext.init(getApplicationContext());
         FontsOverride.setDefaultFont(this, "MONOSPACE", "Raleway-Thin.ttf");
         FontsOverride.setDefaultFont(this, "SERIF", "Raleway-Regular.ttf");
-        createDummyData();
+        //createDummyData();
     }
 
     @Override
@@ -35,7 +30,7 @@ public class CustomerApp extends Application {
         return currentOrderManager;
     }
 
-    private void createDummyData() {
+    /* private void createDummyData() {
 
         // Party
         Party carasid = new Party(1, "carasid", "");
@@ -53,7 +48,7 @@ public class CustomerApp extends Application {
         SugarRecord.save(Snacks);
         ProductCategory Goan = new ProductCategory(2, "Goan");
         SugarRecord.save(Goan);
-        /*ProductCategory Desi = new ProductCategory(3, "Desi");
+        ProductCategory Desi = new ProductCategory(3, "Desi");
         SugarRecord.save(Desi);
         ProductCategory Oriental = new ProductCategory(4, "Oriental");
         SugarRecord.save(Oriental);
@@ -62,10 +57,9 @@ public class CustomerApp extends Application {
         ProductCategory Dessert = new ProductCategory(6, "Dessert");
         SugarRecord.save(Dessert);
         ProductCategory Breads = new ProductCategory(7, "Breads");
-        SugarRecord.save(Breads);*/
+        SugarRecord.save(Breads);
 
 
-        // Product
         Product prawnCurry = new Product(1, "Prawn curry", Goan);
         SugarRecord.save(prawnCurry);
         Product sandw = new Product(2, "butter chicken sandwich", Snacks);
@@ -76,7 +70,6 @@ public class CustomerApp extends Application {
         SugarRecord.save(cb);
 
 
-        // ProductParty
         SugarRecord.save(new ProductParty(1,
                 prawnCurry,
                 carasid,
@@ -101,7 +94,7 @@ public class CustomerApp extends Application {
                 "Traditional Awadhi delicacy made with basmati rice, chicken, spices and onion",
                 200,
                 "file:///android_asset/but chick.jpg"));
-    }
+    }*/
 }
 
 /*

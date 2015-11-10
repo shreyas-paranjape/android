@@ -1,14 +1,12 @@
 package com.goaamigo.traveller.module.app.view.component;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.goaamigo.model.trip.trip.Profile;
+import model.trip.Profile;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.DrawerAdapter;
 import com.orm.SugarRecord;
@@ -18,7 +16,6 @@ import com.view.widget.NavigationDrawerListAdapter;
 
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DrawerFragment extends ListNavigationDrawer {

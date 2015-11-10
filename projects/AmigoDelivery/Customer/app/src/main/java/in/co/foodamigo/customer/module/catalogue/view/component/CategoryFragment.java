@@ -8,10 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.app.singleton.Constant;
-import delivery.model.catalogue.ProductCategory;
-import in.co.foodamigo.customer.module.catalogue.view.adapter.ProductPartyAdapter;
+import in.co.foodamigo.customer.module.catalogue.view.adapter.ProductAdapter;
+import model.catalogue.Product;
+import model.catalogue.ProductCategory;
 
 
 public class CategoryFragment extends Fragment {
@@ -35,6 +39,7 @@ public class CategoryFragment extends Fragment {
     private void initListView(View rootView) {
         RecyclerView productsRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_category);
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        productsRecyclerView.setAdapter(new ProductPartyAdapter(getActivity(), productCategory));
+        List<Product> products = new ArrayList<>(); // TODO find products for category
+        productsRecyclerView.setAdapter(new ProductAdapter(getActivity(), products));
     }
 }

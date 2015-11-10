@@ -1,17 +1,14 @@
 package com.goaamigo.traveller.module.product.view.fragment;
 
 import android.os.Bundle;
-import android.view.Menu;
 
-import com.goaamigo.model.trip.catalogue.Product;
+import model.catalogue.Product;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.component.GoaMapActivity;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
-
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import map.util.Util;

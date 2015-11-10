@@ -5,7 +5,7 @@
 
         <variable
             name="orderItem"
-            type="delivery.model.order.OrderItem" />
+            type="model.order.OrderItem" />
     </data>
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_weight="2"
-            android:text="@{orderItem.productParty.product.name}"
+            android:text="@{orderItem.product.name}"
             android:textSize="16sp"
             android:typeface="serif" />
 

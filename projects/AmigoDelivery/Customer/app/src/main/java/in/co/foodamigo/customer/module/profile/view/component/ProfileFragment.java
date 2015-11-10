@@ -8,14 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import de.greenrobot.event.EventBus;
-import delivery.model.profile.Party;
-import delivery.repository.PartyRepo;
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.databinding.FragmentProfileBinding;
 import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.app.view.activity.FormActivity;
-import in.co.foodamigo.customer.module.profile.view.adapter.AddressAdapter;
+import in.co.foodamigo.customer.module.profile.view.adapter.LocationAdapter;
+import model.common.Location;
+import model.party.Party;
 
 public class ProfileFragment extends Fragment {
 
@@ -26,7 +28,7 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().setTitle("Profile");
         EventBus.getDefault().register(this);
-        party = new Party(1, "Shreyas Paranjape", "");
+        party = new Party();
     }
 
     @Override
@@ -61,13 +63,14 @@ public class ProfileFragment extends Fragment {
         });
 
         rootBinding.addresses.setAdapter(
-                new AddressAdapter(getActivity(),
-                        R.layout.item_address,
-                        PartyRepo.getAddresses(party)));
+                // TODO get location for user
+                new LocationAdapter(getActivity(),
+                        R.layout.item_location,
+                        new ArrayList<Location>()));
         return rootBinding.getRoot();
     }
 
-    public void onEvent(AddressAdapter.AddressEditClickEvent event) {
+    public void onEvent(LocationAdapter.LocationEditClickEvent event) {
         showForm(Constant.ADDRESS);
     }
 

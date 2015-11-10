@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.goaamigo.model.trip.trip.Trip;
+import model.trip.Trip;
 import com.goaamigo.traveller.R;
 
 import java.util.List;

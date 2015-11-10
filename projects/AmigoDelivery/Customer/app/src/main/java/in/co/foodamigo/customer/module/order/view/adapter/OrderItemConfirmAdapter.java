@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-import delivery.model.order.OrderItem;
 import in.co.foodamigo.customer.databinding.ItemOrderConfirmBinding;
+import model.order.OrderItem;
 
 public class OrderItemConfirmAdapter extends ArrayAdapter<OrderItem> {
 

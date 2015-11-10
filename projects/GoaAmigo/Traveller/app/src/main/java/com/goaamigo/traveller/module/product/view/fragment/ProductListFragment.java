@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.goaamigo.model.trip.catalogue.Product;
+import model.catalogue.Product;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 

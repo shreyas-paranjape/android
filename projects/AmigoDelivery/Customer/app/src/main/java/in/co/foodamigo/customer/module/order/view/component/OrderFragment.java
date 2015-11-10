@@ -73,5 +73,4 @@ public class OrderFragment extends Fragment {
         cartItemsAdapter.notifyDataSetChanged();
     }
 
-
 }

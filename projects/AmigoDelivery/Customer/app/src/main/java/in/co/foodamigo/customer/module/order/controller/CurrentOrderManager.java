@@ -8,13 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import delivery.model.catalogue.ProductParty;
-import delivery.model.common.Address;
-import delivery.model.order.Order;
-import delivery.model.order.OrderItem;
 import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.order.view.component.CheckoutActivity;
 import in.co.foodamigo.customer.module.order.view.component.OrderStatusFragment;
+import model.catalogue.Product;
+import model.common.Location;
+import model.order.Order;
+import model.order.OrderItem;
 
 public class CurrentOrderManager {
 
@@ -30,11 +30,11 @@ public class CurrentOrderManager {
         return order;
     }
 
-    public void modifyItem(ProductParty productParty, int quantity) {
-        OrderItem orderItem = getItemForProduct(productParty);
+    public void modifyItem(Product product, int quantity) {
+        OrderItem orderItem = getItemForProduct(product);
         if (orderItem == null) {
             orderItem = new OrderItem();
-            orderItem.setProductParty(productParty);
+            orderItem.setProduct(product);
             orderItem.setOrder(order);
             order.getOrderItems().add(orderItem);
         }
@@ -64,10 +64,10 @@ public class CurrentOrderManager {
                 });
     }
 
-    private OrderItem getItemForProduct(ProductParty productParty) {
+    private OrderItem getItemForProduct(Product product) {
         final List<OrderItem> orderItems = order.getOrderItems();
         for (OrderItem item : orderItems) {
-            if (item.getProductParty().getId() == productParty.getId()) {
+            if (item.getProduct().getId() == product.getId()) {
                 return item;
             }
         }
@@ -81,7 +81,7 @@ public class CurrentOrderManager {
             order.getOrderItems().remove(productOrderItem);
         } else {
             productOrderItem.setPrice(
-                    productOrderItem.getProductParty().getRate() * productOrderItem.getQuantity());
+                    productOrderItem.getProduct().getPrice() * productOrderItem.getQuantity());
         }
     }
 
@@ -95,22 +95,22 @@ public class CurrentOrderManager {
         order.total.set(total);
     }
 
-    public Address getDeliveryAddress() {
-        return order.getDeliveryAddress();
+    public Location getDeliveryAddress() {
+        return order.getDeliveryLocation();
     }
 
-    public void setDeliveryAddress(Address deliveryAddress) {
-        order.setDeliveryAddress(deliveryAddress);
+    public void setDeliveryAddress(Location deliveryAddress) {
+        order.setDeliveryLocation(deliveryAddress);
     }
 
 
     public void onEvent(ModifyCartEvent event) {
         switch (event.getAction()) {
             case ADD:
-                modifyItem(event.getProductParty(), 1);
+                modifyItem(event.getProduct(), 1);
                 break;
             case REMOVE:
-                modifyItem(event.getProductParty(), -1);
+                modifyItem(event.getProduct(), -1);
                 break;
         }
         eventBus.post(new CartModifiedEvent(cartSize()));
@@ -153,16 +153,16 @@ public class CurrentOrderManager {
     }
 
     public static class ModifyCartEvent {
-        private final ProductParty productParty;
+        private final Product product;
         private final CartAction action;
 
-        public ModifyCartEvent(ProductParty productParty, CartAction action) {
-            this.productParty = productParty;
+        public ModifyCartEvent(Product product, CartAction action) {
+            this.product = product;
             this.action = action;
         }
 
-        public ProductParty getProductParty() {
-            return productParty;
+        public Product getProduct() {
+            return product;
         }
 
         public CartAction getAction() {

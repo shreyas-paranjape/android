@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="productParty"
-            type="delivery.model.catalogue.ProductParty" />
+            name="product"
+            type="model.catalogue.Product" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -37,7 +37,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="@{productParty.product.name}"
+                    android:text="@{product.name}"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -48,7 +48,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="@{@string/Rs + String.valueOf(productParty.rate)}"
+                    android:text="@{@string/Rs + String.valueOf(product.price)}"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -71,7 +71,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{productParty.party.name}"
+                        android:text=""
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                         android:layout_marginEnd="3dp"
                         android:layout_marginRight="3dp"
                         android:lines="2"
-                        android:text="@{productParty.description}"
+                        android:text="@{product.description}"
                         android:textSize="12sp" />
                 </LinearLayout>
 

@@ -39,7 +39,7 @@ public class CheckoutActivity extends AbstractActivity {
 
     @Override
     protected Fragment getInitContent() {
-        return new DeliveryAddressFragment();
+        return new DeliveryLocationFragment();
     }
 
     @Override
@@ -54,8 +54,8 @@ public class CheckoutActivity extends AbstractActivity {
 
     private class EventListener {
 
-        public void onEvent(DeliveryAddressFragment.AddressSelectedEvent event) {
-            currentOrderManager.setDeliveryAddress(event.getAddress());
+        public void onEvent(DeliveryLocationFragment.AddressSelectedEvent event) {
+            currentOrderManager.setDeliveryAddress(event.getLocation());
             replaceContent(new ConfirmOrderFragment());
         }
     }

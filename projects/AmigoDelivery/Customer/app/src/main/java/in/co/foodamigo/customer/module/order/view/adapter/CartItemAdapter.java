@@ -9,10 +9,10 @@ import android.widget.ArrayAdapter;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import delivery.model.catalogue.ProductParty;
-import delivery.model.order.OrderItem;
 import in.co.foodamigo.customer.databinding.ItemOrderCurrentBinding;
 import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
+import model.catalogue.Product;
+import model.order.OrderItem;
 
 public class CartItemAdapter extends ArrayAdapter<OrderItem> {
 
@@ -34,23 +34,31 @@ public class CartItemAdapter extends ArrayAdapter<OrderItem> {
 
     private void initView(ItemOrderCurrentBinding rootBinding, final int position) {
         rootBinding.setOrderItem(getItem(position));
-        rootBinding.btnAddQuantity.setOnClickListener(new View.OnClickListener() {
+        rootBinding.btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyItem(getItem(position).getProductParty(), CurrentOrderManager.CartAction.ADD);
+                addItem(getItem(position).getProduct());
             }
         });
 
-        rootBinding.btnRemoveQuantity.setOnClickListener(new View.OnClickListener() {
+        rootBinding.btnRemoveItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                modifyItem(getItem(position).getProductParty(), CurrentOrderManager.CartAction.REMOVE);
+                removeItem(getItem(position).getProduct());
             }
         });
     }
 
-    private void modifyItem(ProductParty productParty, CurrentOrderManager.CartAction action) {
+    private void addItem(Product product) {
+        modifyItem(product, CurrentOrderManager.CartAction.ADD);
+    }
+
+    private void removeItem(Product product) {
+        modifyItem(product, CurrentOrderManager.CartAction.REMOVE);
+    }
+
+    private void modifyItem(Product product, CurrentOrderManager.CartAction action) {
         EventBus.getDefault().post(
-                new CurrentOrderManager.ModifyCartEvent(productParty, action));
+                new CurrentOrderManager.ModifyCartEvent(product, action));
     }
 }

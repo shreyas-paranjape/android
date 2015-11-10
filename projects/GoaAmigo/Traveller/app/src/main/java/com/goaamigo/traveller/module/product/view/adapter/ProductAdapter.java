@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.goaamigo.model.trip.catalogue.Product;
+import model.catalogue.Product;
 import com.goaamigo.traveller.R;
 
 import java.io.Serializable;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 public class ProductAdapter
         extends RecyclerView.Adapter<ProductAdapter.ViewHolder>

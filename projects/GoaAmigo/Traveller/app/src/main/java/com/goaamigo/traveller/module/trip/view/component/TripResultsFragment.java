@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.goaamigo.model.trip.trip.Trip;
+import model.trip.Trip;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.trip.view.adapter.TripRVAdapter;
 

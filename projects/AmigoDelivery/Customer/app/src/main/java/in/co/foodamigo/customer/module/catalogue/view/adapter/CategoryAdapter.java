@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import delivery.repository.ProdCatRepo;
 import in.co.foodamigo.customer.module.app.singleton.Constant;
-import delivery.model.catalogue.ProductCategory;
 import in.co.foodamigo.customer.module.catalogue.view.component.CategoryFragment;
+import model.catalogue.ProductCategory;
 
 
 public class CategoryAdapter extends FragmentStatePagerAdapter {
@@ -19,7 +19,8 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
 
     public CategoryAdapter(FragmentManager fm) {
         super(fm);
-        this.rootCategories = ProdCatRepo.getMenuCategories();
+        this.rootCategories = new ArrayList<>();
+        //TODO this.rootCategories = ProdCatRepo.getMenuCategories();
     }
 
     @Override

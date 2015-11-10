@@ -5,7 +5,7 @@
 
         <variable
             name="order"
-            type="delivery.model.order.Order" />
+            type="model.order.Order" />
     </data>
 
     <LinearLayout

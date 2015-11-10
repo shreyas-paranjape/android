@@ -9,5 +9,6 @@
     <color name="grey_dark">#424242</color>
     <color name="grey_darkest">#212121</color>
     <color name="indicator_color">#ffffff</color>
+    <color name="color_green">#42d00e</color>
 
 </resources>

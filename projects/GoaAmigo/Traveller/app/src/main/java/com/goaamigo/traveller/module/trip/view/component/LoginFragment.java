@@ -1,14 +1,18 @@
 package com.goaamigo.traveller.module.trip.view.component;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -104,6 +108,15 @@ public class LoginFragment extends Fragment implements
         String uName = username.getText().toString();
         String pass = password.getText().toString();
 
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager = getFragmentManager();
+                ForgotPasswordDialog Dialog = new ForgotPasswordDialog();
+                Dialog.show(manager, "My Dialog");
+            }
+        });
+
         Login = (Button) v.findViewById(R.id.btnLogin);
         singUp = (Button) v.findViewById(R.id.btnSignUp);
 
@@ -132,28 +145,56 @@ public class LoginFragment extends Fragment implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(mIsResolving){
+        if (mIsResolving) {
             mGoogleApiClient.connect();
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
-        if(mIsResolving){
+        if (mIsResolving) {
             mGoogleApiClient.connect();
         }
     }
 
+    public class ForgotPasswordDialog extends DialogFragment {
 
+        Button cancel, submit;
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            View view = inflater.inflate(R.layout.forgot_password_dialog, null);
+            cancel = (Button) view.findViewById(R.id.btnForgotPasswordCancel);
+            submit = (Button) view.findViewById(R.id.btnForgotPasswordSubmit);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+            return view;
+        }
+    }
 
     @Override
     public void onStop() {
         super.onStop();
         mGoogleApiClient.disconnect();
     }
+
     private void onSignInClicked() {
         mGoogleApiClient.connect();
     }
+
     @Override
     public void onConnected(Bundle bundle) {
         mShouldResolve = false;
@@ -163,7 +204,7 @@ public class LoginFragment extends Fragment implements
             personPhoto = currentPerson.getImage().getUrl();
             personGooglePlusProfile = currentPerson.getUrl();
         }
-        Log.i("Google data","personName :" + personName + "personPhotoUrl" +personPhoto + "profile" + personGooglePlusProfile);
+        Log.i("Google data", "personName :" + personName + "personPhotoUrl" + personPhoto + "profile" + personGooglePlusProfile);
     }
 
     @Override
@@ -199,6 +240,7 @@ public class LoginFragment extends Fragment implements
 
         }
     }
+
     private void showErrorDialog(ConnectionResult connectionResult) {
         Log.d("showErrorDialog", "1");
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
@@ -222,6 +264,7 @@ public class LoginFragment extends Fragment implements
             }
         }
     }
+
     class FindLoginButtonClickEvent {
     }
 

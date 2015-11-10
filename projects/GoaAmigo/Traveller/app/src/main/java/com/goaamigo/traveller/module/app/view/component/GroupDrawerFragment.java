@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.GroupDrawerAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
+import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
 import com.view.fragment.ExpandableListNavigationDrawer;
 import com.view.model.Item;
 import com.view.model.ItemGroup;
@@ -40,20 +40,48 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
         ItemGroup feedback = new ItemGroup("Feedback");
         ItemGroup account = new ItemGroup("account");
 
-        book.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
+        book.getItems().add(new Item("Contact Us", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return new ProductMapFragment();
+                return new ContactUsFragment();
             }
         });
-
+        book.getItems().add(new Item("Stay",R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new StayFragment();
+            }
+        });
+        book.getItems().add(new Item("Local travel",R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new LocaltravelFragment();
+            }
+        });
+        book.getItems().add(new Item("Activity",R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new ActivityFragment();
+            }
+        });
+        book.getItems().add(new Item("Trip",R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new SearchTripFragment();
+            }
+        });
         feedback.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
                 return new ContactUsFragment();
             }
         });
-
+        feedback.getItems().add(new Item("Comment/Review", R.drawable.ic_restaurant_menu_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return new Commentfragment();
+            }
+        });
         account.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {

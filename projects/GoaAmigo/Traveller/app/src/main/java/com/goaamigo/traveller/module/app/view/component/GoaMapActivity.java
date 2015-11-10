@@ -42,7 +42,6 @@ public class GoaMapActivity extends MapActivity {
     protected void createLayers() {
         super.createLayers();
 
-
         // Add a balloon
         Util.addBalloonMarker(
                 this,

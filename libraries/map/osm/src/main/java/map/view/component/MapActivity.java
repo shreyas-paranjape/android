@@ -17,6 +17,7 @@ public abstract class MapActivity extends MapViewerTemplateRuntimePermissions {
         super.onCreate(savedInstanceState);
     }
 
+
     protected XmlRenderTheme getRenderTheme() {
         return InternalRenderTheme.OSMARENDER;
     }

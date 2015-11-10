@@ -25,10 +25,10 @@ public class ProductMapFragment extends MapFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
         productAdapter = (ProductAdapter) getArguments()
                 .getSerializable("PRODUCT_ADAPTER");
+        EventBus.getDefault().register(this);
     }
 
     @Override

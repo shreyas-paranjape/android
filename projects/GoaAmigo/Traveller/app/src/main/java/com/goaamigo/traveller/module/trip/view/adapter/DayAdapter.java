@@ -24,9 +24,10 @@ public class DayAdapter extends FragmentStatePagerAdapter {
     List<Event> obj1;
     List<Event> obj2;
     List<Event> obj3;
-    String[] monthName = new String[]{"Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"};
+    String[] monthName = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
     Calendar rightNow = Calendar.getInstance();
     GregorianCalendar cal = new GregorianCalendar();
+
     public DayAdapter(FragmentManager fm) {
         super(fm);
         rightNow.set(date.getYear(), date.getMonth(), date.getDay());
@@ -34,32 +35,32 @@ public class DayAdapter extends FragmentStatePagerAdapter {
 
 
         obj1 = new ArrayList<>();
-        obj1.add(new Event(R.drawable.image4,"tab1 event 1","description 1"));
-        obj1.add(new Event(R.drawable.image4,"tab1 event 2","description 2"));
-        obj1.add(new Event(R.drawable.image4,"tab1 event 3","description 3"));
-        obj1.add(new Event(R.drawable.image4,"tab1 event 1","description 1"));
-        obj1.add(new Event(R.drawable.image4,"tab1 event 2","description 2"));
-        obj1.add(new Event(R.drawable.image4,"tab1 event 3","description 3"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 1", "description 1"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 2", "description 2"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 3", "description 3"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 1", "description 1"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 2", "description 2"));
+        obj1.add(new Event(R.drawable.image4, "tab1 event 3", "description 3"));
 
         obj2 = new ArrayList<>();
-        obj2.add(new Event(R.drawable.image4,"tab2 event 1","description 1"));
-        obj2.add(new Event(R.drawable.image4,"tab2 event 2","description 2"));
-        obj2.add(new Event(R.drawable.image4,"tab2 event 3","description 3"));
-        obj2.add(new Event(R.drawable.image4,"tab2 event 1","description 1"));
-        obj2.add(new Event(R.drawable.image4,"tab2 event 2","description 2"));
-        obj2.add(new Event(R.drawable.image4,"tab2 event 3","description 3"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 1", "description 1"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 2", "description 2"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 3", "description 3"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 1", "description 1"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 2", "description 2"));
+        obj2.add(new Event(R.drawable.image4, "tab2 event 3", "description 3"));
 
         obj3 = new ArrayList<>();
-        obj3.add(new Event(R.drawable.image4,"tab3 event 1","description 1"));
-        obj3.add(new Event(R.drawable.image4,"tab3 event 2","description 2"));
-        obj3.add(new Event(R.drawable.image4,"tab3 event 3","description 3"));
-        obj3.add(new Event(R.drawable.image4,"tab3 event 1","description 1"));
-        obj3.add(new Event(R.drawable.image4,"tab3 event 2","description 2"));
-        obj3.add(new Event(R.drawable.image4,"tab3 event 3","description 3"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 1", "description 1"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 2", "description 2"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 3", "description 3"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 1", "description 1"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 2", "description 2"));
+        obj3.add(new Event(R.drawable.image4, "tab3 event 3", "description 3"));
 
-        data.add(new Day(obj1,"day1"));
-        data.add(new Day(obj2,"day1"));
-        data.add(new Day(obj3,"day1"));
+        data.add(new Day(obj1, "day1"));
+        data.add(new Day(obj2, "day1"));
+        data.add(new Day(obj3, "day1"));
     }
 
     @Override

@@ -17,6 +17,7 @@ public class DayFragment extends Fragment {
 
     private Day day;
 
+
     public DayFragment(Day day) {
         this.day = day;
     }

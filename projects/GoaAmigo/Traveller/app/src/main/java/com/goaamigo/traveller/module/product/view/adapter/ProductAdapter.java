@@ -1,5 +1,7 @@
 package com.goaamigo.traveller.module.product.view.adapter;
 
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import de.greenrobot.event.EventBus;
 import model.catalogue.Product;
+
 import com.goaamigo.traveller.R;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter
@@ -37,7 +42,7 @@ public class ProductAdapter
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.name.setText(productsList.get(position).getName());
         holder.location.setText(productsList.get(position).getProductLocation());
         holder.rating.setText(productsList.get(position).getProductRating());
@@ -47,6 +52,8 @@ public class ProductAdapter
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                EventBus.getDefault().post(new OpenDetailFragmentOnClickEvent());
             }
         });
     }
@@ -88,6 +95,11 @@ public class ProductAdapter
             price = (TextView) itemView.findViewById(R.id.productPrice);
             imageView = (ImageView) itemView.findViewById(R.id.product_image);
             cv = (CardView) itemView.findViewById(R.id.cvProduct);
+        }
+    }
+
+    public class OpenDetailFragmentOnClickEvent implements Serializable {
+        public OpenDetailFragmentOnClickEvent() {
         }
     }
 }

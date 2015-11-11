@@ -11,20 +11,38 @@ import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
+import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
+import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
+import com.goaamigo.traveller.module.trip.view.component.TripResultsFragment;
 import com.view.activity.AbstractActivity;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
+    private EventListener listener = new EventListener();
     private final ProductAdapter productAdapter = new ProductAdapter();
+
+    public class EventListener {
+        public void onEvent(ProductAdapter.OpenDetailFragmentOnClickEvent event) {
+            replaceContent(new DetailsFragment());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+        registerListener(listener);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Menu_Search_Content, android.R.layout.simple_spinner_item);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        unRegisterListener(listener);
+        super.onDestroy();
     }
 
     protected int getLayoutId() {

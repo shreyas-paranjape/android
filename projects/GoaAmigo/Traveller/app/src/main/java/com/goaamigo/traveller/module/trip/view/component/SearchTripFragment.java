@@ -25,14 +25,22 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class SearchTripFragment extends DialogFragment implements
         DatePickerDialog.OnDateSetListener {
-    TextView textView1, TextView2, TextView3,Bache;
-    LinearLayout checkindate, checkoutdate,dialog;
+    TextView textView1, TextView2, TextView3, Bache;
+    LinearLayout dialog;
+
+    LinearLayout checkInDate, checkOutDate;
+    TextView tvCheckInDate, tvCheckOutDate, tvCheckInDay, tvCheckOutDay, tvCheckInMonth, tvCheckOutMonth;
+
+    String[] monthName = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"};
+    String[] dayName = new String[]{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
 
     private int Childern = 0;
     private int adult = 0;
@@ -57,8 +65,6 @@ public class SearchTripFragment extends DialogFragment implements
         getActivity().setTitle("Search trips");
 
         View v = inflater.inflate(R.layout.fragment_search_trip, container, false);
-        checkindate = (LinearLayout) v.findViewById(R.id.checkindate);
-        checkoutdate = (LinearLayout) v.findViewById(R.id.checkoutdate);
         textView1 = (TextView) v.findViewById(R.id.textView1);
         TextView2 = (TextView) v.findViewById(R.id.textView2);
         TextView3 = (TextView) v.findViewById(R.id.textView5);
@@ -68,8 +74,7 @@ public class SearchTripFragment extends DialogFragment implements
         spnr = (Spinner) v.findViewById(R.id.spinner);
         spnr2 = (Spinner) v.findViewById(R.id.spinner1);
 
-        dialog=(LinearLayout) v.findViewById(R.id.dialog);
-
+        dialog = (LinearLayout) v.findViewById(R.id.dialog);
 
 
         List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
@@ -102,9 +107,67 @@ public class SearchTripFragment extends DialogFragment implements
         TextView2 = (TextView) v.findViewById(R.id.textView2);
         Button btnFindTrip = (Button) v.findViewById(R.id.btnFindTrip);
 
+        checkInDate = (LinearLayout) v.findViewById(R.id.layoutCheckIn);
+        checkOutDate = (LinearLayout) v.findViewById(R.id.layoutCheckOut);
+
+        tvCheckInDate = (TextView) v.findViewById(R.id.CheckInDate);
+        tvCheckOutDate = (TextView) v.findViewById(R.id.CheckOutDate);
+        tvCheckInDay = (TextView) v.findViewById(R.id.CheckInDay);
+        tvCheckOutDay = (TextView) v.findViewById(R.id.CheckOutDay);
+        tvCheckInMonth = (TextView) v.findViewById(R.id.CheckInMonth);
+        tvCheckOutMonth = (TextView) v.findViewById(R.id.CheckOutMonth);
+
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+
+        tvCheckInDate.setText(String.valueOf(today.getDate()));
+        tvCheckOutDate.setText(String.valueOf(tomorrow.getDate()));
+        tvCheckInDay.setText(String.valueOf(dayName[today.getDay()]));
+        tvCheckOutDay.setText(String.valueOf(dayName[tomorrow.getDay()]));
+        tvCheckInMonth.setText(String.valueOf(monthName[today.getMonth()]));
+        tvCheckOutMonth.setText(String.valueOf(monthName[tomorrow.getMonth()]));
+        Log.i("today=", " date" + today.getDate() + "month " + monthName[today.getMonth()] + " year" + today.getYear() + "day" + dayName[today.getDay()]);
+        Log.i("tomorrow=", "date" + tomorrow.getDate() + " month " + monthName[tomorrow.getMonth()] + "year " + tomorrow.getYear() + "day" + dayName[today.getDay()]);
+
+        final Calendar now = Calendar.getInstance();
+
+        checkInDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        SearchTripFragment.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                // dpd.setThemeDark(modeDarkDate.isChecked());
+                //  dpd.vibrate(vibrateDate.isChecked());
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+            }
+        });
+
+        now.add(Calendar.DAY_OF_YEAR, 1);
+
+        checkOutDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dpd = DatePickerDialog.newInstance(
+                        SearchTripFragment.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                // dpd.setThemeDark(modeDarkDate.isChecked());
+                //  dpd.vibrate(vibrateDate.isChecked());
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+            }
+        });
 
         //below code for todays date
-        textView1.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
+//        textView1.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
 
         final Bundle args = new Bundle();
         // Month is 0 based, just add 1
@@ -119,48 +182,7 @@ public class SearchTripFragment extends DialogFragment implements
                 });
             }
         });
-        checkindate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Tag Name", "Check in date");
 
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = DatePickerDialog.newInstance(
-                        SearchTripFragment.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
-                );
-                // dpd.setThemeDark(modeDarkDate.isChecked());
-                //  dpd.vibrate(vibrateDate.isChecked());
-                dpd.show(getFragmentManager(), "Datepickerdialog");
-
-
-            }
-        });
-
-
-        checkoutdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Tag Name", "Check out Date");
-                final Calendar cal1 = Calendar.getInstance();
-
-                Calendar now = Calendar.getInstance();
-
-                DatePickerDialog dpd1 = DatePickerDialog.newInstance(
-                        SearchTripFragment.this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
-                );
-                dpd1.show(getFragmentManager(), "Datepickerdialog");
-                final Bundle args = new Bundle();
-                TextView2.setText(new StringBuilder().append(pYear).append("").append("/").append(pMonth + 1).append("/").append(pDay));
-
-
-            }
-        });
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,13 +197,13 @@ public class SearchTripFragment extends DialogFragment implements
     public void onDateSet(DatePickerDialog datePickerDialog, int dayOfMonth, int monthOfYear, int year) {
         String date = +dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
         Log.i("On date set", "On date selected");
-        textView1.setText(date);
+        //textView1.setText(date);
     }
 
     public void onDateSet1(DatePickerDialog datePickerDialog, int dayOfMonth, int monthOfYear, int year) {
         String date1 = +dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
         Log.i("Check out date", "check out date selected");
-        TextView2.setText(date1);
+        //TextView2.setText(date1);
     }
 
     public static class FindTripButtonClickEvent {

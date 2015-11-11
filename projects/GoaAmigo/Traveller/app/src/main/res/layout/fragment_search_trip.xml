@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="30dp"
     android:orientation="vertical"
     tools:context="com.example.gautam.project.view.app.SearchTrip">
 
@@ -18,9 +20,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text=" CHECK-IN-DATE"
-            android:textSize="18dp" />
+            android:gravity="left"
+            android:text=" Check In"
+            android:textSize="17sp"
+             />
 
         <View
             android:layout_width="1dp"
@@ -31,16 +34,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="CHECK-OUT-DATE"
-            android:textSize="18dp" />
+            android:gravity="right"
+            android:textSize="17sp"
+            android:text="Check Out"
+             />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
 
         <LinearLayout
             android:id="@+id/layoutCheckIn"
@@ -49,11 +54,11 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
+
             <TextView
                 android:id="@+id/CheckInDate"
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"
-                android:paddingLeft="10dp"
                 android:layout_weight="3"
                 android:text="15"
                 android:textSize="40dp" />
@@ -70,7 +75,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
                     android:text="JAN"
                     android:textSize="20dp" />
 
@@ -79,7 +83,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
                     android:text="MON"
                     android:textSize="20dp" />
             </LinearLayout>
@@ -90,7 +93,6 @@
             android:layout_width="1dp"
             android:layout_height="fill_parent"
             android:background="#000000" />
-
 
         <LinearLayout
             android:id="@+id/layoutCheckOut"
@@ -126,7 +128,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
                         android:text="JAN"
                         android:textSize="20dp" />
 
@@ -135,16 +136,12 @@
                         android:layout_width="fill_parent"
                         android:layout_height="30dp"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
                         android:text="TUE"
                         android:textSize="20dp" />
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/dialog"
@@ -174,7 +171,6 @@
                 android:text="Adults:"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -199,6 +195,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </LinearLayout>
+    
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -207,7 +204,6 @@
         android:layout_weight="4"
         android:orientation="vertical">
 
-
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
@@ -215,7 +211,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_weight="1" />
-
 
         <Spinner
             android:id="@+id/spinner1"
@@ -230,9 +225,9 @@
     <Button
         android:id="@+id/btnFindTrip"
         android:layout_width="fill_parent"
+        android:background="@color/primary_color"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="search trip" />
-
 
 </LinearLayout>

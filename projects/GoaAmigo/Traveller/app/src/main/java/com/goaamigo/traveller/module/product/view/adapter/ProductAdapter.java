@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,12 +56,18 @@ public class ProductAdapter
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PRODUCT", productsList.get(position));
                 EventBus.getDefault().post(
-                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT,bundle) {
-                    @Override
-                    public Class getContentClass() {
-                        return DetailsFragment.class;
-                    }
-                });
+                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle) {
+                            @Override
+                            public Class getContentClass() {
+                                return DetailsFragment.class;
+                            }
+                        });
+            }
+        });
+        holder.addRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -92,6 +99,7 @@ public class ProductAdapter
         TextView name, location, rating, discount, price;
         ImageView imageView;
         CardView cv;
+        Button addRoom;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,6 +110,7 @@ public class ProductAdapter
             price = (TextView) itemView.findViewById(R.id.productPrice);
             imageView = (ImageView) itemView.findViewById(R.id.product_image);
             cv = (CardView) itemView.findViewById(R.id.cvProduct);
+            addRoom = (Button) itemView.findViewById(R.id.btnProductAddRoom);
         }
     }
 

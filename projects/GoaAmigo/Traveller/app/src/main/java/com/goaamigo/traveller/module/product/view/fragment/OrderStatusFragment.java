@@ -1,4 +1,4 @@
-package com.goaamigo.traveller.module.app.view.component;
+package com.goaamigo.traveller.module.product.view.fragment;
 
 
 import android.os.Bundle;
@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 
 import com.goaamigo.traveller.R;
 
-public class ContactUsFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class OrderStatusFragment extends Fragment {
 
 
-    public ContactUsFragment() {
+    public OrderStatusFragment() {
         // Required empty public constructor
     }
 
@@ -21,7 +24,7 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_us, container, false);
+        return inflater.inflate(R.layout.fragment_order_status, container, false);
     }
 
 

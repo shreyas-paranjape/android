@@ -3,10 +3,13 @@ package com.goaamigo.traveller.module.app.singleton;
 import android.app.Application;
 
 import model.trip.Profile;
+
+import com.goaamigo.traveller.module.product.view.Contoller.CurrentOrderManager;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 
 public class TravellerApp extends Application {
+    private final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
 
     @Override
     public void onCreate() {
@@ -24,4 +27,9 @@ public class TravellerApp extends Application {
         super.onTerminate();
 
     }
+
+    public CurrentOrderManager getCurrentOrderManager() {
+        return currentOrderManager;
+    }
+
 }

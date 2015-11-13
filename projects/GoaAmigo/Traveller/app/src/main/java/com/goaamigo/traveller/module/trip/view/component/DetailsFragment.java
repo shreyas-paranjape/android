@@ -19,15 +19,24 @@ import com.goaamigo.traveller.R;
 
 import java.util.HashMap;
 
+import model.catalogue.Product;
+
 public class DetailsFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
     private Button deals;
     private Button rate;
     private Button beenHere;
-    private TextView address;
+    private TextView address,name;
     private RatingBar rating;
 
+    private Product product;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        product = (Product)getArguments().getSerializable("PRODUCT");
+    }
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -46,13 +55,18 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
         super.onActivityCreated(savedInstanceState);
         mDemoSlider = (SliderLayout) getActivity().findViewById(R.id.slider);
         rating = (RatingBar) getActivity().findViewById(R.id.ratingBar);
+        address = (TextView) getActivity().findViewById(R.id.detailFragName);
+        name = (TextView) getActivity().findViewById(R.id.detailFragAdrress);
+
+        name.setText(product.getName());
+        address.setText(product.getProductLocation());
 
         rating.setRating(4);
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Vivanta",R.drawable.vivataimage1);
-        file_maps.put("Vivanta1",R.drawable.vivataimage2);
-        file_maps.put("Vivanta2",R.drawable.vivataimage3);
+        file_maps.put("image 1",product.getProductImage());
+        file_maps.put("image 2",product.getProductImage());
+        file_maps.put("image 3",product.getProductImage());
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getActivity());

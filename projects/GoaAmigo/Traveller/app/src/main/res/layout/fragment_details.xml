@@ -43,12 +43,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
 
         <Button
             android:layout_width="fill_parent"
@@ -67,21 +65,20 @@
             android:text="been here" />
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:id="@+id/detailFragName"/>
-
     <RatingBar
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:isIndicator="true"
         android:numStars="5"
         android:id="@+id/ratingBar" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/detailFragName"/>
 
     <TextView
+        android:id="@+id/detailFragAdrress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Address" />

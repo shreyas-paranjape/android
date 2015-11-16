@@ -4,8 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/products_toolbar" />
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        app:umanoPanelHeight="75dp"
+        app:umanoShadowHeight="5dp">
 
-    <include layout="@layout/activity_home" />
+        <include layout="@layout/products_toolbar" />
+
+        <include layout="@layout/activity_home" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cartContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true">
+
+        </android.support.v7.widget.CardView>
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
 </LinearLayout>

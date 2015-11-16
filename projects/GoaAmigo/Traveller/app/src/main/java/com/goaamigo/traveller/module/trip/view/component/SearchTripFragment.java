@@ -128,8 +128,6 @@ public class SearchTripFragment extends DialogFragment implements
         tvCheckOutDay.setText(String.valueOf(dayName[tomorrow.getDay()]));
         tvCheckInMonth.setText(String.valueOf(monthName[today.getMonth()]));
         tvCheckOutMonth.setText(String.valueOf(monthName[tomorrow.getMonth()]));
-        Log.i("today=", " date" + today.getDate() + "month " + monthName[today.getMonth()] + " year" + today.getYear() + "day" + dayName[today.getDay()]);
-        Log.i("tomorrow=", "date" + tomorrow.getDate() + " month " + monthName[tomorrow.getMonth()] + "year " + tomorrow.getYear() + "day" + dayName[today.getDay()]);
 
         final Calendar now = Calendar.getInstance();
 

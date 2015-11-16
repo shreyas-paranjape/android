@@ -1,6 +1,8 @@
 package com.goaamigo.traveller.module.product.view.activity;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,30 +10,35 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
+import com.goaamigo.traveller.module.product.view.fragment.OrderFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
 import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
 import com.goaamigo.traveller.module.trip.view.component.TripResultsFragment;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
-    private EventListener listener = new EventListener();
     private final ProductAdapter productAdapter = new ProductAdapter();
+    private final EventListener listener = new EventListener();
 
-    public class EventListener {
-        public void onEvent(ProductAdapter.OpenDetailFragmentOnClickEvent event) {
-            replaceContent(new DetailsFragment());
-        }
+    private class EventListener {
     }
+
+    private CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
-        registerListener(listener);
+        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
+        cartManager.hidePanel();
+        registerListener(cartManager);
+        addCartFragment();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.Menu_Search_Content, android.R.layout.simple_spinner_item);
 
@@ -39,9 +46,15 @@ public class ProductsActivity extends AbstractActivity {
         spinner.setAdapter(adapter);
     }
 
+    private void addCartFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.cartContainer, new OrderFragment()).commit();
+    }
+
     @Override
     protected void onDestroy() {
-        unRegisterListener(listener);
+        unRegisterListener(cartManager);
         super.onDestroy();
     }
 

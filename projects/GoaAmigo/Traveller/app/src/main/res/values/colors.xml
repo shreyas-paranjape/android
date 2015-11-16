@@ -10,5 +10,5 @@
     <color name="grey_darkest">#212121</color>
     <color name="indicator_color">#ffffff</color>
     <color name="color_green">#42d00e</color>
-
+    <color name="grey_100">#f5f5f5</color>
 </resources>

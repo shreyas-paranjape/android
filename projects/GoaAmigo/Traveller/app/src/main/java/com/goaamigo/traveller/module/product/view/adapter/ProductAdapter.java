@@ -1,23 +1,24 @@
 package com.goaamigo.traveller.module.product.view.adapter;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import de.greenrobot.event.EventBus;
-import model.catalogue.Product;
-
+import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import model.catalogue.Product;
 
 public class ProductAdapter
         extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
@@ -53,7 +54,20 @@ public class ProductAdapter
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                EventBus.getDefault().post(new OpenDetailFragmentOnClickEvent());
+                bundle.putSerializable("PRODUCT", productsList.get(position));
+                EventBus.getDefault().post(
+                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle) {
+                            @Override
+                            public Class getContentClass() {
+                                return DetailsFragment.class;
+                            }
+                        });
+            }
+        });
+        holder.addRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -85,6 +99,7 @@ public class ProductAdapter
         TextView name, location, rating, discount, price;
         ImageView imageView;
         CardView cv;
+        Button addRoom;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +110,7 @@ public class ProductAdapter
             price = (TextView) itemView.findViewById(R.id.productPrice);
             imageView = (ImageView) itemView.findViewById(R.id.product_image);
             cv = (CardView) itemView.findViewById(R.id.cvProduct);
+            addRoom = (Button) itemView.findViewById(R.id.btnProductAddRoom);
         }
     }
 

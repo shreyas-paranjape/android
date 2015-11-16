@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
+
 
 android {
     compileSdkVersion 23
@@ -10,9 +12,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-    }
-    defaultConfig {
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -34,7 +33,6 @@ dependencies {
     compile project(path: ':common')
     compile project(path: ':model')
     compile project(path: ':map')
-    compile 'com.android.support:multidex:1.0.0'
     compile 'com.wdullaer:materialdatetimepicker:1.5.4'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:support-v13:23.0.1'
@@ -43,10 +41,10 @@ dependencies {
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
     compile 'me.relex:circleindicator:1.1.5@aar'
     compile 'com.sothree.slidinguppanel:library:3.1.1'
-    compile 'com.google.android.gms:play-services:8.1.0'
-    compile 'com.google.android.gms:play-services-identity:8.1.0'
-    compile 'com.google.android.gms:play-services-plus:8.1.0'
-    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.android.gms:play-services:8.3.0'
+//    compile 'com.google.android.gms:play-services-identity:8.3.0'
+//    compile 'com.google.android.gms:play-services-plus:8.3.0'
+//    compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.squareup.picasso:picasso:2.3.2'

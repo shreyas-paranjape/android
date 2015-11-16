@@ -1,7 +1,6 @@
 package com.goaamigo.traveller.module.app.view.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.model.MenuData;
+import com.util.Util;
 
 import java.util.List;
 
@@ -43,14 +43,10 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
         dataViewHolder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle dataBundle = new Bundle();
-                dataBundle.putSerializable("MENUDATA", menuDataList.get(i));
-                EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, dataBundle) {
-                    @Override
-                    public Class getContentClass() {
-                        return menuDataList.get(i).getClazz();
-                    }
-                });
+                EventBus.getDefault().post(
+                        new ChangeContentEvent(
+                                menuDataList.get(i).getClazz(),
+                                Util.bundleSerializable("MENUDATA", menuDataList.get(i))));
             }
         });
     }

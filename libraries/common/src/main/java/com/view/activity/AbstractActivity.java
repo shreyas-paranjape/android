@@ -139,9 +139,9 @@ public abstract class AbstractActivity extends AppCompatActivity {
     private class EventListener {
 
         public void onEvent(ChangeContentEvent event) {
-            if (event.getContentClass().isAssignableFrom(Activity.class)) {
+            if (Activity.class.isAssignableFrom(event.getContentClass())) {
                 startNewActivity(event.getContentClass(), event.getData());
-            } else if (event.getContentClass().isAssignableFrom(Fragment.class)) {
+            } else if (Fragment.class.isAssignableFrom(event.getContentClass())) {
                 replaceContent(event.getContentClass(), event.getData());
             }
         }

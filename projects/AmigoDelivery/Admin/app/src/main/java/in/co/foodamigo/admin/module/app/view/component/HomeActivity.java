@@ -3,38 +3,56 @@ package in.co.foodamigo.admin.module.app.view.component;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.view.activity.AbstractActivity;
-import com.view.fragment.NavigationDrawer;
 
-import de.greenrobot.event.EventBus;
+import java.util.Arrays;
+
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.infra.socket.SocketConnectionManager;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
-import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdCatListAdapter;
-import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdListAdapter;
-import in.co.foodamigo.admin.module.catalogue.view.adapter.list.SupplierListAdapter;
-import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdCatFormFragment;
-import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdFormFragment;
-import in.co.foodamigo.admin.module.catalogue.view.component.form.SupplierFormFragment;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.ProductListFragment;
 
 public class HomeActivity extends AbstractActivity {
 
-    private static final String TAG = HomeActivity.class.getName();
-    private final EventListener eventListener = new EventListener();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerListener(eventListener);
         startService(new Intent(this, SocketConnectionManager.class));
+        initSpinner();
+    }
+
+    private void initSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_spinner_item,
+                        Arrays.asList(new String[]{"One", "Two"}));
+        spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_sort:
+                break;
+            case R.id.action_filter:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
     }
 
     @Override
@@ -49,7 +67,6 @@ public class HomeActivity extends AbstractActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unRegisterListener(eventListener);
     }
 
     protected int getLayoutId() {
@@ -75,32 +92,6 @@ public class HomeActivity extends AbstractActivity {
     protected DrawerLayout getDrawerLayout() {
         return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
-
-
-    private class EventListener {
-
-        public void onEvent(ProdCatListAdapter.ProdCatEvent event) {
-            ProdCatFormFragment formFragment = new ProdCatFormFragment();
-            Bundle args = new Bundle();
-            args.putSerializable(Constant.PRODUCT_CATEGORY, event.getProductCategory());
-            formFragment.setArguments(args);
-            replaceContent(formFragment);
-        }
-
-        public void onEvent(ProdListAdapter.ProdEvent event) {
-            ProdFormFragment formFragment = new ProdFormFragment();
-            Bundle args = new Bundle();
-            args.putSerializable(Constant.PRODUCT, event.getProduct());
-            formFragment.setArguments(args);
-            replaceContent(formFragment);
-        }
-
-        public void onEvent(SupplierListAdapter.SupplierEvent event) {
-            SupplierFormFragment formFragment = new SupplierFormFragment();
-            Bundle args = new Bundle();
-            args.putSerializable(Constant.PRODUCT, event.getSupplier());
-            formFragment.setArguments(args);
-            replaceContent(formFragment);
-        }
-    }
 }
+
+

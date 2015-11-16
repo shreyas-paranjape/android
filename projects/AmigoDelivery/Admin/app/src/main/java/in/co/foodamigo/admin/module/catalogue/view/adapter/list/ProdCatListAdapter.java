@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.event.ChangeContentEvent;
+import com.util.Util;
+
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemProdCatBinding;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.model.ProductCategory;
+import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdCatFormFragment;
 
 public class ProdCatListAdapter extends ArrayAdapter<ProductCategory> {
 
@@ -32,7 +37,11 @@ public class ProdCatListAdapter extends ArrayAdapter<ProductCategory> {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(
-                        new ProdCatEvent(getItem(position)));
+                        new ChangeContentEvent(
+                                ProdCatFormFragment.class,
+                                Util.bundleSerializable(
+                                        Constant.PRODUCT_CATEGORY,
+                                        getItem(position))));
             }
         });
         return rootBinding.getRoot();
@@ -41,17 +50,5 @@ public class ProdCatListAdapter extends ArrayAdapter<ProductCategory> {
     @Override
     public boolean isEnabled(int position) {
         return false;
-    }
-
-    public static class ProdCatEvent {
-        private final ProductCategory productCategory;
-
-        public ProdCatEvent(ProductCategory productCategory) {
-            this.productCategory = productCategory;
-        }
-
-        public ProductCategory getProductCategory() {
-            return productCategory;
-        }
     }
 }

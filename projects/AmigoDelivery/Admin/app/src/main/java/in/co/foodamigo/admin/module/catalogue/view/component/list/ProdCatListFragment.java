@@ -15,7 +15,6 @@ public class ProdCatListFragment extends AbstractListFragment<ProductCategory> {
 
     @Override
     protected void add() {
-        EventBus.getDefault().post(new ProdCatListAdapter.ProdCatEvent(null));
     }
 
     @Override

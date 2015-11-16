@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.R;
+import com.event.ChangeContentEvent;
 import com.view.model.Item;
 
 import de.greenrobot.event.EventBus;
@@ -83,18 +83,25 @@ public abstract class NavigationDrawer extends Fragment {
     protected abstract int getLayoutId();
 
     protected void drawerItemClicked(Item item) {
+        closeDrawer();
+        EventBus.getDefault().post(
+                new ChangeContentEvent(
+                        item.getDisplayFragment().getClass(),
+                        new Bundle()));
+    }
+
+    private void closeDrawer() {
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-        EventBus.getDefault().post(new DrawerItemClickedEvent(item));
     }
 
     private ActionBarDrawerToggle getActionBarDrawerToggle() {
         return new ActionBarDrawerToggle(
                 getActivity(),
                 mDrawerLayout,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+                getOpenContentDescRes(),
+                getCloseContentDescRes()
         ) {
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -116,18 +123,6 @@ public abstract class NavigationDrawer extends Fragment {
         };
     }
 
-    public class DrawerItemClickedEvent {
-        private final Item item;
-
-        public DrawerItemClickedEvent(Item item) {
-            this.item = item;
-        }
-
-        public Item getItem() {
-            return item;
-        }
-    }
-
     public static class SetupDrawerEvent {
 
         private final DrawerLayout drawerLayout;
@@ -146,6 +141,14 @@ public abstract class NavigationDrawer extends Fragment {
             return fragmentId;
         }
 
+    }
+
+    protected int getOpenContentDescRes() {
+        return 0;
+    }
+
+    protected int getCloseContentDescRes() {
+        return 0;
     }
 
 }

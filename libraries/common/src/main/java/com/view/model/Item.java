@@ -9,7 +9,7 @@ public abstract class Item implements Serializable {
     private final String name;
     private final int imageId;
 
-    public Item(){
+    public Item() {
         this.name = "";
         this.imageId = 0;
     }

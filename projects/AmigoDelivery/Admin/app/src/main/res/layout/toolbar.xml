@@ -6,4 +6,9 @@
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize">
 
+    <Spinner
+        android:id="@+id/productSpinner"
+        android:layout_width="70dp"
+        android:layout_height="24dp" />
+
 </android.support.v7.widget.Toolbar>

@@ -63,4 +63,14 @@ public class DrawerFragment extends ListNavigationDrawer {
     protected int getLayoutId() {
         return R.layout.fragment_navigation_drawer;
     }
+
+    @Override
+    protected int getCloseContentDescRes() {
+        return R.string.navigation_drawer_close;
+    }
+
+    @Override
+    protected int getOpenContentDescRes() {
+        return R.string.navigation_drawer_open;
+    }
 }

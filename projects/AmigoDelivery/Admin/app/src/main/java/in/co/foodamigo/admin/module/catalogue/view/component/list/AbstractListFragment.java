@@ -25,13 +25,13 @@ public abstract class AbstractListFragment<T> extends Fragment {
         ListView lvProdCat = (ListView) root.findViewById(R.id.lvGrid);
         ArrayAdapter<T> prodCatAdapter = getAdapter();
         lvProdCat.setAdapter(prodCatAdapter);
-        Button btnAdd = (Button) root.findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        //Button btnAdd = (Button) root.findViewById(R.id.btnAdd);
+        /*btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 add();
             }
-        });
+        });*/
     }
 
     protected abstract void add();

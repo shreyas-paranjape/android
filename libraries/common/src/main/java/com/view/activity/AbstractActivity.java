@@ -1,7 +1,7 @@
 package com.view.activity;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -51,6 +51,16 @@ public abstract class AbstractActivity extends AppCompatActivity {
     protected void onDestroy() {
         unRegisterListener(listener);
         super.onDestroy();
+    }
+
+    protected void replaceContent(Class newFragmentClass, Bundle data) {
+        try {
+            Fragment frag = (Fragment) newFragmentClass.newInstance();
+            frag.setArguments(data);
+            replaceContent(frag);
+        } catch (Exception e) {
+            // Do nothing
+        }
     }
 
     protected void replaceContent(Fragment newFragment) {
@@ -127,25 +137,12 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     private class EventListener {
-        public void onEvent(NavigationDrawer.DrawerItemClickedEvent event) {
-            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            replaceContent(event.getItem().getDisplayFragment());
-        }
 
         public void onEvent(ChangeContentEvent event) {
-            switch (event.getNewContent()) {
-                case ACTIVITY:
-                    startNewActivity(event.getContentClass(), event.getData());
-                    break;
-                case FRAGMENT:
-                    try {
-                        Fragment frag = (Fragment) event.getContentClass().newInstance();
-                        frag.setArguments(event.getData());
-                        replaceContent(frag);
-                    } catch (Exception e) {
-                        // Do nothing
-                    }
-                    break;
+            if (event.getContentClass().isAssignableFrom(Activity.class)) {
+                startNewActivity(event.getContentClass(), event.getData());
+            } else if (event.getContentClass().isAssignableFrom(Fragment.class)) {
+                replaceContent(event.getContentClass(), event.getData());
             }
         }
     }

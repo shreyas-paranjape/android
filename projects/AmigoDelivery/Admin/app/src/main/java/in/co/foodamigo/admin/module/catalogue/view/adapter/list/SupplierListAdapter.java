@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.event.ChangeContentEvent;
+import com.util.Util;
+
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemSupplierBinding;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.model.Supplier;
+import in.co.foodamigo.admin.module.catalogue.view.component.form.SupplierFormFragment;
 
 public class SupplierListAdapter extends ArrayAdapter<Supplier> {
 
@@ -31,7 +36,11 @@ public class SupplierListAdapter extends ArrayAdapter<Supplier> {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(
-                        new SupplierEvent(getItem(position)));
+                        new ChangeContentEvent(
+                                SupplierFormFragment.class,
+                                Util.bundleSerializable(
+                                        Constant.PRODUCT_CATEGORY,
+                                        getItem(position))));
             }
         });
         return rootBinding.getRoot();
@@ -40,17 +49,5 @@ public class SupplierListAdapter extends ArrayAdapter<Supplier> {
     @Override
     public boolean isEnabled(int position) {
         return false;
-    }
-
-    public static class SupplierEvent {
-        private final Supplier supplier;
-
-        public SupplierEvent(Supplier supplier) {
-            this.supplier = supplier;
-        }
-
-        public Supplier getSupplier() {
-            return supplier;
-        }
     }
 }

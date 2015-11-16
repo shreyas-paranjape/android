@@ -18,16 +18,16 @@ import java.util.Random;
 
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.singleton.Constant;
-import in.co.foodamigo.admin.module.catalogue.model.Product;
-import in.co.foodamigo.admin.module.catalogue.model.ProductCategory;
-import in.co.foodamigo.admin.module.catalogue.model.Supplier;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.spinner.ProdCatSpinnerAdapter;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.spinner.SupplierSpinnerAdapter;
+import model.catalogue.Product;
+import model.catalogue.ProductCategory;
+import model.party.Party;
 
 public class ProdFormFragment extends Fragment {
 
     private List<ProductCategory> productCategories;
-    private List<Supplier> suppliers;
+    private List<Party> suppliers;
 
     private Product product;
     private Random random = new Random();
@@ -44,7 +44,7 @@ public class ProdFormFragment extends Fragment {
 
     private void initData() {
         productCategories = SugarRecord.listAll(ProductCategory.class);
-        suppliers = SugarRecord.listAll(Supplier.class);
+        suppliers = SugarRecord.listAll(Party.class);
         product =
                 (Product) getArguments().getSerializable(Constant.PRODUCT);
         if (product == null) {
@@ -73,8 +73,8 @@ public class ProdFormFragment extends Fragment {
                 product.setDescription(etDescription.getText().toString());
                 product.setPrice(Integer.valueOf(etRate.getText().toString()));
                 product.setImageUrl(etImageUrl.getText().toString());
-                product.setCategory((ProductCategory) spParentCategory.getSelectedItem());
-                product.setProductSupplier((Supplier) spSupplier.getSelectedItem());
+                product.setProductCategory((ProductCategory) spParentCategory.getSelectedItem());
+                //product.setProductSupplier((Supplier) spSupplier.getSelectedItem());
                 SugarRecord.save(product);
             }
         });
@@ -84,7 +84,7 @@ public class ProdFormFragment extends Fragment {
     @NonNull
     private Spinner getCategorySpinner(View root) {
         final Spinner spParentCategory = (Spinner) root.findViewById(R.id.spParentCategory);
-        spParentCategory.setSelection(getIndexFor(product.getCategory()));
+        spParentCategory.setSelection(getIndexFor(product.getProductCategory()));
         ArrayAdapter<ProductCategory> prodCatAdapter = new ProdCatSpinnerAdapter(
                 getActivity(),
                 android.R.layout.simple_dropdown_item_1line,
@@ -96,8 +96,8 @@ public class ProdFormFragment extends Fragment {
     @NonNull
     private Spinner getSupplierSpinner(View root) {
         final Spinner spSuppliers = (Spinner) root.findViewById(R.id.spSupplier);
-        spSuppliers.setSelection(getIndexFor(product.getProductSupplier()));
-        ArrayAdapter<Supplier> supplierAdapter = new SupplierSpinnerAdapter(
+        // spSuppliers.setSelection(getIndexFor(product.getProductSupplier()));
+        ArrayAdapter<Party> supplierAdapter = new SupplierSpinnerAdapter(
                 getActivity(),
                 android.R.layout.simple_dropdown_item_1line,
                 suppliers);
@@ -117,9 +117,9 @@ public class ProdFormFragment extends Fragment {
         return 0;
     }
 
-    private int getIndexFor(Supplier productSupplier) {
+    private int getIndexFor(Party productSupplier) {
         if (productSupplier != null) {
-            for (Supplier supplier : suppliers) {
+            for (Party supplier : suppliers) {
                 if (supplier.getId() == (productSupplier.getId())) {
                     return suppliers.indexOf(supplier);
                 }

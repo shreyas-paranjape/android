@@ -1,54 +1,78 @@
 package in.co.foodamigo.admin.module.catalogue.view.adapter.list;
 
 import android.content.Context;
-import android.view.LayoutInflater;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import com.event.ChangeContentEvent;
-import com.util.Util;
+import com.util.IPredicate;
+import com.view.widget.AbstractRecyclerAdapter;
 
+import java.util.Comparator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemProdBinding;
 import in.co.foodamigo.admin.module.app.singleton.Constant;
-import in.co.foodamigo.admin.module.catalogue.model.Product;
 import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdFormFragment;
+import model.catalogue.Product;
 
-public class ProdListAdapter extends ArrayAdapter<Product> {
+public class ProdListAdapter extends AbstractRecyclerAdapter<Product, ProdListAdapter.ViewHolder> {
 
-    private LayoutInflater inflater;
+    public ProdListAdapter(Context context, List<Product> products) {
+        super(context, products);
+        EventBus.getDefault().register(this);
 
-    public ProdListAdapter(Context context, int resource, List<Product> products) {
-        super(context, resource, products);
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ItemProdBinding rootBinding =
-                ItemProdBinding.inflate(inflater, parent, false);
-        rootBinding.setProduct(getItem(position));
-        rootBinding.ivEdit.setOnClickListener(new View.OnClickListener() {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ViewHolder(ItemProdBinding.inflate(inflater, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.binding.setProduct(getItem(position));
+        holder.binding.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(
-                        new ChangeContentEvent(
-                                ProdFormFragment.class,
-                                Util.bundleSerializable(
-                                        Constant.PRODUCT_CATEGORY,
-                                        getItem(position))));
+                ProdListAdapter.this
+                        .onClick(ProdFormFragment.class,
+                                Constant.PRODUCT_CATEGORY,
+                                getItem(position));
             }
         });
-        return rootBinding.getRoot();
     }
 
-    @Override
-    public boolean isEnabled(int position) {
-        return false;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ItemProdBinding binding;
+
+        public ViewHolder(ItemProdBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 
+    public void onEvent(FilterSort event) {
+        filterSort(event.getPredicate(), event.getComparator());
+    }
+
+    public static class FilterSort {
+        private final IPredicate<Product> predicate;
+        private final Comparator<Product> comparator;
+
+        public FilterSort(IPredicate<Product> predicate,
+                          Comparator<Product> comparator) {
+            this.predicate = predicate;
+            this.comparator = comparator;
+        }
+
+        public Comparator<Product> getComparator() {
+            return comparator;
+        }
+
+        public IPredicate<Product> getPredicate() {
+            return predicate;
+        }
+    }
 }

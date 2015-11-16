@@ -4,7 +4,8 @@ import android.content.Context;
 
 import java.util.List;
 
-import in.co.foodamigo.admin.module.catalogue.model.ProductCategory;
+import model.catalogue.ProductCategory;
+
 
 public class ProdCatSpinnerAdapter extends AbstractSpinnerAdapter<ProductCategory> {
 

@@ -21,7 +21,7 @@ import model.catalogue.ProductCategory;
 
 public class FragmentSelectProduct extends Fragment {
 
-    List<ProductCategory> productCategories = new ArrayList<ProductCategory>();
+    List<ProductCategory> productCategories = new ArrayList<>();
 
     public FragmentSelectProduct() {
         // Required empty public constructor
@@ -43,15 +43,17 @@ public class FragmentSelectProduct extends Fragment {
         productCategories.add(new ProductCategory("stay",R.drawable.ic_accessibility_black_24dp));
         productCategories.add(new ProductCategory("beach",R.drawable.ic_accessibility_black_24dp));
 
-        ArrayAdapter<ProductCategory> adapter = new ProductCategoryListAdapter();
+        ArrayAdapter<ProductCategory> adapter = new ProductCategoryListAdapter(productCategories);
         ListView selectProduct = (ListView) v.findViewById(R.id.lv_select_product);
         selectProduct.setAdapter(adapter);
     }
 
     private class ProductCategoryListAdapter extends ArrayAdapter<ProductCategory> {
-
-        public ProductCategoryListAdapter() {
+        TextView textView;
+        List<ProductCategory> data;
+        public ProductCategoryListAdapter(List<ProductCategory> data) {
             super(getActivity(),R.layout.item_product_select,productCategories);
+            this.data = data;
         }
 
         @Override
@@ -59,11 +61,10 @@ public class FragmentSelectProduct extends Fragment {
             if(convertView == null){
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.item_product_select,parent,false);
             }
-            ProductCategory product = productCategories.get(position);
-            ImageView image = (ImageView) getActivity().findViewById(R.id.iv_product_select);
-            TextView textView = (TextView) getActivity().findViewById(R.id.tv_product_select);
-            image.setImageResource(product.getProductImage());
-            textView.setText(product.getName());
+            ImageView image = (ImageView) convertView.findViewById(R.id.iv_product_select);
+            textView = (TextView) convertView.findViewById(R.id.tv_product_select);
+            image.setImageResource(productCategories.get(position).getProductImage());
+            textView.setText(productCategories.get(position).getName());
 
             return  convertView;
         }

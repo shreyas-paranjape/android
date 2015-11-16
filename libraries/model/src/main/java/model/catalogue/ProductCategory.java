@@ -17,6 +17,9 @@ public class ProductCategory implements Serializable {
 
     private int productImage;
 
+    public ProductCategory() {
+    }
+
     public ProductCategory(String name, int productImage) {
         this.name = name;
         this.productImage = productImage;

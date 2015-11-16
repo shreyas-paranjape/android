@@ -6,9 +6,23 @@
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize">
 
-    <Spinner
-        android:id="@+id/productSpinner"
-        android:layout_width="70dp"
-        android:layout_height="24dp">
-    </Spinner>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/productToolbarSelectItem"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/productToolbarImage"
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_search_black_24dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+            />
+    </LinearLayout>
+
 </android.support.v7.widget.Toolbar>

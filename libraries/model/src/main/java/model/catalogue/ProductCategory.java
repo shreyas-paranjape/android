@@ -15,6 +15,21 @@ public class ProductCategory implements Serializable {
     @Column(name = "name")
     private String name;
 
+    private int productImage;
+
+    public ProductCategory(String name, int productImage) {
+        this.name = name;
+        this.productImage = productImage;
+    }
+
+    public int getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(int productImage) {
+        this.productImage = productImage;
+    }
+
     @Column(name = "parent_id")
     private ProductCategory parent;
 

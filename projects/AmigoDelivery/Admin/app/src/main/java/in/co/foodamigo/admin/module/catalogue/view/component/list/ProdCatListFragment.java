@@ -51,12 +51,7 @@ public class ProdCatListFragment extends AbstractRecyclerFragment {
             case R.id.action_sort:
                 EventBus.getDefault().post(
                         new ProdCatListAdapter.FilterSort(
-                                new IPredicate<ProductCategory>() {
-                                    @Override
-                                    public boolean apply(ProductCategory type) {
-                                        return type.getName().contains("1");
-                                    }
-                                },
+                                null,
                                 new Comparator<ProductCategory>() {
                                     @Override
                                     public int compare(ProductCategory lhs, ProductCategory rhs) {
@@ -65,6 +60,15 @@ public class ProdCatListFragment extends AbstractRecyclerFragment {
                                 }));
                 break;
             case R.id.action_filter:
+                EventBus.getDefault().post(
+                        new ProdCatListAdapter.FilterSort(
+                                new IPredicate<ProductCategory>() {
+                                    @Override
+                                    public boolean apply(ProductCategory type) {
+                                        return type.getName().contains("1");
+                                    }
+                                },
+                                null));
                 break;
         }
         return super.onOptionsItemSelected(item);

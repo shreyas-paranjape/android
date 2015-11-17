@@ -3,25 +3,50 @@ package com.goaamigo.traveller.module.product.view.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.OrderStatusFragment;
+import com.goaamigo.traveller.module.product.view.fragment.FragmentSelectProduct;
+import com.goaamigo.traveller.module.product.view.fragment.OrderFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
+import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
+import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
+import com.goaamigo.traveller.module.trip.view.component.TripResultsFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
+
+import de.greenrobot.event.EventBus;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
     private final ProductAdapter productAdapter = new ProductAdapter();
     private final EventListener listener = new EventListener();
+    LinearLayout layoutSpinner;
+
+    String[] spinnerValues = {"trip", "hotel", "beach", "ride", "activities",};
+
+    int total_images[] = {
+            R.drawable.ic_help_black_24dp,
+            R.drawable.ic_home_black_24dp,
+            R.drawable.ic_accessibility_black_24dp,
+            R.drawable.ic_account_circle_black_24dp,
+            R.drawable.ic_add_shopping_cart_black_24dp,
+            R.drawable.ic_sort_black_24dp};
 
     private class EventListener {
     }
@@ -31,22 +56,70 @@ public class ProductsActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        cartManager.hidePanel();
+        //cartManager.hidePanel();
         registerListener(cartManager);
         addCartFragment();
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.Menu_Search_Content, android.R.layout.simple_spinner_item);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        layoutSpinner = (LinearLayout) findViewById(R.id.productToolbarSelectItem);
+        layoutSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                EventBus.getDefault().post(
+                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle){
+                            @Override
+                            public Class getContentClass() {
+                                return FragmentSelectProduct.class;
+                            }
+                        }
+                );
+            }
+        });
+//        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+//
+//        spinner.setAdapter(new MyAdapter(this, R.layout.spinner_layout,
+//                spinnerValues));
     }
+
+    public class MyAdapter extends ArrayAdapter<String> {
+
+        public MyAdapter(Context ctx, int txtViewResourceId, String[] objects) {
+            super(ctx, txtViewResourceId, objects);
+        }
+
+        @Override
+        public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
+            return getCustomView(position, cnvtView, prnt);
+        }
+
+        @Override
+        public View getView(int pos, View cnvtView, ViewGroup prnt) {
+            return getCustomView(pos, cnvtView, prnt);
+        }
+
+        public View getCustomView(int position, View convertView,
+                                  ViewGroup parent) {
+            LayoutInflater inflater = getLayoutInflater();
+            View mySpinner = inflater.inflate(R.layout.spinner_layout, parent,
+                    false);
+            TextView main_text = (TextView) mySpinner
+                    .findViewById(R.id.text_main_seen);
+            main_text.setText(spinnerValues[position]);
+
+            ImageView left_icon = (ImageView) mySpinner
+                    .findViewById(R.id.left_pic);
+            left_icon.setImageResource(total_images[position]);
+
+            return mySpinner;
+        }
+    }
+
 
     private void addCartFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new OrderStatusFragment()).commit();
+        ft.replace(R.id.cartContainer, new OrderFragment()).commit();
     }
 
     @Override

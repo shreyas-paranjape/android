@@ -11,12 +11,27 @@ public class ProductCategory implements Serializable {
     private static final long serialVersionUID = 1l;
 
     private long id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "parent_id")
     private ProductCategory parent;
+    private int productImage;
+
+    public ProductCategory() {
+    }
+
+    public ProductCategory(String name, int productImage) {
+        this.name = name;
+        this.productImage = productImage;
+    }
+
+    public int getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(int productImage) {
+        this.productImage = productImage;
+    }
 
 
     public long getId() {

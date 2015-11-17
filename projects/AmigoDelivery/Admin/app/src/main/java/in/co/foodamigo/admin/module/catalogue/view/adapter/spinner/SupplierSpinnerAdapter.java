@@ -4,16 +4,17 @@ import android.content.Context;
 
 import java.util.List;
 
-import in.co.foodamigo.admin.module.catalogue.model.Supplier;
+import model.party.Party;
 
-public class SupplierSpinnerAdapter extends AbstractSpinnerAdapter<Supplier> {
 
-    public SupplierSpinnerAdapter(Context context, int resource, List<Supplier> objects) {
+public class SupplierSpinnerAdapter extends AbstractSpinnerAdapter<Party> {
+
+    public SupplierSpinnerAdapter(Context context, int resource, List<Party> objects) {
         super(context, resource, objects);
     }
 
     @Override
-    protected String getText(Supplier item) {
+    protected String getText(Party item) {
         return item.getName();
     }
 }

@@ -13,7 +13,7 @@
 
         <meta-data
             android:name="DATABASE"
-            android:value="delivery_admin.db" />
+            android:value="goaamigo_admin.db" />
         <meta-data
             android:name="VERSION"
             android:value="1" />
@@ -22,7 +22,7 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="delivery.model" />
+            android:value="model" />
 
         <service
             android:name=".module.app.infra.socket.SocketConnectionManager"

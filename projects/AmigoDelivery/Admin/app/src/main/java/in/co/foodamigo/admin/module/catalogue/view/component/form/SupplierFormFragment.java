@@ -14,11 +14,11 @@ import java.util.Random;
 
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.singleton.Constant;
-import in.co.foodamigo.admin.module.catalogue.model.Supplier;
+import model.party.Party;
 
 public class SupplierFormFragment extends Fragment {
 
-    private Supplier supplier;
+    private Party party;
     private Random random = new Random();
 
     @Override
@@ -35,24 +35,23 @@ public class SupplierFormFragment extends Fragment {
         final EditText etImageUrl = (EditText) root.findViewById(R.id.etImageUrl);
         final Button btnSave = (Button) root.findViewById(R.id.btnSave);
 
-        etTitle.setText(supplier.getName());
-        etImageUrl.setText(supplier.getImageUrl());
+        etTitle.setText(party.getName());
+        //etImageUrl.setText(party.getImageUrl());
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                supplier.setName(etTitle.getText().toString());
-                supplier.setImageUrl(etImageUrl.getText().toString());
-                SugarRecord.save(supplier);
+                party.setName(etTitle.getText().toString());
+                //party.setImageUrl(etImageUrl.getText().toString());
+                SugarRecord.save(party);
             }
         });
     }
 
     private void initData() {
-        supplier =
-                (Supplier) getArguments().getSerializable(Constant.SUPPLIER);
-        if (supplier == null) {
-            supplier = new Supplier();
-            supplier.setId(random.nextInt());
+        party = (Party) getArguments().getSerializable(Constant.SUPPLIER);
+        if (party == null) {
+            party = new Party();
+            party.setId(random.nextInt());
         }
     }
 }

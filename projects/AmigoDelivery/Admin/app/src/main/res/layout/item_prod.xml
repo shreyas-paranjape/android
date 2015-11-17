@@ -5,7 +5,7 @@
 
         <variable
             name="product"
-            type="in.co.foodamigo.admin.module.catalogue.model.Product" />
+            type="model.catalogue.Product" />
     </data>
 
     <LinearLayout
@@ -39,13 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@{product.category.name}" />
+            android:text="@{product.productCategory.name}" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@{product.productSupplier.name}" />
+            android:text="" />
 
     </LinearLayout>
 </layout>

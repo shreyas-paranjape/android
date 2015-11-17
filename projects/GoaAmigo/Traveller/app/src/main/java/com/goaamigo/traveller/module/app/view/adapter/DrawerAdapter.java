@@ -14,7 +14,6 @@ import com.view.widget.NavigationDrawerListAdapter;
 
 import java.util.List;
 
-
 public class DrawerAdapter extends NavigationDrawerListAdapter {
 
     public DrawerAdapter(Context context, int resource, List<Item> items) {

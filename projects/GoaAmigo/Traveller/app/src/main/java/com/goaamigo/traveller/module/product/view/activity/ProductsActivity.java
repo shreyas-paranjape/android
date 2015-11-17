@@ -34,6 +34,7 @@ import de.greenrobot.event.EventBus;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
+    private CartManager cartManager;
     private final ProductAdapter productAdapter = new ProductAdapter();
     private final EventListener listener = new EventListener();
     LinearLayout layoutSpinner;
@@ -51,13 +52,12 @@ public class ProductsActivity extends AbstractActivity {
     private class EventListener {
     }
 
-    private CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        //cartManager.hidePanel();
+        cartManager.hidePanel();
         registerListener(cartManager);
         addCartFragment();
 

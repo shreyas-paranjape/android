@@ -105,13 +105,13 @@ public class MapsActivity extends AbstractActivity implements OnMapReadyCallback
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refresh(Hoteldata, R.drawable.ic_accessibility_black_24dp);
+                refresh(Hoteldata, R.drawable.ic_done_black_24dp);
             }
         });
         rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refresh(restaurantData, R.drawable.ic_account_box);
+                refresh(restaurantData, R.drawable.ic_home_black_24dp);
             }
         });
     }

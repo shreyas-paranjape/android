@@ -1,8 +1,7 @@
 package com.goaamigo.traveller.module.product.view.fragment;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +45,12 @@ public class FragmentSelectProduct extends Fragment {
         ArrayAdapter<ProductCategory> adapter = new ProductCategoryListAdapter(productCategories);
         ListView selectProduct = (ListView) v.findViewById(R.id.lv_select_product);
         selectProduct.setAdapter(adapter);
+        selectProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
 
     }
 

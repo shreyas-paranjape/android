@@ -12,12 +12,9 @@ import android.widget.Spinner;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.OrderFragment;
+import com.goaamigo.traveller.module.product.view.fragment.OrderStatusFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
-import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
-import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
-import com.goaamigo.traveller.module.trip.view.component.TripResultsFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
@@ -49,7 +46,7 @@ public class ProductsActivity extends AbstractActivity {
     private void addCartFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new OrderFragment()).commit();
+        ft.replace(R.id.cartContainer, new OrderStatusFragment()).commit();
     }
 
     @Override

@@ -5,12 +5,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.view.activity.AbstractActivity;
-
-import java.util.Arrays;
 
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.infra.socket.SocketConnectionManager;
@@ -22,19 +18,7 @@ public class HomeActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(this, SocketConnectionManager.class));
-        initSpinner();
     }
-
-    private void initSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        Arrays.asList(new String[]{"One", "Two"}));
-        spinner.setAdapter(adapter);
-    }
-
 
     @Override
     public void onBackPressed() {

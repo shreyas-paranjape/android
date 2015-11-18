@@ -1,4 +1,4 @@
-package in.co.foodamigo.admin.module.catalogue.view.adapter.spinner;
+package com.view.widget;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,17 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.view.widget.AbstractSpinnerAdapter;
+
 import java.util.List;
 
-public abstract class AbstractSpinnerAdapter<T> extends ArrayAdapter<T> {
-    private final int resource;
-    private final LayoutInflater mInflater;
+public abstract class FormSpinnerAdapter<T> extends AbstractSpinnerAdapter<T> {
 
-    public AbstractSpinnerAdapter(Context context, int resource, List<T> objects) {
+    public FormSpinnerAdapter(Context context, int resource, List<T> objects) {
         super(context, resource, objects);
-        this.resource = resource;
-        mInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

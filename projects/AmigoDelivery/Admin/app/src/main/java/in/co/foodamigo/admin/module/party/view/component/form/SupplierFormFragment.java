@@ -1,4 +1,4 @@
-package in.co.foodamigo.admin.module.catalogue.view.component.form;
+package in.co.foodamigo.admin.module.party.view.component.form;
 
 import android.app.Fragment;
 import android.os.Bundle;

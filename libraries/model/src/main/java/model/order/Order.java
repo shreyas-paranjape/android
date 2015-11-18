@@ -1,7 +1,5 @@
 package model.order;
 
-import android.databinding.ObservableDouble;
-import android.databinding.ObservableInt;
 
 import com.orm.dsl.Column;
 import com.orm.dsl.Ignore;
@@ -15,7 +13,7 @@ import java.util.List;
 import model.common.Location;
 import model.party.Party;
 
-@Table
+@Table(name = "ordr")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1l;
@@ -34,10 +32,6 @@ public class Order implements Serializable {
 
     @Ignore
     private List<OrderItem> orderItems = new ArrayList<>();
-    @Ignore
-    public final ObservableDouble total = new ObservableDouble();
-    @Ignore
-    public final ObservableInt cartSize = new ObservableInt();
 
     @Override
     public boolean equals(Object o) {

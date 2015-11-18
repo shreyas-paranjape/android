@@ -1,21 +1,35 @@
 package in.co.foodamigo.admin.module.catalogue.view.component.list;
 
+import android.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
-import com.orm.SugarRecord;
-import com.util.IPredicate;
 import com.view.fragment.AbstractRecyclerFragment;
+import com.view.model.Item;
 import com.view.widget.AbstractRecyclerAdapter;
+import com.view.widget.ItemSpinnerAdapter;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.R;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdListAdapter;
 import model.catalogue.Product;
+import repository.catalogue.ProductRepo;
 
-public class ProductListFragment extends AbstractRecyclerFragment {
+public class ProductListFragment extends AbstractRecyclerFragment<Product> {
+
+    protected final static List<Item> spinnerItems = new ArrayList<>();
+
+    @Override
+    protected String getArgumentKey() {
+        return Constant.PRODUCT;
+    }
 
     @Override
     protected int getLayoutId() {
@@ -33,36 +47,72 @@ public class ProductListFragment extends AbstractRecyclerFragment {
     }
 
     @Override
-    protected void initView(View root) {
+    protected Class getFilterFragmentClass() {
+        return null;
     }
 
     @Override
     protected AbstractRecyclerAdapter getAdapter() {
-        return new ProdListAdapter(getActivity(),
-                SugarRecord.listAll(Product.class));
+        return new ProdListAdapter(getActivity(), applyFilters(ProductRepo.getAll(), filters));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_sort:
-                EventBus.getDefault().post(new ProdListAdapter.FilterSort(new IPredicate<Product>() {
-                    @Override
-                    public boolean apply(Product type) {
-                        return type.getName().contains("1");
-                    }
-                }, new Comparator<Product>() {
-                    @Override
-                    public int compare(Product lhs, Product rhs) {
-                        return (int) (rhs.getId() - lhs.getId());
-                    }
-                }));
-                break;
             case R.id.action_filter:
-                break;
+                onFilterClick();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void initView(View root) {
+        LinearLayout tlSorts = (LinearLayout) root.findViewById(R.id.llSorts);
+        Button textView = new Button(getActivity());
+        textView.setText("Sort one");
+        tlSorts.addView(textView);
+        initSpinner();
+    }
+
+    private void initSpinner() {
+        Spinner spinner = (Spinner) getActivity().findViewById(R.id.spCategories);
+        final ItemSpinnerAdapter adapter = new ItemSpinnerAdapter(getActivity(), spinnerItems);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Item item = adapter.getItem(position);
+                //Todo Filter list based on category
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinner.setAdapter(adapter);
+    }
+
+
+    static {
+        spinnerItems.add(new Item("Pending", R.drawable.ic_mode_edit_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("Past", R.drawable.ic_account_circle_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("Today", R.drawable.ic_add_shopping_cart_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
     }
 
 }

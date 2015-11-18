@@ -5,14 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
 import com.event.ChangeContentEvent;
-import com.util.IPredicate;
 import com.util.Util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -41,27 +39,11 @@ public abstract class
         return itemList.get(position);
     }
 
-    public void filterSort(IPredicate<T> predicate, Comparator<T> comparator) {
-        if (predicate != null) {
-            itemList.clear();
-            itemList.addAll(originalList);
-            filter(predicate);
-        }
-        if (comparator != null) {
-            Collections.sort(itemList, comparator);
-        }
+    public void sort(Comparator<T> comparator) {
+        Collections.sort(itemList, comparator);
         notifyDataSetChanged();
     }
 
-    private void filter(IPredicate<T> predicate) {
-        Iterator<T> it = itemList.iterator();
-        while (it.hasNext()) {
-            T foo = it.next();
-            if (!predicate.apply(foo)) {
-                it.remove();
-            }
-        }
-    }
 
     protected void onClick(Class newView, String dataKey, Serializable data) {
         EventBus.getDefault().post(

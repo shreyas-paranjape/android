@@ -4,19 +4,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.orm.SugarRecord;
-import com.util.IPredicate;
 import com.view.fragment.AbstractRecyclerFragment;
 import com.view.widget.AbstractRecyclerAdapter;
 
-import java.util.Comparator;
-
-import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.R;
+import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdCatListAdapter;
 import model.catalogue.ProductCategory;
 
-public class ProdCatListFragment extends AbstractRecyclerFragment {
-    private ProdCatListAdapter adapter;
+public class ProdCatListFragment extends AbstractRecyclerFragment<ProductCategory> {
+
 
     @Override
     protected int getLayoutId() {
@@ -34,9 +31,13 @@ public class ProdCatListFragment extends AbstractRecyclerFragment {
 
     @Override
     protected AbstractRecyclerAdapter getAdapter() {
-        adapter = new ProdCatListAdapter(getActivity(),
+        return new ProdCatListAdapter(getActivity(),
                 SugarRecord.listAll(ProductCategory.class));
-        return adapter;
+    }
+
+    @Override
+    protected String getArgumentKey() {
+        return Constant.PRODUCT_CATEGORY;
     }
 
     @Override
@@ -45,30 +46,17 @@ public class ProdCatListFragment extends AbstractRecyclerFragment {
     }
 
     @Override
+    protected Class getFilterFragmentClass() {
+        return null;
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_sort:
-                EventBus.getDefault().post(
-                        new ProdCatListAdapter.FilterSort(
-                                null,
-                                new Comparator<ProductCategory>() {
-                                    @Override
-                                    public int compare(ProductCategory lhs, ProductCategory rhs) {
-                                        return (int) (lhs.getId() - rhs.getId());
-                                    }
-                                }));
-                break;
             case R.id.action_filter:
-                EventBus.getDefault().post(
-                        new ProdCatListAdapter.FilterSort(
-                                new IPredicate<ProductCategory>() {
-                                    @Override
-                                    public boolean apply(ProductCategory type) {
-                                        return type.getName().contains("1");
-                                    }
-                                },
-                                null));
+                onFilterClick();
                 break;
         }
         return super.onOptionsItemSelected(item);

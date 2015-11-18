@@ -19,7 +19,8 @@ public class DummyData {
             SugarRecord.save(product);
         }
 
-        for (Integer i : Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})) {
+        for (Integer i : Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                11, 12, 13, 14, 15, 16, 17, 18, 19, 20})) {
             ProductCategory productCategory = new ProductCategory();
             productCategory.setId(i);
             productCategory.setName("Product Category : " + productCategory.getId());

@@ -7,8 +7,8 @@
     android:minHeight="?attr/actionBarSize">
 
     <Spinner
-        android:id="@+id/productSpinner"
-        android:layout_width="70dp"
-        android:layout_height="24dp" />
+        android:id="@+id/spCategories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </android.support.v7.widget.Toolbar>

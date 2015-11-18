@@ -1,11 +1,10 @@
-package in.co.foodamigo.admin.module.catalogue.view.adapter.list;
+package in.co.foodamigo.admin.module.party.view.adapter.list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.util.IPredicate;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import java.util.Comparator;
@@ -17,7 +16,8 @@ import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdFormFragment;
 import model.party.Party;
 
-public class SupplierListAdapter extends AbstractRecyclerAdapter<Party, SupplierListAdapter.ViewHolder> {
+public class SupplierListAdapter
+        extends AbstractRecyclerAdapter<Party, SupplierListAdapter.ViewHolder> {
 
     public SupplierListAdapter(Context context, List<Party> parties) {
         super(context, parties);
@@ -52,17 +52,14 @@ public class SupplierListAdapter extends AbstractRecyclerAdapter<Party, Supplier
         }
     }
 
-    public void onEvent(FilterSort event) {
-        filterSort(event.getPredicate(), event.getComparator());
+    public void onEvent(Sort event) {
+        sort(event.getComparator());
     }
 
-    public static class FilterSort {
-        private final IPredicate<Party> predicate;
+    public static class Sort {
         private final Comparator<Party> comparator;
 
-        public FilterSort(IPredicate<Party> predicate,
-                          Comparator<Party> comparator) {
-            this.predicate = predicate;
+        public Sort(Comparator<Party> comparator) {
             this.comparator = comparator;
         }
 
@@ -70,8 +67,5 @@ public class SupplierListAdapter extends AbstractRecyclerAdapter<Party, Supplier
             return comparator;
         }
 
-        public IPredicate<Party> getPredicate() {
-            return predicate;
-        }
     }
 }

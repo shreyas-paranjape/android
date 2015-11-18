@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.util.IPredicate;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import java.util.Comparator;
@@ -54,17 +53,14 @@ public class ProdCatListAdapter
         }
     }
 
-    public void onEvent(FilterSort event) {
-        filterSort(event.getPredicate(), event.getComparator());
+    public void onEvent(Sort event) {
+        sort(event.getComparator());
     }
 
-    public static class FilterSort {
-        private final IPredicate<ProductCategory> predicate;
+    public static class Sort {
         private final Comparator<ProductCategory> comparator;
 
-        public FilterSort(IPredicate<ProductCategory> predicate,
-                          Comparator<ProductCategory> comparator) {
-            this.predicate = predicate;
+        public Sort(Comparator<ProductCategory> comparator) {
             this.comparator = comparator;
         }
 
@@ -72,9 +68,6 @@ public class ProdCatListAdapter
             return comparator;
         }
 
-        public IPredicate<ProductCategory> getPredicate() {
-            return predicate;
-        }
     }
 
 

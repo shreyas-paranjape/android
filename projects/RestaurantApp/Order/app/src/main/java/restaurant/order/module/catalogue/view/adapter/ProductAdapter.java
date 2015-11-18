@@ -1,4 +1,4 @@
-package in.co.foodamigo.customer.module.catalogue.view.adapter;
+package restaurant.order.module.catalogue.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import in.co.foodamigo.customer.databinding.ItemProductBinding;
 import model.catalogue.Product;
 import model.catalogue.ProductCategory;
 import repository.catalogue.ProductRepo;
+import restaurant.order.databinding.ItemProductBinding;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 

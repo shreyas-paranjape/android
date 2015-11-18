@@ -31,6 +31,7 @@ public class DummyData {
             product.setProductCategory(ProductCategoryRepo.getById(i));
             product.setDescription("Product Description: " + product.getId());
             product.setPrice(i * 1000);
+            product.setImageUrl("file:///android_asset/1.jpg");
             SugarRecord.save(product);
         }
 

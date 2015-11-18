@@ -1,17 +1,17 @@
-package in.co.foodamigo.customer.module.catalogue.view.component;
+package restaurant.order.module.catalogue.view.component;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.singleton.Constant;
-import in.co.foodamigo.customer.module.catalogue.view.adapter.ProductAdapter;
 import model.catalogue.ProductCategory;
+import restaurant.order.R;
+import restaurant.order.module.app.singleton.Constant;
+import restaurant.order.module.catalogue.view.adapter.ProductAdapter;
 
 
 public class CategoryFragment extends Fragment {
@@ -34,7 +34,8 @@ public class CategoryFragment extends Fragment {
 
     private void initListView(View rootView) {
         RecyclerView productsRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_category);
-        productsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //productsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        productsRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         productsRecyclerView.setAdapter(new ProductAdapter(getActivity(), productCategory));
     }
 }

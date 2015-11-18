@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.Contoller.CurrentOrderManager;
+import com.order.CurrentOrderManager;
 import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
 import java.io.Serializable;

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.order.CurrentOrderManager;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.Executors;
@@ -14,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 import in.co.foodamigo.customer.databinding.FragmentOrderStatusBinding;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 import in.co.foodamigo.customer.module.order.view.model.OrderStatus;
 
 public class OrderStatusFragment extends Fragment {

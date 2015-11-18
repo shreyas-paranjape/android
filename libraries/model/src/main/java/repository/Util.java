@@ -1,6 +1,5 @@
 package repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Util {
@@ -20,10 +19,10 @@ public class Util {
     }
 
     public static String[] listToStringArray(List<?> objects) {
-        List<String> res = new ArrayList<>();
-        for (Object obj : objects) {
-            res.add(String.valueOf(obj));
+        String[] res = new String[objects.size()];
+        for (int i = 0; i < objects.size(); i++) {
+            res[i] = String.valueOf(objects.get(i));
         }
-        return (String[]) res.toArray();
+        return res;
     }
 }

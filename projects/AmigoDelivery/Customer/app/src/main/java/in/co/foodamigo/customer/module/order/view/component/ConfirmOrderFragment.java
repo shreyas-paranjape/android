@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.order.CurrentOrderManager;
+
 import in.co.foodamigo.customer.databinding.FragmentConfirmOrderBinding;
 import in.co.foodamigo.customer.databinding.ItemOrderConfirmBinding;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 import model.order.OrderItem;
 
 public class ConfirmOrderFragment extends Fragment {
@@ -27,11 +28,11 @@ public class ConfirmOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("Confirm order");
         FragmentConfirmOrderBinding rootBinding = FragmentConfirmOrderBinding.inflate(inflater);
-        rootBinding.setOrder(currentOrderManager.getOrder());
+        rootBinding.setOrderManager(currentOrderManager);
         rootBinding.btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentOrderManager.placeOrder();
+                //TODO currentOrderManager.placeOrder();
             }
         });
         setOrderItems(rootBinding.lvOrderItems, inflater);

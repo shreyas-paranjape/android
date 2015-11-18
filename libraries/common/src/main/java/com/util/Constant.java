@@ -1,4 +1,4 @@
-package com.goaamigo.traveller.module.app.singleton;
+package com.util;
 
 public interface Constant {
 

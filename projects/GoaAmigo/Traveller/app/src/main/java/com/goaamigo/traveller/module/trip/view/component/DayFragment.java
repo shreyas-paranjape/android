@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import model.trip.Day;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.app.singleton.Constant;
+import com.util.Constant;
 import com.goaamigo.traveller.module.trip.view.adapter.EventAdapter;
 
 public class DayFragment extends Fragment {

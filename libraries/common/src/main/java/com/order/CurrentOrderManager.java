@@ -1,24 +1,21 @@
-package in.co.foodamigo.customer.module.order.controller;
+package com.order;
 
-import android.os.Bundle;
+import android.databinding.ObservableDouble;
+import android.databinding.ObservableInt;
+import android.util.Log;
 
-import com.event.ChangeContentEvent;
-
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import in.co.foodamigo.customer.module.app.singleton.Constant;
-import in.co.foodamigo.customer.module.order.view.component.CheckoutActivity;
-import in.co.foodamigo.customer.module.order.view.component.OrderStatusFragment;
 import model.catalogue.Product;
-import model.common.Location;
 import model.order.Order;
 import model.order.OrderItem;
 
 public class CurrentOrderManager {
 
     private Order order;
+    public final ObservableDouble total = new ObservableDouble();
+    public final ObservableInt size = new ObservableInt();
     private final EventBus eventBus = EventBus.getDefault();
 
     public CurrentOrderManager() {
@@ -40,7 +37,8 @@ public class CurrentOrderManager {
         }
         changeProductQuantity(orderItem, quantity);
         changeTotal();
-        order.cartSize.set(order.cartSize.get() + quantity);
+        Log.d("Order Manager", "Cart size" + cartSize());
+        size.set(cartSize());
     }
 
     public int cartSize() {
@@ -53,15 +51,7 @@ public class CurrentOrderManager {
     }
 
     public void checkOut() {
-        // if logged in goto address selection page
-        // if not logged in show add profile
-        eventBus.post(
-                new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, new Bundle()) {
-                    @Override
-                    public Class getContentClass() {
-                        return CheckoutActivity.class;
-                    }
-                });
+        eventBus.post(new CheckOutEvent(order));
     }
 
     private OrderItem getItemForProduct(Product product) {
@@ -88,19 +78,11 @@ public class CurrentOrderManager {
 
     private void changeTotal() {
         final List<OrderItem> orderItems = order.getOrderItems();
-        double total = 0;
+        double t = 0;
         for (OrderItem orderItem : orderItems) {
-            total += orderItem.getPrice();
+            t += orderItem.getPrice();
         }
-        order.total.set(total);
-    }
-
-    public Location getDeliveryAddress() {
-        return order.getDeliveryLocation();
-    }
-
-    public void setDeliveryAddress(Location deliveryAddress) {
-        order.setDeliveryLocation(deliveryAddress);
+        total.set(t);
     }
 
 
@@ -114,25 +96,6 @@ public class CurrentOrderManager {
                 break;
         }
         eventBus.post(new CartModifiedEvent(cartSize()));
-    }
-
-    public void placeOrder() {
-        order.setPlacedAt(new Date());
-        order.setStatus("PENDING");
-        Bundle data = new Bundle();
-        data.putSerializable(Constant.ORDER, order);
-        //TODO Send order to server
-        //TODO Save order
-        eventBus.post(
-                new ChangeContentEvent(
-                        ChangeContentEvent.ContentType.FRAGMENT,
-                        data) {
-                    @Override
-                    public Class getContentClass() {
-                        return OrderStatusFragment.class;
-                    }
-                });
-        //TODO order = new Order();
     }
 
     public static class CartModifiedEvent {
@@ -170,4 +133,17 @@ public class CurrentOrderManager {
         }
     }
 
+    public static class CheckOutEvent {
+        private final Order order;
+
+
+        public CheckOutEvent(Order order) {
+            this.order = order;
+        }
+
+        public Order getOrder() {
+            return order;
+        }
+    }
 }
+

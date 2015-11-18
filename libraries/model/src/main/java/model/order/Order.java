@@ -1,8 +1,5 @@
 package model.order;
 
-import android.databinding.ObservableDouble;
-import android.databinding.ObservableInt;
-
 import com.orm.dsl.Column;
 import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;

@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="order"
-            type="model.order.Order" />
+            name="orderManager"
+            type="com.order.CurrentOrderManager" />
     </data>
 
     <LinearLayout
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
-                android:text="@{@string/Rs + String.valueOf(order.total)}" />
+                android:text="@{@string/Rs + String.valueOf(orderManager.total)}" />
 
         </LinearLayout>
 
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
                 android:paddingBottom="5dp"
-                android:text="@{order.deliveryLocation.address}" />
+                android:text="" />
 
         </LinearLayout>
 

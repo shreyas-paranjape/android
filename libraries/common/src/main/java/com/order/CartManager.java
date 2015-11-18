@@ -1,4 +1,4 @@
-package com.goaamigo.traveller.module.product.view.Contoller;
+package com.order;
 
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 

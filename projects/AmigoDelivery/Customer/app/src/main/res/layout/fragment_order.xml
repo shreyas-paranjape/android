@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="order"
-            type="model.order.Order" />
+            name="orderManager"
+            type="com.order.CurrentOrderManager" />
     </data>
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0"
-                android:text="@{String.valueOf(order.cartSize)}" />
+                android:text="@{String.valueOf(orderManager.size)}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginStart="5dp"
                 android:layout_weight="0"
-                android:text="@{@string/Rs + String.valueOf(order.total)}" />
+                android:text="@{@string/Rs + String.valueOf(orderManager.total)}" />
 
             <Button
                 android:id="@+id/btn_checkout"

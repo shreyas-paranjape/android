@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.order.CurrentOrderManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -14,7 +15,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.customer.databinding.ItemProductBinding;
-import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 import model.catalogue.Product;
 
 public class ProductAdapter

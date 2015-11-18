@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import model.catalogue.Product;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 
 import java.util.ArrayList;

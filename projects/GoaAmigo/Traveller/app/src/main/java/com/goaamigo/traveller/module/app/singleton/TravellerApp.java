@@ -4,7 +4,7 @@ import android.app.Application;
 
 import model.trip.Profile;
 
-import com.goaamigo.traveller.module.product.view.Contoller.CurrentOrderManager;
+import com.order.CurrentOrderManager;
 import com.orm.SugarContext;
 import com.orm.SugarRecord;
 

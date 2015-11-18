@@ -1,18 +1,17 @@
 package com.goaamigo.traveller.module.product.view.fragment;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +36,22 @@ public class FragmentSelectProduct extends Fragment {
     private void initView(View v) {
 
         productCategories.add(new ProductCategory("hotel",R.drawable.ic_accessibility_black_24dp));
-        productCategories.add(new ProductCategory("activity",R.drawable.ic_accessibility_black_24dp));
-        productCategories.add(new ProductCategory("boat ride",R.drawable.ic_accessibility_black_24dp));
-        productCategories.add(new ProductCategory("water sport",R.drawable.ic_accessibility_black_24dp));
-        productCategories.add(new ProductCategory("stay",R.drawable.ic_accessibility_black_24dp));
-        productCategories.add(new ProductCategory("beach",R.drawable.ic_accessibility_black_24dp));
+        productCategories.add(new ProductCategory("activity",R.drawable.ic_help_black_24dp));
+        productCategories.add(new ProductCategory("boat ride",R.drawable.ic_home_black_24dp));
+        productCategories.add(new ProductCategory("water sport",R.drawable.ic_account_circle_black_24dp));
+        productCategories.add(new ProductCategory("stay",R.drawable.ic_sort_black_24dp));
+        productCategories.add(new ProductCategory("beach",R.drawable.ic_help_black_24dp));
 
         ArrayAdapter<ProductCategory> adapter = new ProductCategoryListAdapter(productCategories);
         ListView selectProduct = (ListView) v.findViewById(R.id.lv_select_product);
         selectProduct.setAdapter(adapter);
+        selectProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
     }
 
     private class ProductCategoryListAdapter extends ArrayAdapter<ProductCategory> {

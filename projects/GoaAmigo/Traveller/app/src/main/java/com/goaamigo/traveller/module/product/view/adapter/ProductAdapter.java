@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.Contoller.CurrentOrderManager;
 import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
 import java.io.Serializable;
@@ -67,9 +68,18 @@ public class ProductAdapter
         holder.addRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                addItem(productsList.get(position));
             }
         });
+    }
+
+    private void addItem(Product product) {
+        modifyItem(product, CurrentOrderManager.CartAction.ADD);
+    }
+
+    private void modifyItem(Product product, CurrentOrderManager.CartAction action) {
+        EventBus.getDefault().post(
+                new CurrentOrderManager.ModifyCartEvent(product, action));
     }
 
     @Override

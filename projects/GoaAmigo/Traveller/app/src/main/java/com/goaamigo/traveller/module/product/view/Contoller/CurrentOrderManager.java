@@ -40,7 +40,7 @@ public class CurrentOrderManager {
         }
         changeProductQuantity(orderItem, quantity);
         changeTotal();
-        order.cartSize.set(order.cartSize.get() + quantity);
+//        order.cartSize.set(order.cartSize.get() + quantity);
     }
 
     public int cartSize() {
@@ -92,7 +92,7 @@ public class CurrentOrderManager {
         for (OrderItem orderItem : orderItems) {
             total += orderItem.getPrice();
         }
-        order.total.set(total);
+//        order.total.set(total);
     }
 
     public Location getDeliveryAddress() {

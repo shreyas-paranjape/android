@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import model.catalogue.Product;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ import java.util.List;
 public class ProductListFragment extends Fragment {
     private List<Product> productList;
 
+
+    public ProductListFragment() {
+    }
 
     private ProductAdapter productAdapter;
 

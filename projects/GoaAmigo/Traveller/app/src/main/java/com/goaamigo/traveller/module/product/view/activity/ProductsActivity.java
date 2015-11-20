@@ -3,49 +3,39 @@ package com.goaamigo.traveller.module.product.view.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 
+import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
-import com.order.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
+import com.goaamigo.traveller.module.product.view.fragment.ProductFilter;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
+import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
+import com.order.CartManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
+import com.view.model.Item;
+import com.view.widget.ItemSpinnerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
     private CartManager cartManager;
     private final ProductAdapter productAdapter = new ProductAdapter();
     private final EventListener listener = new EventListener();
-    LinearLayout layoutSpinner;
-
-    String[] spinnerValues = {"trip", "hotel", "beach", "ride", "activities",};
-
-    int total_images[] = {
-            R.drawable.ic_help_black_24dp,
-            R.drawable.ic_home_black_24dp,
-            R.drawable.ic_accessibility_black_24dp,
-            R.drawable.ic_account_circle_black_24dp,
-            R.drawable.ic_add_shopping_cart_black_24dp,
-            R.drawable.ic_sort_black_24dp};
+    protected final static List<Item> spinnerItems = new ArrayList<>();
 
     private class EventListener {
     }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,59 +44,35 @@ public class ProductsActivity extends AbstractActivity {
         registerListener(cartManager);
         addCartFragment();
 
-//        layoutSpinner = (LinearLayout) findViewById(R.id.productToolbarSelectItem);
-//        layoutSpinner.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Bundle bundle = new Bundle();
-//                EventBus.getDefault().post(
-//                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle){
-//                            @Override
-//                            public Class getContentClass() {
-//                                return FragmentSelectProduct.class;
-//                            }
-//                        }
-//                );
-//            }
-//        });
+        spinnerItems.add(new Item("stay",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("rent bike/car",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("activities",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("transport",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
         Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
-        spinner.setAdapter(new ProductSpinnerAdapter(this, R.layout.spinner_layout,
-                spinnerValues));
+        final ItemSpinnerAdapter adapter = new ItemSpinnerAdapter(this, spinnerItems);
+        spinner.setAdapter(adapter);
+
     }
-
-    public class ProductSpinnerAdapter extends ArrayAdapter<String> {
-
-        public ProductSpinnerAdapter(Context ctx, int txtViewResourceId, String[] objects) {
-            super(ctx, txtViewResourceId, objects);
-        }
-
-        @Override
-        public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
-            return getCustomView(position, cnvtView, prnt);
-        }
-
-        @Override
-        public View getView(int pos, View cnvtView, ViewGroup prnt) {
-            return getCustomView(pos, cnvtView, prnt);
-        }
-
-        public View getCustomView(int position, View convertView,
-                                  ViewGroup parent) {
-            LayoutInflater inflater = getLayoutInflater();
-            View mySpinner = inflater.inflate(R.layout.spinner_layout, parent,
-                    false);
-            TextView main_text = (TextView) mySpinner
-                    .findViewById(R.id.text_main_seen);
-            main_text.setText(spinnerValues[position]);
-
-            ImageView left_icon = (ImageView) mySpinner
-                    .findViewById(R.id.left_pic);
-            left_icon.setImageResource(total_images[position]);
-
-            return mySpinner;
-        }
-    }
-
 
     private void addCartFragment() {
         FragmentManager fragmentManager = getFragmentManager();
@@ -126,12 +92,17 @@ public class ProductsActivity extends AbstractActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.action_sort:
                 break;
             case R.id.action_filter:
+                Bundle b = new Bundle();
+                EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT,b){
+                    @Override
+                    public Class getContentClass() {
+                        return ProductFilter.class;
+                    }
+                });
                 break;
             case R.id.action_maps:
                 if (mapsIcon == false) {

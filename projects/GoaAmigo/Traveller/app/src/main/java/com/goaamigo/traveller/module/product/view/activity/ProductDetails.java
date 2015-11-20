@@ -2,6 +2,7 @@ package com.goaamigo.traveller.module.product.view.activity;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -19,26 +20,57 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.util.StringConstants;
+import com.order.CartManager;
+import com.order.CurrentOrderManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;
 
+import de.greenrobot.event.EventBus;
 import model.catalogue.Product;
 
-public class ProductDetails extends AbstractActivity {
+public class ProductDetails extends AbstractActivity implements OnMapReadyCallback {
     private SliderLayout mDemoSlider;
     private TextView address, name, productPrice, termsCond;
     private String terms;
     private Product product;
+    private CartManager cartManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
+        cartManager.hidePanel();
+        registerListener(cartManager);
+        addCartFragment();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.maps);
+        mapFragment.getMapAsync(this);
         Bundle b = getIntent().getExtras();
         product = (Product) b.getSerializable("PRODUCT");
         setLayout();
+    }
+
+    private void addCartFragment() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(R.id.cartContainer, new ProductOrderFragment()).commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unRegisterListener(cartManager);
+        super.onDestroy();
     }
 
     private void setLayout() {
@@ -49,7 +81,7 @@ public class ProductDetails extends AbstractActivity {
         productPrice = (TextView) findViewById(R.id.tv_product_price);
         termsCond = (TextView) findViewById(R.id.tv_terms);
         address.setText(product.getProductLocation());
-        productPrice.setText(product.getProductPrice());
+        productPrice.setText("Rs " + product.getProductPrice());
 
         terms = "The terms and conditions document includes the following provisions:\n" +
                 "\n" +
@@ -117,6 +149,18 @@ public class ProductDetails extends AbstractActivity {
         return true;
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(product.getPosition()));
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(14);
+        googleMap.animateCamera(zoom);
+        googleMap.addMarker(new MarkerOptions()
+                        .position(product.getPosition())
+                        .title(product.getName())
+        );
+    }
+
     public class TermsAndConditions extends DialogFragment {
 
         TextView textTerms;
@@ -149,10 +193,20 @@ public class ProductDetails extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_book_product:
-                Toast.makeText(this, "product booked", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "product booked", Toast.LENGTH_LONG).show();
+                addItem(product);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addItem(Product product) {
+        modifyItem(product, CurrentOrderManager.CartAction.ADD);
+    }
+
+    private void modifyItem(Product product, CurrentOrderManager.CartAction action) {
+        EventBus.getDefault().post(
+                new CurrentOrderManager.ModifyCartEvent(product, action));
     }
 
     protected int getLayoutId() {

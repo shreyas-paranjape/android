@@ -13,20 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
 import com.order.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.FragmentSelectProduct;
 import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
-
-import de.greenrobot.event.EventBus;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
@@ -57,30 +54,29 @@ public class ProductsActivity extends AbstractActivity {
         registerListener(cartManager);
         addCartFragment();
 
-        layoutSpinner = (LinearLayout) findViewById(R.id.productToolbarSelectItem);
-        layoutSpinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                EventBus.getDefault().post(
-                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle){
-                            @Override
-                            public Class getContentClass() {
-                                return FragmentSelectProduct.class;
-                            }
-                        }
-                );
-            }
-        });
-//        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
-//
-//        spinner.setAdapter(new MyAdapter(this, R.layout.spinner_layout,
-//                spinnerValues));
+//        layoutSpinner = (LinearLayout) findViewById(R.id.productToolbarSelectItem);
+//        layoutSpinner.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Bundle bundle = new Bundle();
+//                EventBus.getDefault().post(
+//                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle){
+//                            @Override
+//                            public Class getContentClass() {
+//                                return FragmentSelectProduct.class;
+//                            }
+//                        }
+//                );
+//            }
+//        });
+        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+        spinner.setAdapter(new ProductSpinnerAdapter(this, R.layout.spinner_layout,
+                spinnerValues));
     }
 
-    public class MyAdapter extends ArrayAdapter<String> {
+    public class ProductSpinnerAdapter extends ArrayAdapter<String> {
 
-        public MyAdapter(Context ctx, int txtViewResourceId, String[] objects) {
+        public ProductSpinnerAdapter(Context ctx, int txtViewResourceId, String[] objects) {
             super(ctx, txtViewResourceId, objects);
         }
 

@@ -6,6 +6,12 @@
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize">
 
+    <Spinner
+        android:id="@+id/productSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Spinner>
+
+    <!--
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,5 +30,5 @@
             android:src="@drawable/ic_arrow_drop_down_black_24dp"
             />
     </LinearLayout>
-
+-->
 </android.support.v7.widget.Toolbar>

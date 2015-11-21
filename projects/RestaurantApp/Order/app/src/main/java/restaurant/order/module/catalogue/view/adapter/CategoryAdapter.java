@@ -1,16 +1,18 @@
 package restaurant.order.module.catalogue.view.adapter;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
+import com.util.Constant;
+
 import java.util.List;
 
-import restaurant.order.module.app.singleton.Constant;
-import restaurant.order.module.catalogue.view.component.CategoryFragment;
 import model.catalogue.ProductCategory;
 import repository.catalogue.ProductCategoryRepo;
+import restaurant.order.module.catalogue.view.component.CategoryFragment;
 
 
 public class CategoryAdapter extends FragmentStatePagerAdapter {
@@ -20,6 +22,11 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
     public CategoryAdapter(FragmentManager fm) {
         super(fm);
         this.rootCategories = ProductCategoryRepo.getAll();
+    }
+
+    public CategoryAdapter(FragmentManager fm, ProductCategory parent) {
+        super(fm);
+        this.rootCategories = ProductCategoryRepo.getAllChildren(parent.getId());
     }
 
     @Override
@@ -38,13 +45,13 @@ public class CategoryAdapter extends FragmentStatePagerAdapter {
     }
 
     @NonNull
-    private CategoryFragment getCategoryFragment(int position) {
+    private Fragment getCategoryFragment(int position) {
         CategoryFragment fragment = new CategoryFragment();
         setArgs(position, fragment);
         return fragment;
     }
 
-    private void setArgs(int position, CategoryFragment fragment) {
+    private void setArgs(int position, Fragment fragment) {
         if (rootCategories != null && position < rootCategories.size()) {
             Bundle args = new Bundle();
             args.putSerializable(Constant.PRODUCT_CATEGORY, rootCategories.get(position));

@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
+
 import model.catalogue.ProductCategory;
 import restaurant.order.R;
-import restaurant.order.module.app.singleton.Constant;
 import restaurant.order.module.catalogue.view.adapter.ProductAdapter;
 
 
@@ -19,9 +20,12 @@ public class CategoryFragment extends Fragment {
     private ProductCategory productCategory;
 
     @Override
-    public void setArguments(Bundle args) {
-        super.setArguments(args);
-        productCategory = (ProductCategory) args.getSerializable(Constant.PRODUCT_CATEGORY);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            productCategory = (ProductCategory) getArguments()
+                    .getSerializable(Constant.PRODUCT_CATEGORY);
+        }
     }
 
     @Override

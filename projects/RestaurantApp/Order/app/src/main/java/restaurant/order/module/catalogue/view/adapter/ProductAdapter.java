@@ -53,15 +53,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                                 CurrentOrderManager.CartAction.ADD));
             }
         });
-        Picasso.with(context)
-                .load(product.getImageUrl())
-                .into(viewHolder.productCardView.imgProduct,
-                        new Callback.EmptyCallback() {
-                            @Override
-                            public void onError() {
-                                Log.d("ProductAdapter", "Could not load image");
-                            }
-                        });
+        Log.d("ProductAdapter", product.toString());
+        if (product.getDetail() != null) {
+            Picasso.with(context)
+                    .load("file:///android_asset/" + product.getDetail().getImageUrl())
+                    .into(viewHolder.productCardView.imgProduct,
+                            new Callback.EmptyCallback() {
+                                @Override
+                                public void onError() {
+                                    Log.d("ProductAdapter", "Could not load image");
+                                }
+                            });
+        }
+
         //TODO Load image from URL
     }
 

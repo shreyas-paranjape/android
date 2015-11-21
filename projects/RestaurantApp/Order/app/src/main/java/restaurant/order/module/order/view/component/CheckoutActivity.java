@@ -33,11 +33,6 @@ public class CheckoutActivity extends AbstractActivity {
     }
 
     @Override
-    protected int getToolbarId() {
-        return R.id.toolbar;
-    }
-
-    @Override
     protected Fragment getInitContent() {
         return null;
     }
@@ -45,11 +40,6 @@ public class CheckoutActivity extends AbstractActivity {
     @Override
     protected int getContentContainerId() {
         return R.id.container;
-    }
-
-    @Override
-    protected int getTitleId() {
-        return R.id.tvTitle;
     }
 
     private class EventListener {

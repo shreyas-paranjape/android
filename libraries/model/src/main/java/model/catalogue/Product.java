@@ -18,37 +18,17 @@ public class Product implements Serializable {
     @Column(name = "product_category_id")
     private ProductCategory productCategory;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "detail")
+    private ProductDetail detail;
 
-    @Column(name = "price")
-    private double price;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", productCategory=" + productCategory +
+                ", detail=" + detail +
+                '}';
     }
 
     private String productLocation;
@@ -56,6 +36,14 @@ public class Product implements Serializable {
     private String productDiscount;
     private String productPrice;
     private int productImage;
+
+    public ProductDetail getDetail() {
+        return detail;
+    }
+
+    public void setDetail(ProductDetail detail) {
+        this.detail = detail;
+    }
 
     public int getProductImage() {
         return productImage;

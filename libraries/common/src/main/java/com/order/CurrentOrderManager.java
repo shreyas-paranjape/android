@@ -71,7 +71,7 @@ public class CurrentOrderManager {
             order.getOrderItems().remove(productOrderItem);
         } else {
             productOrderItem.setPrice(
-                    productOrderItem.getProduct().getPrice() * productOrderItem.getQuantity());
+                    productOrderItem.getProduct().getDetail().getPrice() * productOrderItem.getQuantity());
         }
     }
 

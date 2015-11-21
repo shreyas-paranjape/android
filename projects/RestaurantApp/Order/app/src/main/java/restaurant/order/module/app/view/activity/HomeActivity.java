@@ -1,87 +1,70 @@
 package restaurant.order.module.app.view.activity;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.order.CartManager;
+import com.orm.SugarRecord;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.util.Constant;
+import com.util.Util;
+import com.view.activity.AbstractActivity;
 
+import model.catalogue.ProductCategory;
 import restaurant.order.R;
 import restaurant.order.module.catalogue.view.component.MenuFragment;
+import restaurant.order.module.order.view.component.FoodOrderFragment;
 
-public class HomeActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+public class HomeActivity extends AbstractActivity {
+
+    private CartManager cartManager;
+    //private final EventListener listener = new EventListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_home);
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new MenuFragment(), "Food");
-        adapter.addFragment(new MenuFragment(), "Drinks");
-        viewPager.setAdapter(adapter);
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-    /*private CartManager cartManager;
-    private final EventListener listener = new EventListener();
-
-      @Override
-    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
         cartManager.hidePanel();
-        //registerListener(cartManager);
+        initTabs();
+        registerListener(cartManager);
         addCartFragment();
+        replaceContent(MenuFragment.class,
+                Util.bundleSerializable(
+                        Constant.PRODUCT_CATEGORY,
+                        SugarRecord.findById(ProductCategory.class, 1)));
+    }
+
+    private void initTabs() {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.addTab(tabLayout.newTab().setText("Food"));
+        tabLayout.addTab(tabLayout.newTab().setText("Drinks"));
+        tabLayout.addTab(tabLayout.newTab().setText("Dessert"));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                replaceContent(MenuFragment.class,
+                        Util.bundleSerializable(
+                                Constant.PRODUCT_CATEGORY,
+                                SugarRecord.findById(ProductCategory.class, tab.getPosition() + 1)));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
 
@@ -100,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-  protected int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.activity_home;
     }
 
@@ -108,25 +91,8 @@ public class HomeActivity extends AppCompatActivity {
         return R.id.drawer;
     }
 
-    protected int getToolbarId() {
-        return R.id.toolbar;
-    }
-
     protected int getContentContainerId() {
         return R.id.container;
-    }
-
-    protected Fragment getInitContent() {
-        return new MenuFragment();
-    }
-
-    @Override
-    protected int getTitleId() {
-        return R.id.tvTitle;
-    }
-
-    protected DrawerLayout getDrawerLayout() {
-        return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     private void addCartFragment() {
@@ -136,5 +102,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private class EventListener {
-    }*/
+    }
 }
+
+
+    /*@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_home);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new MenuAdapter(getFragmentManager()));
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+    }*/

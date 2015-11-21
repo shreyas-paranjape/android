@@ -48,7 +48,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="@{@string/Rs + String.valueOf(product.price)}"
+                    android:text="@{@string/Rs + String.valueOf(product.detail.price)}"
                     android:textSize="15sp"
                     android:typeface="serif" />
 
@@ -82,11 +82,11 @@
                         android:layout_marginEnd="3dp"
                         android:layout_marginRight="3dp"
                         android:lines="2"
-                        android:text="@{product.description}"
+                        android:text="@{product.detail.description}"
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <ImageButton
+                <Button
                     android:id="@+id/btn_product_add"
                     style="@style/button"
                     android:layout_width="0dp"
@@ -95,9 +95,9 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/product_add"
                     android:padding="5dp"
-                    android:src="@drawable/ic_add_shopping_cart_black_24dp" />
-                <!--android:text="@string/product_add"-->
+                    android:text="@string/product_add" />
 
+                    <!--android:src="@drawable/ic_add_shopping_cart_black_24dp"--> />
             </LinearLayout>
 
 

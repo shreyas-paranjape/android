@@ -17,6 +17,12 @@ public class ProductCategoryRepo {
         return SugarRecord.listAll(ProductCategory.class);
     }
 
+    public static List<ProductCategory> getTopLevel() {
+        return SugarRecord.find(
+                ProductCategory.class,
+                "parent_id isnull");
+    }
+
     public static List<ProductCategory> getImmediateChildren(long productCategoryId) {
         return SugarRecord.find(
                 ProductCategory.class,

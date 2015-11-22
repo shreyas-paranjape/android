@@ -21,6 +21,8 @@ public class Product implements Serializable {
     @Column(name = "detail")
     private ProductDetail detail;
 
+    @Column(name = "price")
+    private double price;
 
     @Override
     public String toString() {

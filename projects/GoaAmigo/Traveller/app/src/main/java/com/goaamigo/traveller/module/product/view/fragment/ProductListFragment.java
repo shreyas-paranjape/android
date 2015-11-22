@@ -37,14 +37,14 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         productList = new ArrayList<>();
-        productList.add(new Product("hotel 1","mapusa","4","50%","3500",R.drawable.vivataimage1));
-        productList.add(new Product("hotel 2","panajim","5","10%","3530",R.drawable.vivataimage3));
-        productList.add(new Product("hotel 3","ponda","3","40%","3550",R.drawable.vivataimage1));
-        productList.add(new Product("hotel 4","goa","5","20%","320",R.drawable.vivataimage2));
-        productList.add(new Product("hotel 5","baga","2","20%","320",R.drawable.vivataimage3));
-        productList.add(new Product("hotel 6","vasco","3","20%","320",R.drawable.vivataimage1));
-        productList.add(new Product("hotel 7","ponda","4","20%","320",R.drawable.vivataimage2));
-        productList.add(new Product("hotel 8","mapusa","5","20%","320",R.drawable.vivataimage3));
+        productList.add(new Product("Vivanta by taj","mapusa","4","50%","3500",R.drawable.vivataimage1,15.493904,73.820391));
+        productList.add(new Product("Hotel Goa International","panajim","5","10%","3530",R.drawable.vivataimage3,15.493904,73.820391));
+        productList.add(new Product("Hotel Solmar","ponda","3","40%","3550",R.drawable.vivataimage1,15.493904,73.820391));
+        productList.add(new Product("Goa Marriott Resort & Spa","goa","5","20%","320",R.drawable.vivataimage2,15.493904,73.820391));
+        productList.add(new Product("Hotel Magsons Center, Cafe Coffee Day","baga","2","20%","320",R.drawable.vivataimage3,15.493904,73.820391));
+        productList.add(new Product("Hotel Magsons Center, Cafe Coffee Day","vasco","3","20%","320",R.drawable.vivataimage1,15.493904,73.820391));
+        productList.add(new Product("Food Land","ponda","4","20%","320",R.drawable.vivataimage2,15.493904,73.820391));
+        productList.add(new Product("Rio Restaurant","mapusa","5","20%","320",R.drawable.vivataimage3,15.493904,73.820391));
 
         View v = inflater.inflate(R.layout.fragment_product_list, container, false);
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.rvProducts);

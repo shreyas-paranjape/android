@@ -25,7 +25,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="DATABASE"
             android:value="goaamigo.db" />
@@ -38,11 +37,9 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="model" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -76,8 +73,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-
         <activity
             android:name=".module.app.view.component.MapsActivity"
             android:label="@string/title_activity_maps"
@@ -90,12 +85,18 @@
         <activity android:name=".module.app.view.component.GoaMapActivity" />
         <activity
             android:name=".module.product.view.activity.ProductsActivity"
-            android:parentActivityName=".module.app.view.component.HomeActivity">
-
-        </activity>
+            android:parentActivityName=".module.app.view.component.HomeActivity"></activity>
         <activity
             android:name=".module.product.view.activity.CheckoutActivity"
             android:label="@string/title_activity_check_out" />
+        <activity
+            android:name=".module.product.view.activity.ProductDetails"
+            android:label="@string/title_activity_product_details"
+            android:parentActivityName=".module.product.view.activity.ProductsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.goaamigo.traveller.module.product.view.activity.ProductsActivity" />
+        </activity>
     </application>
 
 </manifest>

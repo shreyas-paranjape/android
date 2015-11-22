@@ -91,10 +91,10 @@ public class SearchTripFragment extends DialogFragment implements
         // Initializing an ArrayAdapter
         plantsList1 = new ArrayList<>(Arrays.asList(plants1));
         // Initializing an ArrayAdapter
-        final ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(
-                getActivity(), R.layout.spinner_item, plantsList1);
-        spinnerArrayAdapter1.setDropDownViewResource(R.layout.spinner_item);
-        spnr2.setAdapter(spinnerArrayAdapter1);
+//        final ArrayAdapter<String> spinnerArrayAdapter1 = new ArrayAdapter<String>(
+//                getActivity(), R.layout.spinner_item, plantsList1);
+//        spinnerArrayAdapter1.setDropDownViewResource(R.layout.spinner_item);
+//        spnr2.setAdapter(spinnerArrayAdapter1);
 
 
         initView(v);

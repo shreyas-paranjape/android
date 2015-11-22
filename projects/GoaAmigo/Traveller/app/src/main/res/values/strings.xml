@@ -65,4 +65,6 @@
     <string name="skip">Skip</string>
     <string name="img_desc_tut">Tutorial image</string>
     <string name="title_activity_check_out">CheckOutActivity</string>
+    <string name="action_book_product">BOOK NOW</string>
+    <string name="title_activity_product_details">ProductDetails</string>
 </resources>

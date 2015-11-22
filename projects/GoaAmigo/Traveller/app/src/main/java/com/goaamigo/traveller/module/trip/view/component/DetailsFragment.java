@@ -4,11 +4,15 @@ package com.goaamigo.traveller.module.trip.view.component;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -36,12 +40,28 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         product = (Product)getArguments().getSerializable("PRODUCT");
+        setHasOptionsMenu(true);
     }
 
     public DetailsFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.product_detail_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_book_product:
+                Toast.makeText(getActivity(),"product booked",Toast.LENGTH_LONG).show();
+                break;
+        }
+        return true;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,15 +73,16 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(product.getName());
         mDemoSlider = (SliderLayout) getActivity().findViewById(R.id.slider);
-        rating = (RatingBar) getActivity().findViewById(R.id.ratingBar);
+//        rating = (RatingBar) getActivity().findViewById(R.id.ratingBar);
         address = (TextView) getActivity().findViewById(R.id.detailFragName);
         name = (TextView) getActivity().findViewById(R.id.detailFragAdrress);
 
         name.setText(product.getName());
         address.setText(product.getProductLocation());
 
-        rating.setRating(4);
+        //rating.setRating(4);
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("image 1",product.getProductImage());
@@ -72,7 +93,6 @@ public class DetailsFragment extends Fragment implements BaseSliderView.OnSlider
             TextSliderView textSliderView = new TextSliderView(getActivity());
             // initialize a SliderLayout
             textSliderView
-                    .description(name)
                     .image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);

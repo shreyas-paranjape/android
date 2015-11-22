@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.activity.ProductDetails;
 import com.order.CurrentOrderManager;
 import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
@@ -57,10 +58,10 @@ public class ProductAdapter
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PRODUCT", productsList.get(position));
                 EventBus.getDefault().post(
-                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle) {
+                        new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, bundle) {
                             @Override
                             public Class getContentClass() {
-                                return DetailsFragment.class;
+                                return ProductDetails.class;
                             }
                         });
             }

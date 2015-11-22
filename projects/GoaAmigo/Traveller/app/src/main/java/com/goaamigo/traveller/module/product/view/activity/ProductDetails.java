@@ -1,50 +1,10 @@
 package com.goaamigo.traveller.module.product.view.activity;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.order.CartManager;
-import com.order.CurrentOrderManager;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.util.LocationUtil;
 import com.view.activity.AbstractActivity;
 
-import java.util.HashMap;
-
-import de.greenrobot.event.EventBus;
-import model.catalogue.Product;
-
-public class ProductDetails extends AbstractActivity implements OnMapReadyCallback {
-    private SliderLayout mDemoSlider;
+public class ProductDetails extends AbstractActivity {
+        //implements OnMapReadyCallback {
+    /*private SliderLayout mDemoSlider;
     private TextView productAddress, productName, productPrice, termsCond;
     private String terms;
     private Product product;
@@ -204,5 +164,5 @@ public class ProductDetails extends AbstractActivity implements OnMapReadyCallba
 
     protected int getToolbarId() {
         return R.id.toolbar;
-    }
+    }*/
 }

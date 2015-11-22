@@ -1,6 +1,6 @@
 package com.goaamigo.traveller.module.app.view.model;
 
-import com.goaamigo.traveller.module.trip.view.component.TripActivity;
+//import com.goaamigo.traveller.module.trip.view.component.TripActivity;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public class MenuData implements Serializable {
     String title;
     String description;
     int imageId;
-    private Class clazz = TripActivity.class;
+    private Class clazz ;// = TripActivity.class;
 
     public MenuData() {
 

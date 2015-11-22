@@ -1,12 +1,10 @@
 package com.goaamigo.traveller.module.product.view.adapter;
 
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,13 +13,14 @@ import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.product.view.activity.ProductDetails;
 import com.order.CurrentOrderManager;
-import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
 import java.io.Serializable;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import model.catalogue.Product;
+
+//import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
 
 public class ProductAdapter
         extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
@@ -48,11 +47,11 @@ public class ProductAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.name.setText(productsList.get(position).getName());
-        holder.location.setText(productsList.get(position).getProductLocation());
-        holder.rating.setText(productsList.get(position).getProductRating());
-        holder.discount.setText("-" + productsList.get(position).getProductDiscount());
-        holder.price.setText("Rs." + productsList.get(position).getProductPrice());
-        holder.imageView.setImageResource(productsList.get(position).getProductImage());
+        //holder.location.setText(productsList.get(position).getProductLocation());
+        //holder.rating.setText(productsList.get(position).getProductRating());
+        //holder.discount.setText("-" + productsList.get(position).getProductDiscount());
+        //holder.price.setText("Rs." + productsList.get(position).getProductPrice());
+        //holder.imageView.setImageResource(productsList.get(position).getProductImage());
         holder.lv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

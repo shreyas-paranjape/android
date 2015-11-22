@@ -212,10 +212,10 @@ public class ProductsActivity extends AbstractActivity {
     }
 
     private Fragment getMapFragment() {
-        ProductMapFragment frag = new ProductMapFragment();
+        //ProductMapFragment frag = new ProductMapFragment();
 //        productAdapter.addProduct(new Product());
-        addArguments(frag);
-        return frag;
+        //addArguments(frag);
+        return null;
     }
 
     private Fragment getListFragment() {

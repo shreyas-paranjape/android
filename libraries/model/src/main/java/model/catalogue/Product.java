@@ -33,6 +33,13 @@ public class Product implements Serializable {
                 '}';
     }
 
+    public Product() {
+    }
+
+    public Product(long id) {
+        this.id = id;
+    }
+
     private String productLocation;
     private String productRating;
     private String productDiscount;
@@ -100,8 +107,7 @@ public class Product implements Serializable {
         this.productImage = productImage;
     }
 
-    public Product() {
-    }
+
 
     public Product(long id, String name, ProductCategory productCategory) {
         this.id = id;

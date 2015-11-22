@@ -27,6 +27,16 @@ public class OrderItem implements Serializable {
     @Column(name = "status")
     private String status;
 
+    public OrderItem() {
+    }
+
+    public OrderItem(Product product, double price, int quantity, String status) {
+        this.product = product;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+    }
+
     public long getId() {
         return id;
     }

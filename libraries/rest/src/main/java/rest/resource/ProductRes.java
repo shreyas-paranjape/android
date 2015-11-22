@@ -21,17 +21,17 @@ import rest.common.IResource;
 public class ProductRes implements IResource {
 
     private final RequestQueue queue;
+    private static final String PRODUCT = "/product";
+    private static final String CATEGORY = "/category";
 
     public ProductRes(RequestQueue queue) {
         this.queue = queue;
     }
 
-    private static final String path = "/product";
-
     public void fetchAndPersist() {
         queue.add(new GsonRequest<>(
                 Request.Method.GET,
-                baseUri + "/category",
+                baseUri + CATEGORY,
                 null,
                 new Response.Listener<List<ProductCategory>>() {
                     @Override
@@ -45,7 +45,7 @@ public class ProductRes implements IResource {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("Product Categories", error.getMessage());
+                        Log.d("Product Categories", "error" + error.getMessage());
                     }
                 },
                 new TypeToken<List<ProductCategory>>() {
@@ -53,7 +53,7 @@ public class ProductRes implements IResource {
 
         queue.add(new GsonRequest<>(
                 Request.Method.GET,
-                baseUri + path,
+                baseUri + PRODUCT,
                 null,
                 new Response.Listener<List<Product>>() {
                     @Override

@@ -1,13 +1,24 @@
 package com.goaamigo.traveller.module.product.view.activity;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
@@ -94,6 +105,9 @@ public class ProductsActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_sort:
+                FragmentManager manager = getFragmentManager();
+                DialogProductSort Dialog = new DialogProductSort();
+                Dialog.show(manager, "My Dialog");
                 break;
             case R.id.action_filter:
                 Bundle b = new Bundle();
@@ -116,7 +130,67 @@ public class ProductsActivity extends AbstractActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public class DialogProductSort extends DialogFragment {
+        private View view;
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            view = inflater.inflate(R.layout.dialog_product_sort, null);
+            final CheckBox popularity = (CheckBox)view.findViewById(R.id.cb_popularity);
+            final CheckBox lowToHigh = (CheckBox)view.findViewById(R.id.cb_low_to_high);
+            final CheckBox highToLow = (CheckBox)view.findViewById(R.id.cb_high_to_low);
+            final CheckBox discount = (CheckBox)view.findViewById(R.id.cb_discount);
 
+            if(popularity.isChecked()){
+                popularity.setChecked(false);
+                dismiss();
+            }
+            if(lowToHigh.isChecked()){
+                lowToHigh.setChecked(false);
+                dismiss();
+            }
+            if(highToLow.isChecked()){
+                highToLow.setChecked(false);
+                dismiss();
+            }
+            if(discount.isChecked()){
+                discount.setChecked(false);
+                dismiss();
+            }
+            return view;
+        }
+        public void onRadioButtonClicked(View view) {
+            // Is the button now checked?
+            boolean checked = ((RadioButton) view).isChecked();
+
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.rb_low_to_high:
+                    if (checked){
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                        dismiss();
+                    }
+                        // Pirates are the best
+                        break;
+                case R.id.rb_discount:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+                case R.id.rb_high_to_low:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+                case R.id.rb_popularity:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_products, menu);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.event.ChangeContentEvent;
@@ -52,7 +53,7 @@ public class ProductAdapter
         holder.discount.setText("-" + productsList.get(position).getProductDiscount());
         holder.price.setText("Rs." + productsList.get(position).getProductPrice());
         holder.imageView.setImageResource(productsList.get(position).getProductImage());
-        holder.cv.setOnClickListener(new View.OnClickListener() {
+        holder.lv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
@@ -64,12 +65,6 @@ public class ProductAdapter
                                 return ProductDetails.class;
                             }
                         });
-            }
-        });
-        holder.addRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem(productsList.get(position));
             }
         });
     }
@@ -109,8 +104,7 @@ public class ProductAdapter
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, location, rating, discount, price;
         ImageView imageView;
-        CardView cv;
-        Button addRoom;
+        LinearLayout lv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -120,8 +114,7 @@ public class ProductAdapter
             discount = (TextView) itemView.findViewById(R.id.productDiscount);
             price = (TextView) itemView.findViewById(R.id.productPrice);
             imageView = (ImageView) itemView.findViewById(R.id.product_image);
-            cv = (CardView) itemView.findViewById(R.id.cvProduct);
-            addRoom = (Button) itemView.findViewById(R.id.btnProductAddRoom);
+            lv = (LinearLayout) itemView.findViewById(R.id.ll_card);
         }
     }
 

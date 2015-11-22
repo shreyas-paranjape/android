@@ -25,6 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="DATABASE"
             android:value="goaamigo.db" />
@@ -44,22 +45,29 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".module.app.view.component.HomeActivity">
+        <activity android:name=".module.app.view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <service android:name="rest.common.DataService" android:enabled="true" />
+
+        <activity android:name=".module.app.view.activity.HomeActivity">
 
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".module.app.view.adapter.SearchableActivity" />
         </activity>
-       <!-- <activity android:name=".module.trip.view.component.TripActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".module.app.view.component.HomeActivity" />
-        </activity>-->
+
+        <!-- <activity android:name=".module.trip.view.component.TripActivity">
+             <meta-data
+                 android:name="android.support.PARENT_ACTIVITY"
+                 android:value=".module.app.view.component.HomeActivity" />
+         </activity>-->
+
         <activity
             android:name=".module.app.view.component.SearchableActivity"
             android:label="@string/title_activity_searchable">
@@ -85,7 +93,7 @@
         <activity android:name=".module.app.view.component.GoaMapActivity" />-->
         <activity
             android:name=".module.product.view.activity.ProductsActivity"
-            android:parentActivityName=".module.app.view.component.HomeActivity"></activity>
+            android:parentActivityName=".module.app.view.activity.HomeActivity"></activity>
         <activity
             android:name=".module.product.view.activity.CheckoutActivity"
             android:label="@string/title_activity_check_out" />

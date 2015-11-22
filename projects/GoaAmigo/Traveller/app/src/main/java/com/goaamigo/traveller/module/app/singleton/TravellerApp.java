@@ -1,12 +1,12 @@
 package com.goaamigo.traveller.module.app.singleton;
 
 import android.app.Application;
-
-import model.trip.Profile;
+import android.content.Intent;
 
 import com.order.CurrentOrderManager;
 import com.orm.SugarContext;
-import com.orm.SugarRecord;
+
+import rest.common.DataService;
 
 public class TravellerApp extends Application {
     private final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
@@ -15,17 +15,13 @@ public class TravellerApp extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(getApplicationContext());
-
-        Profile profile = new Profile();
-        // set properties
-        SugarRecord.save(profile);
+        startService(new Intent(getApplicationContext(), DataService.class));
     }
 
     @Override
     public void onTerminate() {
         SugarContext.terminate();
         super.onTerminate();
-
     }
 
     public CurrentOrderManager getCurrentOrderManager() {

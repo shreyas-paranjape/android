@@ -1,4 +1,4 @@
-package com.goaamigo.traveller.module.app.view.component;
+package com.goaamigo.traveller.module.app.view.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.app.view.component.MenuFragment;
+import com.goaamigo.traveller.module.app.view.component.SearchableActivity;
+import com.goaamigo.traveller.module.app.view.component.SearchableFragment;
 import com.view.activity.AbstractActivity;
 
 public class HomeActivity extends AbstractActivity {

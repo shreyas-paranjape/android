@@ -120,6 +120,14 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
+    protected void registerListenerSticky(Object... listeners) {
+        for (Object listener : listeners) {
+            if (!eventBus.isRegistered(listener)) {
+                eventBus.registerSticky(listener);
+            }
+        }
+    }
+
     protected void unRegisterListener(Object... listeners) {
         for (Object listener : listeners) {
             if (eventBus.isRegistered(listener)) {

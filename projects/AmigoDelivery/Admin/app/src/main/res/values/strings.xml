@@ -15,4 +15,5 @@
     <string name="action_sort">sort</string>
     <string name="action_settings">settings</string>
     <string name="category">Category</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

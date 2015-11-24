@@ -24,7 +24,7 @@ import in.co.foodamigo.admin.module.catalogue.view.component.list.SupplierListFr
 public class DrawerFragment extends ListNavigationDrawer {
 
     public DrawerFragment() {
-        drawerItems.add(new Item("Products",R.drawable.ic_mode_edit_black_24dp) {
+        drawerItems.add(new Item("",R.drawable.ic_mode_edit_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
                 return new ProductListFragment();

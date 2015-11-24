@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.view.fragment.AbstractFilterFragment;
 import com.view.fragment.AbstractRecyclerFragment;
 import com.view.model.Item;
 import com.view.widget.AbstractRecyclerAdapter;
@@ -19,12 +20,14 @@ import java.util.List;
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdListAdapter;
+import in.co.foodamigo.admin.module.catalogue.view.component.dialog.ProductFilterDialogue;
 import model.catalogue.Product;
 import repository.catalogue.ProductRepo;
 
 public class ProductListFragment extends AbstractRecyclerFragment<Product> {
 
     protected final static List<Item> spinnerItems = new ArrayList<>();
+
 
     @Override
     protected String getArgumentKey() {
@@ -61,7 +64,8 @@ public class ProductListFragment extends AbstractRecyclerFragment<Product> {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_filter:
-                onFilterClick();
+                showDialog();
+                // onFilterClick();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -93,6 +97,9 @@ public class ProductListFragment extends AbstractRecyclerFragment<Product> {
         spinner.setAdapter(adapter);
     }
 
+    protected AbstractFilterFragment<Product> getFilterFragment() {
+        return new ProductFilterDialogue();
+    }
 
     static {
         spinnerItems.add(new Item("Pending", R.drawable.ic_mode_edit_black_24dp) {

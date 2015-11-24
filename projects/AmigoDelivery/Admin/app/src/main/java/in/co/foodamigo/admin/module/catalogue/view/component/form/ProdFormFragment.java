@@ -63,16 +63,16 @@ public class ProdFormFragment extends Fragment {
         final Button btnSave = (Button) root.findViewById(R.id.btnSave);
 
         etTitle.setText(product.getName());
-        etDescription.setText(product.getDescription());
-        etRate.setText(String.valueOf(product.getPrice()));
-        etImageUrl.setText(product.getImageUrl());
+        //etDescription.setText(product.getDescription());
+        //etRate.setText(String.valueOf(product.getPrice()));
+        //etImageUrl.setText(product.getImageUrl());
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 product.setName(etTitle.getText().toString());
-                product.setDescription(etDescription.getText().toString());
-                product.setPrice(Integer.valueOf(etRate.getText().toString()));
-                product.setImageUrl(etImageUrl.getText().toString());
+                //product.setDescription(etDescription.getText().toString());
+                //product.setPrice(Integer.valueOf(etRate.getText().toString()));
+                //product.setImageUrl(etImageUrl.getText().toString());
                 product.setProductCategory((ProductCategory) spParentCategory.getSelectedItem());
                 //product.setProductSupplier((Supplier) spSupplier.getSelectedItem());
                 SugarRecord.save(product);

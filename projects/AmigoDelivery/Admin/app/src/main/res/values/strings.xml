@@ -16,4 +16,5 @@
     <string name="action_settings">settings</string>
     <string name="category">Category</string>
     <string name="filter">Filter</string>
+    <string name="action_reset">Reset</string>
 </resources>

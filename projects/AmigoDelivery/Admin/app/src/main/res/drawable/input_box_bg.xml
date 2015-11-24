@@ -9,8 +9,8 @@
 
     <gradient
         android:angle="270"
-        android:endColor="@color/primary_color_trans"
-        android:startColor="@color/primary_color"
+        android:endColor="@color/primary_50"
+        android:startColor="@color/primary_500"
         android:type="linear" />
 
 </shape>

@@ -17,16 +17,8 @@ public class SupplierFilterFragment extends AbstractFilterFragment<Party> {
     protected void initView(View root) {
     }
 
-    @Override
-    protected Class getListFragmentClass() {
-        return SupplierListFragment.class;
-    }
-
     protected String getArgumentKey() {
         return Constant.SUPPLIER;
     }
 
-    protected int getFilterButtonId() {
-        return R.id.btnFilter;
-    }
 }

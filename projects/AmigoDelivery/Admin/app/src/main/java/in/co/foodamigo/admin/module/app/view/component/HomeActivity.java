@@ -1,7 +1,6 @@
 package in.co.foodamigo.admin.module.app.view.component;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -20,14 +19,14 @@ public class HomeActivity extends AbstractActivity {
         startService(new Intent(this, SocketConnectionManager.class));
     }
 
-    @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 1) {
-            getFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (getFragmentManager().getBackStackEntryCount() > 1) {
+//            getFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     protected void onDestroy() {

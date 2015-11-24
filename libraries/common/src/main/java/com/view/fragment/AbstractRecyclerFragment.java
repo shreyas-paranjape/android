@@ -1,6 +1,8 @@
 package com.view.fragment;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ import de.greenrobot.event.EventBus;
 public abstract class AbstractRecyclerFragment<T> extends Fragment {
 
     protected List<Filter<T>> filters;
+    protected final static String dialogFragmentTag = "DIALOG";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,21 @@ public abstract class AbstractRecyclerFragment<T> extends Fragment {
         EventBus.getDefault().post(
                 new ChangeContentEvent(
                         getFilterFragmentClass(), new Bundle()));
+    }
+
+    protected void showDialog() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag(dialogFragmentTag);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+        DialogFragment newFragment = getFilterFragment();
+        newFragment.show(ft, dialogFragmentTag);
+    }
+
+    protected AbstractFilterFragment<T> getFilterFragment() {
+        return null;
     }
 
     protected abstract Class getFilterFragmentClass();

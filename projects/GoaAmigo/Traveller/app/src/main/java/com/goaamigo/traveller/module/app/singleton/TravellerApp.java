@@ -22,6 +22,7 @@ public class TravellerApp extends Application {
     public void onTerminate() {
         SugarContext.terminate();
         super.onTerminate();
+
     }
 
     public CurrentOrderManager getCurrentOrderManager() {

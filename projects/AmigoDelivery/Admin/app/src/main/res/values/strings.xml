@@ -15,7 +15,8 @@
     <string name="action_sort">sort</string>
     <string name="action_settings">settings</string>
     <string name="category">Category</string>
-    <string name="filter">Filter</string>
+    <string name="title_activity_main">MainActivity</string>
+<string name="filter">Filter</string>
     <string name="action_reset">Reset</string>
     <string name="apply">Apply</string>
 </resources>

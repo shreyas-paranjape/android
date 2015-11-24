@@ -1,17 +1,24 @@
 package in.co.foodamigo.admin.module.app.view.component;
 
 import android.app.Fragment;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.view.fragment.ListNavigationDrawer;
+import com.view.fragment.NavigationDrawer;
 import com.view.model.Item;
 import com.view.widget.NavigationDrawerListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import in.co.foodamigo.admin.R;
 import in.co.foodamigo.admin.module.app.view.adapter.DrawerAdapter;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.ProdCatListFragment;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.ProductListFragment;
-import in.co.foodamigo.admin.module.order.view.component.OrderListFragment;
-import in.co.foodamigo.admin.module.party.view.component.list.SupplierListFragment;
+import in.co.foodamigo.admin.module.catalogue.view.component.list.SupplierListFragment;
 
 
 public class DrawerFragment extends ListNavigationDrawer {
@@ -31,14 +38,14 @@ public class DrawerFragment extends ListNavigationDrawer {
             }
         });
 
-        drawerItems.add(new Item("Categories", R.drawable.ic_mode_edit_black_24dp) {
+        drawerItems.add(new Item("Categories",R.drawable.ic_mode_edit_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
                 return new ProdCatListFragment();
             }
         });
 
-        drawerItems.add(new Item("Suppliers", R.drawable.ic_mode_edit_black_24dp) {
+        drawerItems.add(new Item("Suppliers",R.drawable.ic_mode_edit_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
                 return new SupplierListFragment();

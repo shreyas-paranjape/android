@@ -120,7 +120,7 @@ public class ProductsActivity extends AbstractActivity {
                 break;
             case R.id.action_maps:
                 if (mapsIcon == false) {
-                    replaceContent(getMapFragment());
+                    replaceContent(new Fragment());
                     mapsIcon = true;
                 } else {
                     replaceContent(getListFragment());

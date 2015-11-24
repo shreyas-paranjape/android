@@ -45,7 +45,7 @@ public class OrderApp extends Application {
         final Order o = new Order();
         final Party party = new Party();
         final List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem(new Product(5), 500, 1, "placed"));
+        orderItems.add(new OrderItem(new Product(), 500, 1, "placed"));
         party.setId(5);
         o.setCode(UUID.randomUUID().toString());
         o.setStatus("placed");

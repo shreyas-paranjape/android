@@ -33,7 +33,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         registerListener(listener);
         setupDrawer();
         setupToolbar();
-        replaceContent(getInitContent());
+        replaceContent(getInitContent(), true);
         setTitle("");
     }
 
@@ -57,7 +57,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         try {
             Fragment frag = (Fragment) newFragmentClass.newInstance();
             frag.setArguments(data);
-            replaceContent(frag);
+            replaceContent(frag, true);
         } catch (Exception e) {
             // Do nothing
         }

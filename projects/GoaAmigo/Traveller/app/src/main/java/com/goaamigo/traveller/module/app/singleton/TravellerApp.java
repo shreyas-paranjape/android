@@ -15,7 +15,7 @@ public class TravellerApp extends Application {
     public void onCreate() {
         super.onCreate();
         SugarContext.init(getApplicationContext());
-        startService(new Intent(getApplicationContext(), DataService.class));
+        //startService(new Intent(getApplicationContext(), DataService.class));
     }
 
     @Override

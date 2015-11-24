@@ -46,17 +46,17 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".module.app.view.activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service android:name="rest.common.DataService" android:enabled="true" />
 
         <activity android:name=".module.app.view.activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".module.app.view.adapter.SearchableActivity" />

@@ -37,6 +37,18 @@ public class OrderItem implements Serializable {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", order=" + order +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
@@ -84,4 +96,6 @@ public class OrderItem implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
 }

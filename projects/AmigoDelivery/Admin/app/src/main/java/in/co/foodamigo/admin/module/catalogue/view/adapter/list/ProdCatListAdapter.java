@@ -5,14 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import java.util.Comparator;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemProdCatBinding;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdCatFormFragment;
 import model.catalogue.ProductCategory;
 
@@ -22,7 +21,11 @@ public class ProdCatListAdapter
     public ProdCatListAdapter(Context context,
                               List<ProductCategory> productCategories) {
         super(context, productCategories);
-        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected String getCacheFilterKey() {
+        return Constant.PRODUCT_CATEGORY;
     }
 
     @Override
@@ -53,21 +56,15 @@ public class ProdCatListAdapter
         }
     }
 
-    public void onEvent(Sort event) {
+    public void onEvent(ProductCategorySort event) {
         sort(event.getComparator());
     }
 
-    public static class Sort {
-        private final Comparator<ProductCategory> comparator;
+    public static class ProductCategorySort extends Sort<ProductCategory> {
 
-        public Sort(Comparator<ProductCategory> comparator) {
-            this.comparator = comparator;
+        public ProductCategorySort(Comparator<ProductCategory> comparator) {
+            super(comparator);
         }
-
-        public Comparator<ProductCategory> getComparator() {
-            return comparator;
-        }
-
     }
 
 

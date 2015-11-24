@@ -9,7 +9,6 @@ import com.view.widget.AbstractRecyclerAdapter;
 import java.util.ArrayList;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.order.view.adapter.OrderListAdapter;
 import model.order.Order;
 
@@ -48,18 +47,12 @@ public class OrderListFragment extends AbstractRecyclerFragment<Order> {
 
     @Override
     protected AbstractRecyclerAdapter getAdapter() {
-        return new OrderListAdapter(getActivity(),
-                applyFilters(new ArrayList<Order>(), filters));
+        return new OrderListAdapter(getActivity(), new ArrayList<Order>());
     }
 
     @Override
     protected Class getFilterFragmentClass() {
         return null;
-    }
-
-    @Override
-    protected String getArgumentKey() {
-        return Constant.ORDER;
     }
 
 }

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdListAdapter;
 import in.co.foodamigo.admin.module.catalogue.view.component.dialog.ProductFilterDialogue;
 import model.catalogue.Product;
@@ -27,12 +26,6 @@ import repository.catalogue.ProductRepo;
 public class ProductListFragment extends AbstractRecyclerFragment<Product> {
 
     protected final static List<Item> spinnerItems = new ArrayList<>();
-
-
-    @Override
-    protected String getArgumentKey() {
-        return Constant.PRODUCT;
-    }
 
     @Override
     protected int getLayoutId() {
@@ -56,7 +49,7 @@ public class ProductListFragment extends AbstractRecyclerFragment<Product> {
 
     @Override
     protected AbstractRecyclerAdapter getAdapter() {
-        return new ProdListAdapter(getActivity(), applyFilters(ProductRepo.getAll(), filters));
+        return new ProdListAdapter(getActivity(), ProductRepo.getAll());
     }
 
     @Override
@@ -75,7 +68,7 @@ public class ProductListFragment extends AbstractRecyclerFragment<Product> {
     protected void initView(View root) {
         LinearLayout tlSorts = (LinearLayout) root.findViewById(R.id.llSorts);
         Button textView = new Button(getActivity());
-        textView.setText("Sort one");
+        textView.setText("ProductSort one");
         tlSorts.addView(textView);
         initSpinner();
     }

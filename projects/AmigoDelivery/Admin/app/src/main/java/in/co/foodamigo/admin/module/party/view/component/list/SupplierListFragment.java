@@ -7,7 +7,6 @@ import com.view.fragment.AbstractRecyclerFragment;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.party.view.adapter.list.SupplierListAdapter;
 import model.party.Party;
 import repository.party.PartyRepo;
@@ -48,12 +47,7 @@ public class SupplierListFragment extends AbstractRecyclerFragment<Party> {
     protected AbstractRecyclerAdapter getAdapter() {
         return new SupplierListAdapter(
                 getActivity(),
-                applyFilters(PartyRepo.getAll(), filters));
-    }
-
-    @Override
-    protected String getArgumentKey() {
-        return Constant.FILTER;
+                PartyRepo.getAll());
     }
 
     protected Class getFilterFragmentClass() {

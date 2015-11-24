@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.orm.SugarRecord;
+import com.util.Constant;
 
 import java.util.Random;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import model.party.Party;
 
 public class SupplierFormFragment extends Fragment {

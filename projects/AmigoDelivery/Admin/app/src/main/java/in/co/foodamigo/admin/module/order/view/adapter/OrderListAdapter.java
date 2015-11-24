@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import java.util.Comparator;
@@ -12,7 +13,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemOrderBinding;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdFormFragment;
 import model.order.Order;
 
@@ -22,6 +22,11 @@ public class OrderListAdapter
     public OrderListAdapter(Context context, List<Order> orders) {
         super(context, orders);
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected String getCacheFilterKey() {
+        return Constant.ORDER;
     }
 
     @Override
@@ -52,20 +57,14 @@ public class OrderListAdapter
         }
     }
 
-    public void onEvent(Sort event) {
+    public void onEvent(OrderSort event) {
         sort(event.getComparator());
     }
 
-    public static class Sort {
-        private final Comparator<Order> comparator;
+    public static class OrderSort extends Sort<Order> {
 
-        public Sort(Comparator<Order> comparator) {
-            this.comparator = comparator;
+        public OrderSort(Comparator<Order> comparator) {
+            super(comparator);
         }
-
-        public Comparator<Order> getComparator() {
-            return comparator;
-        }
-
     }
 }

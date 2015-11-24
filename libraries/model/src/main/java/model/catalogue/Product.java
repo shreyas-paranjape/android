@@ -6,7 +6,7 @@ import com.orm.dsl.Table;
 import java.io.Serializable;
 
 @Table
-public class Product implements Serializable {
+public class Product implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 1l;
 
@@ -25,6 +25,15 @@ public class Product implements Serializable {
         this.id = id;
         this.name = name;
         this.productCategory = productCategory;
+    }
+
+    public Product(long id, String name, ProductCategory productCategory, ProductDetail detail) {
+        this(id, name, productCategory);
+        this.detail = detail;
+    }
+
+    public Product clone() {
+        return new Product(id, name, productCategory, detail);
     }
 
     public ProductDetail getDetail() {

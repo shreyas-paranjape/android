@@ -13,31 +13,18 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cache.ObjectCache;
 import com.event.ChangeContentEvent;
-import com.view.model.Filter;
 import com.view.widget.AbstractRecyclerAdapter;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public abstract class AbstractRecyclerFragment<T> extends Fragment {
 
-    protected List<Filter<T>> filters;
     protected final static String dialogFragmentTag = "DIALOG";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Object cachedFilters = ObjectCache.get(getArgumentKey());
-        if (cachedFilters != null) {
-            filters = (List<Filter<T>>) cachedFilters;
-        } else {
-            filters = new ArrayList<>();
-        }
         setHasOptionsMenu(true);
     }
 
@@ -62,20 +49,6 @@ public abstract class AbstractRecyclerFragment<T> extends Fragment {
                 (RecyclerView) rootView.findViewById(getRecyclerId());
         productsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productsRecyclerView.setAdapter(getAdapter());
-    }
-
-
-    protected List<T> applyFilters(List<T> objects, List<Filter<T>> filters) {
-        Iterator<T> iterator = objects.iterator();
-        while (iterator.hasNext()) {
-            T object = iterator.next();
-            for (Filter filter : filters) {
-                if (filter.getPredicate().apply(object)) {
-                    iterator.remove();
-                }
-            }
-        }
-        return objects;
     }
 
     protected void onFilterClick() {
@@ -110,7 +83,4 @@ public abstract class AbstractRecyclerFragment<T> extends Fragment {
     protected abstract void initView(View root);
 
     protected abstract AbstractRecyclerAdapter getAdapter();
-
-    protected abstract String getArgumentKey();
-
 }

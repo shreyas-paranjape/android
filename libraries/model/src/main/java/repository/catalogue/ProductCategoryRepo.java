@@ -9,8 +9,18 @@ import model.catalogue.ProductCategory;
 
 public class ProductCategoryRepo {
 
+    public static ProductCategory getById(long productCategoryId) {
+        return SugarRecord.findById(ProductCategory.class, productCategoryId);
+    }
+
     public static List<ProductCategory> getAll() {
         return SugarRecord.listAll(ProductCategory.class);
+    }
+
+    public static List<ProductCategory> getTopLevel() {
+        return SugarRecord.find(
+                ProductCategory.class,
+                "parent_id isnull");
     }
 
     public static List<ProductCategory> getImmediateChildren(long productCategoryId) {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.MenuRVAdapter;
 import com.goaamigo.traveller.module.app.view.model.MenuData;
+import com.goaamigo.traveller.module.product.view.activity.ProductsActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,10 +22,11 @@ public class MenuFragment extends Fragment {
     private static final String TAG = MenuFragment.class.getName();
     private final MenuData[] menuItems = new MenuData[]{
             new MenuData(
-                    "Search Trip",
+                    "Search Product",
                     R.drawable.ic_home_black_24dp,
-                    "Home description"),
-            new MenuData(
+                    "Home description",
+                    ProductsActivity.class),
+           /* new MenuData(
                     "login to trip",
                     R.drawable.ic_account_circle_black_24dp,
                     "see your trip"),
@@ -36,7 +38,7 @@ public class MenuFragment extends Fragment {
             new MenuData(
                     "Deals",
                     R.drawable.ic_edit_black_24dp,
-                    "see our deals")
+                    "see our deals")*/
     };
 
     private List<MenuData> list = Arrays.asList(menuItems);

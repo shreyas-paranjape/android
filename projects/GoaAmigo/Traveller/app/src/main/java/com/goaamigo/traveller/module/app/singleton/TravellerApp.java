@@ -1,10 +1,12 @@
 package com.goaamigo.traveller.module.app.singleton;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.multidex.MultiDex;
+import android.content.Intent;
 
-import com.goaamigo.traveller.module.product.view.Contoller.CurrentOrderManager;
+import com.order.CurrentOrderManager;
+import com.orm.SugarContext;
+
+import rest.common.DataService;
 
 public class TravellerApp extends Application {
     private final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
@@ -12,23 +14,15 @@ public class TravellerApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //SugarContext.init(getApplicationContext());
-
-        //Profile profile = new Profile();
-        // set properties
-        //SugarRecord.save(profile);
+        SugarContext.init(getApplicationContext());
+        //startService(new Intent(getApplicationContext(), DataService.class));
     }
 
     @Override
     public void onTerminate() {
-        //SugarContext.terminate();
+        SugarContext.terminate();
         super.onTerminate();
 
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        MultiDex.install(this);
     }
 
     public CurrentOrderManager getCurrentOrderManager() {

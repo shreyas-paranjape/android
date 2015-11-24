@@ -33,7 +33,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         registerListener(listener);
         setupDrawer();
         setupToolbar();
-        replaceContent(getInitContent());
+        replaceContent(getInitContent(), true);
         setTitle("");
     }
 
@@ -57,7 +57,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         try {
             Fragment frag = (Fragment) newFragmentClass.newInstance();
             frag.setArguments(data);
-            replaceContent(frag);
+            replaceContent(frag, true);
         } catch (Exception e) {
             // Do nothing
         }
@@ -116,6 +116,14 @@ public abstract class AbstractActivity extends AppCompatActivity {
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setHomeButtonEnabled(true);
                 }
+            }
+        }
+    }
+
+    protected void registerListenerSticky(Object... listeners) {
+        for (Object listener : listeners) {
+            if (!eventBus.isRegistered(listener)) {
+                eventBus.registerSticky(listener);
             }
         }
     }

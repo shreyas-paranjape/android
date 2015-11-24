@@ -1,0 +1,5 @@
+<resources>
+    <string name="navigation_drawer_open">Drawer opened</string>
+    <string name="navigation_drawer_close">Drawer closed</string>
+    <string name="link_image">drawer link image</string>
+</resources>

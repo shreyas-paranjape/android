@@ -15,6 +15,12 @@ public class Party implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "mobileNumber")
+    private String mobileNumber;
+
     public String getName() {
         return name;
     }
@@ -29,5 +35,21 @@ public class Party implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 }

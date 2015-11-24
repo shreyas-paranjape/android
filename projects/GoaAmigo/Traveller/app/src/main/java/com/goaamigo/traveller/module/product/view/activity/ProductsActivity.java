@@ -1,125 +1,94 @@
 package com.goaamigo.traveller.module.product.view.activity;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.Contoller.CartManager;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.FragmentSelectProduct;
-import com.goaamigo.traveller.module.product.view.fragment.OrderFragment;
+import com.goaamigo.traveller.module.product.view.fragment.ProductFilter;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
 import com.goaamigo.traveller.module.product.view.fragment.ProductMapFragment;
-import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
-import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
-import com.goaamigo.traveller.module.trip.view.component.TripResultsFragment;
+import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
+import com.order.CartManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
+import com.view.model.Item;
+import com.view.widget.ItemSpinnerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class ProductsActivity extends AbstractActivity {
     private boolean mapsIcon = false;
+    private CartManager cartManager;
     private final ProductAdapter productAdapter = new ProductAdapter();
     private final EventListener listener = new EventListener();
-    LinearLayout layoutSpinner;
-
-    String[] spinnerValues = {"trip", "hotel", "beach", "ride", "activities",};
-
-    int total_images[] = {
-            R.drawable.ic_help_black_24dp,
-            R.drawable.ic_home_black_24dp,
-            R.drawable.ic_accessibility_black_24dp,
-            R.drawable.ic_account_circle_black_24dp,
-            R.drawable.ic_add_shopping_cart_black_24dp,
-            R.drawable.ic_sort_black_24dp};
+    protected final static List<Item> spinnerItems = new ArrayList<>();
 
     private class EventListener {
     }
-
-    private CartManager cartManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        //cartManager.hidePanel();
+        cartManager.hidePanel();
         registerListener(cartManager);
         addCartFragment();
 
-        layoutSpinner = (LinearLayout) findViewById(R.id.productToolbarSelectItem);
-        layoutSpinner.setOnClickListener(new View.OnClickListener() {
+        spinnerItems.add(new Item("stay",R.drawable.ic_help_black_24dp) {
             @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                EventBus.getDefault().post(
-                        new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT, bundle){
-                            @Override
-                            public Class getContentClass() {
-                                return FragmentSelectProduct.class;
-                            }
-                        }
-                );
+            public Fragment getDisplayFragment() {
+                return null;
             }
         });
-//        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
-//
-//        spinner.setAdapter(new MyAdapter(this, R.layout.spinner_layout,
-//                spinnerValues));
+        spinnerItems.add(new Item("rent bike/car",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("activities",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("transport",R.drawable.ic_help_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+        final ItemSpinnerAdapter adapter = new ItemSpinnerAdapter(this, spinnerItems);
+        spinner.setAdapter(adapter);
+
     }
-
-    public class MyAdapter extends ArrayAdapter<String> {
-
-        public MyAdapter(Context ctx, int txtViewResourceId, String[] objects) {
-            super(ctx, txtViewResourceId, objects);
-        }
-
-        @Override
-        public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
-            return getCustomView(position, cnvtView, prnt);
-        }
-
-        @Override
-        public View getView(int pos, View cnvtView, ViewGroup prnt) {
-            return getCustomView(pos, cnvtView, prnt);
-        }
-
-        public View getCustomView(int position, View convertView,
-                                  ViewGroup parent) {
-            LayoutInflater inflater = getLayoutInflater();
-            View mySpinner = inflater.inflate(R.layout.spinner_layout, parent,
-                    false);
-            TextView main_text = (TextView) mySpinner
-                    .findViewById(R.id.text_main_seen);
-            main_text.setText(spinnerValues[position]);
-
-            ImageView left_icon = (ImageView) mySpinner
-                    .findViewById(R.id.left_pic);
-            left_icon.setImageResource(total_images[position]);
-
-            return mySpinner;
-        }
-    }
-
 
     private void addCartFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new OrderFragment()).commit();
+        ft.replace(R.id.cartContainer, new ProductOrderFragment()).commit();
     }
 
     @Override
@@ -134,16 +103,24 @@ public class ProductsActivity extends AbstractActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.action_sort:
+                FragmentManager manager = getFragmentManager();
+                DialogProductSort Dialog = new DialogProductSort();
+                Dialog.show(manager, "My Dialog");
                 break;
             case R.id.action_filter:
+                Bundle b = new Bundle();
+                EventBus.getDefault().post(new ChangeContentEvent(ChangeContentEvent.ContentType.FRAGMENT,b){
+                    @Override
+                    public Class getContentClass() {
+                        return ProductFilter.class;
+                    }
+                });
                 break;
             case R.id.action_maps:
                 if (mapsIcon == false) {
-                    replaceContent(getMapFragment());
+                    replaceContent(new Fragment());
                     mapsIcon = true;
                 } else {
                     replaceContent(getListFragment());
@@ -153,7 +130,67 @@ public class ProductsActivity extends AbstractActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public class DialogProductSort extends DialogFragment {
+        private View view;
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            view = inflater.inflate(R.layout.dialog_product_sort, null);
+            final CheckBox popularity = (CheckBox)view.findViewById(R.id.cb_popularity);
+            final CheckBox lowToHigh = (CheckBox)view.findViewById(R.id.cb_low_to_high);
+            final CheckBox highToLow = (CheckBox)view.findViewById(R.id.cb_high_to_low);
+            final CheckBox discount = (CheckBox)view.findViewById(R.id.cb_discount);
 
+            if(popularity.isChecked()){
+                popularity.setChecked(false);
+                dismiss();
+            }
+            if(lowToHigh.isChecked()){
+                lowToHigh.setChecked(false);
+                dismiss();
+            }
+            if(highToLow.isChecked()){
+                highToLow.setChecked(false);
+                dismiss();
+            }
+            if(discount.isChecked()){
+                discount.setChecked(false);
+                dismiss();
+            }
+            return view;
+        }
+        public void onRadioButtonClicked(View view) {
+            // Is the button now checked?
+            boolean checked = ((RadioButton) view).isChecked();
+
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.rb_low_to_high:
+                    if (checked){
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                        dismiss();
+                    }
+                        // Pirates are the best
+                        break;
+                case R.id.rb_discount:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+                case R.id.rb_high_to_low:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+                case R.id.rb_popularity:
+                    if (checked)
+                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
+                    // Ninjas rule
+                        break;
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_products, menu);
@@ -175,10 +212,10 @@ public class ProductsActivity extends AbstractActivity {
     }
 
     private Fragment getMapFragment() {
-        ProductMapFragment frag = new ProductMapFragment();
+        //ProductMapFragment frag = new ProductMapFragment();
 //        productAdapter.addProduct(new Product());
-        addArguments(frag);
-        return frag;
+        //addArguments(frag);
+        return null;
     }
 
     private Fragment getListFragment() {

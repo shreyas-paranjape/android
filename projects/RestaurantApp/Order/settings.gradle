@@ -1,0 +1,13 @@
+include ':app'
+include ':common'
+project(':common').projectDir = new File(rootDir, '../../../libraries/common')
+include ':sugar'
+project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
+include ':model'
+project(':model').projectDir = new File(rootDir, '../../../libraries/model')
+include ':volley'
+project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
+include ':rest'
+project(':rest').projectDir = new File(rootDir, '../../../libraries/rest')
+include ':cog'
+project(':cog').projectDir = new File(rootDir,'../../../libraries/cognalys')

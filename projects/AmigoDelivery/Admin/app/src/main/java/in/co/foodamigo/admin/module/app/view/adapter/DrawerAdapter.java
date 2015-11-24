@@ -2,6 +2,7 @@ package in.co.foodamigo.admin.module.app.view.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.view.model.Item;
@@ -27,5 +28,7 @@ public class DrawerAdapter extends NavigationDrawerListAdapter {
     protected void initView(View convertView, int position) {
         TextView txtListChild = (TextView) convertView.findViewById(R.id.tv_drawer_link);
         txtListChild.setText(getItem(position).getName());
+        ImageView linkImage = (ImageView) convertView.findViewById(R.id.iv_drawer_link);
+        linkImage.setBackgroundResource(getItem(position).getImageId());
     }
 }

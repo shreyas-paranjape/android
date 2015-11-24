@@ -9,15 +9,10 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_sort"
-        android:icon="@drawable/ic_sort_black_24dp"
+        android:id="@+id/action_switch_view"
+        android:icon="@drawable/ic_mode_edit_black_24dp"
         android:orderInCategory="200"
         android:title="@string/action_sort"
         app:showAsAction="always" />
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="400"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
 </menu>

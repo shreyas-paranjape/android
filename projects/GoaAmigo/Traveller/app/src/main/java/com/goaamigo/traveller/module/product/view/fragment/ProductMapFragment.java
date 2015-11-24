@@ -1,22 +1,9 @@
 package com.goaamigo.traveller.module.product.view.fragment;
 
-import android.os.Bundle;
+public class ProductMapFragment {
+        //extends MapFragment {
 
-import model.catalogue.Product;
-import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.app.view.component.GoaMapActivity;
-import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-
-import org.mapsforge.core.model.LatLong;
-import org.mapsforge.core.model.MapPosition;
-
-import de.greenrobot.event.EventBus;
-import map.util.Util;
-import map.view.component.MapFragment;
-
-public class ProductMapFragment extends MapFragment {
-
-    private static final String TAG = GoaMapActivity.class.getName();
+    /*private static final String TAG = GoaMapActivity.class.getName();
     public static final LatLong LATLONG_PANAJI = new LatLong(15.4989, 73.8278);
 
     private ProductAdapter productAdapter;
@@ -75,5 +62,5 @@ public class ProductMapFragment extends MapFragment {
                 product.getName(),
                 R.mipmap.balloon_overlay_unfocused);
     }
-
+*/
 }

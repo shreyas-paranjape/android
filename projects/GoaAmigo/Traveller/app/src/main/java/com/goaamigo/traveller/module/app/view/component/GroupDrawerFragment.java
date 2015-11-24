@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.goaamigo.traveller.R;
 import com.goaamigo.traveller.module.app.view.adapter.GroupDrawerAdapter;
-import com.goaamigo.traveller.module.trip.view.component.SearchTripFragment;
 import com.view.fragment.ExpandableListNavigationDrawer;
 import com.view.model.Item;
 import com.view.model.ItemGroup;
@@ -67,7 +66,8 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
         book.getItems().add(new Item("Trip",R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return new SearchTripFragment();
+                return null;
+                        //new SearchTripFragment();
             }
         });
         feedback.getItems().add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {

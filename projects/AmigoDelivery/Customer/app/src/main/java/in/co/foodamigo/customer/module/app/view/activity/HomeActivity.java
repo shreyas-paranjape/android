@@ -6,13 +6,13 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 
+import com.order.CartManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
-import in.co.foodamigo.customer.module.order.controller.CartManager;
-import in.co.foodamigo.customer.module.order.view.component.OrderFragment;
+import in.co.foodamigo.customer.module.order.view.component.FoodOrderFragment;
 
 public class HomeActivity extends AbstractActivity {
 
@@ -76,7 +76,7 @@ public class HomeActivity extends AbstractActivity {
     private void addCartFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new OrderFragment()).commit();
+        ft.replace(R.id.cartContainer, new FoodOrderFragment()).commit();
     }
 
     private class EventListener {

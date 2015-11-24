@@ -1,8 +1,5 @@
 package model.order;
 
-import android.databinding.ObservableDouble;
-import android.databinding.ObservableInt;
-
 import com.orm.dsl.Column;
 import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
@@ -15,29 +12,33 @@ import java.util.List;
 import model.common.Location;
 import model.party.Party;
 
-@Table
+@Table(name = "ordr")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1l;
 
     private long id;
+
     @Column(name = "party_id")
     private Party party;
+
     @Column(name = "code")
     private String code;
+
     @Column(name = "delivery_location_id")
     private Location deliveryLocation;
+
     @Column(name = "placed_at")
     private Date placedAt;
+
+    @Column(name = "pickup_time")
+    private Date pickupTime;
+
     @Column(name = "status")
     private String status;
 
     @Ignore
     private List<OrderItem> orderItems = new ArrayList<>();
-    @Ignore
-    public final ObservableDouble total = new ObservableDouble();
-    @Ignore
-    public final ObservableInt cartSize = new ObservableInt();
 
     @Override
     public boolean equals(Object o) {
@@ -53,6 +54,20 @@ public class Order implements Serializable {
     @Override
     public int hashCode() {
         return code != null ? code.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", party=" + party +
+                ", code='" + code + '\'' +
+                ", deliveryLocation=" + deliveryLocation +
+                ", placedAt=" + placedAt +
+                ", pickupTime=" + pickupTime +
+                ", status='" + status + '\'' +
+                ", orderItems=" + orderItems +
+                '}';
     }
 
     public String getCode() {
@@ -109,5 +124,13 @@ public class Order implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupTime(Date pickupTime) {
+        this.pickupTime = pickupTime;
     }
 }

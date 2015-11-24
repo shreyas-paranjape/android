@@ -11,104 +11,12 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1l;
 
     private long id;
-
     @Column(name = "name")
     private String name;
-
     @Column(name = "product_category_id")
     private ProductCategory productCategory;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "price")
-    private double price;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    private String productLocation;
-    private String productRating;
-    private String productDiscount;
-    private String productPrice;
-    private int productImage;
-
-    public int getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getProductLocation() {
-        return productLocation;
-    }
-
-    public void setProductLocation(String productLocation) {
-        this.productLocation = productLocation;
-    }
-
-    public String getProductRating() {
-        return productRating;
-    }
-
-    public void setProductRating(String productRating) {
-        this.productRating = productRating;
-    }
-
-    public String getProductDiscount() {
-        return productDiscount;
-    }
-
-    public void setProductDiscount(String productDiscount) {
-        this.productDiscount = productDiscount;
-    }
-
-    public String getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public Product(String name, String productLocation, String productRating, String productDiscount, String productPrice, int productImage) {
-        this.name = name;
-        this.productLocation = productLocation;
-        this.productRating = productRating;
-        this.productDiscount = productDiscount;
-        this.productPrice = productPrice;
-        this.productImage = productImage;
-    }
+    @Column(name = "detail")
+    private ProductDetail detail;
 
     public Product() {
     }
@@ -118,6 +26,15 @@ public class Product implements Serializable {
         this.name = name;
         this.productCategory = productCategory;
     }
+
+    public ProductDetail getDetail() {
+        return detail;
+    }
+
+    public void setDetail(ProductDetail detail) {
+        this.detail = detail;
+    }
+
 
     public long getId() {
         return id;

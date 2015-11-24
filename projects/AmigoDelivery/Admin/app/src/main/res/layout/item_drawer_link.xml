@@ -7,7 +7,7 @@
     android:paddingTop="8dp">
 
     <ImageView
-        android:id="@+id/imgAvatar"
+        android:id="@+id/iv_drawer_link"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:contentDescription="@string/link_image" />

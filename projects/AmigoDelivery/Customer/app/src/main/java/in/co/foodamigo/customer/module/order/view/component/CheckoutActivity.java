@@ -3,11 +3,11 @@ package in.co.foodamigo.customer.module.order.view.component;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import com.order.CurrentOrderManager;
 import com.view.activity.AbstractActivity;
 
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.app.singleton.CustomerApp;
-import in.co.foodamigo.customer.module.order.controller.CurrentOrderManager;
 
 public class CheckoutActivity extends AbstractActivity {
 
@@ -55,7 +55,7 @@ public class CheckoutActivity extends AbstractActivity {
     private class EventListener {
 
         public void onEvent(DeliveryLocationFragment.AddressSelectedEvent event) {
-            currentOrderManager.setDeliveryAddress(event.getLocation());
+            //TODO currentOrderManager.setDeliveryAddress(event.getLocation());
             replaceContent(new ConfirmOrderFragment());
         }
     }

@@ -3,6 +3,10 @@ include ':volley'
 project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':common'
 project(':common').projectDir = new File(rootDir, '../../../libraries/common')
+include ':model'
+project(':model').projectDir = new File(rootDir, '../../../libraries/model')
+include ':rest'
+project(':rest').projectDir = new File(rootDir, '../../../libraries/rest')
 include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
 include ':websocket'

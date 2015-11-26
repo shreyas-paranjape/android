@@ -22,15 +22,15 @@ import supplier.module.app.singleton.SupplierApp;
 public class NewPickupOrderConfirmFragment extends Fragment {
 
     private Order order;
-    private Party party;
-    private Location loc;
+    //private Party party;
+    //private Location loc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         order = (Order) getArguments().getSerializable(Constant.ORDER);
-        party = (Party) getArguments().getSerializable(Constant.PARTY);
-        loc = (Location) getArguments().getSerializable(Constant.LOCATION);
+        //party = (Party) getArguments().getSerializable(Constant.PARTY);
+        //loc = (Location) getArguments().getSerializable(Constant.LOCATION);
     }
 
     @Nullable
@@ -38,23 +38,23 @@ public class NewPickupOrderConfirmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_confirm, container, false);
         Button ok;
-        ok =(Button)v.findViewById(R.id.okbtn);
+        ok = (Button) v.findViewById(R.id.okbtn);
 
-        TextView cname = (TextView)v.findViewById(R.id.cusname);
-        TextView cnum = (TextView)v. findViewById(R.id.cusnumber);
-        TextView cadd = (TextView)v. findViewById(R.id.add1);
-        TextView textView7 = (TextView)v. findViewById(R.id.add2);
-        TextView camount = (TextView)v. findViewById(R.id.amount);
-        TextView cpickup = (TextView)v. findViewById(R.id.pickuptime);
-        TextView caltenum= (TextView)v. findViewById(R.id.alternatnum);
+        TextView cname = (TextView) v.findViewById(R.id.cusname);
+        TextView cnum = (TextView) v.findViewById(R.id.cusnumber);
+        TextView cadd = (TextView) v.findViewById(R.id.add1);
+//        TextView textView7 = (TextView)v. findViewById(R.id/.add2);
+        TextView camount = (TextView) v.findViewById(R.id.amount);
+        TextView cpickup = (TextView) v.findViewById(R.id.pickuptime);
+//        TextView caltenum= (TextView)v. findViewById(R.id.alternatnum);
 
-       cname.setText((CharSequence) party.getName());
-       cnum.setText((CharSequence) party.getMobileNumber());
-       cadd.setText((CharSequence) loc.getAddress());
-       // textView7.setText((CharSequence) order.getCode());
-        camount.setText((int) order.getOrderItems().get(0).getPrice());
-        cpickup.setText((CharSequence) order.getParty());
-        caltenum.setText((CharSequence) order.getPickupTime());
+        cname.setText(order.getParty().getName());
+        cnum.setText(order.getParty().getMobileNumber());
+        cadd.setText(order.getDeliveryLocation().getAddress());
+        // textView7.setText((CharSequence) order.getCode());
+        camount.setText(Double.valueOf(order.getOrderItems().get(0).getPrice()).toString());
+        cpickup.setText(order.getPickupTime() != null ? order.getPickupTime().toString() : "");
+        //caltenum.setText((CharSequence) order.getPickupTime());
 
         Log.d("App", "Order : " + order);
         return v;

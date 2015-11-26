@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/epn"
+        android:inputType="number"
+        android:maxLength="10"
+        android:hint="Customer phone number"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ecn1"
+        android:hint="Customer name"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+       />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ead1"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+       android:hint="Customer address"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/eam"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+       android:hint="Amount to be collected" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ept"
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:layout_gravity="center_horizontal"
+       android:hint="Pick up time"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Pickup order form" />
+        android:text="Book"
+        android:layout_marginTop="15dp"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
+</ScrollView>

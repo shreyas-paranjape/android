@@ -11,4 +11,8 @@ public interface Constant {
     String PERSONAL_DETAILS = "PERSONAL_DETAILS";
     String ADDRESS = "ADDRESS";
     String FORM = "FORM";
+    String LIST_TAG = "LIST_FRAGMENT";
+    String PRODUCT = "PRODUCT";
+    String SUPPLIER = "SUPPLIER";
+    String FILTER = "FILTER";
 }

@@ -5,23 +5,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
 import com.view.widget.AbstractRecyclerAdapter;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import in.co.foodamigo.admin.databinding.ItemProdBinding;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.component.form.ProdFormFragment;
 import model.catalogue.Product;
 
 public class ProdListAdapter extends AbstractRecyclerAdapter<Product, ProdListAdapter.ViewHolder> {
 
+
     public ProdListAdapter(Context context, List<Product> products) {
         super(context, products);
         EventBus.getDefault().register(this);
-
     }
 
     @Override
@@ -52,20 +53,28 @@ public class ProdListAdapter extends AbstractRecyclerAdapter<Product, ProdListAd
         }
     }
 
-    public void onEvent(Sort event) {
+    public void onEvent(ProductSort event) {
         sort(event.getComparator());
     }
 
-    public static class Sort {
-        private final Comparator<Product> comparator;
+    public static class ProductSort extends AbstractRecyclerAdapter.Sort<Product> {
 
-        public Sort(Comparator<Product> comparator) {
-            this.comparator = comparator;
+        public ProductSort(Comparator<Product> comparator) {
+            super(comparator);
         }
+    }
 
-        public Comparator<Product> getComparator() {
-            return comparator;
+    @Override
+    protected List<Product> cloneList(List<Product> list) {
+        List<Product> clone = new ArrayList<>(list.size());
+        for (Product item : list) {
+            clone.add(item.clone());
         }
+        return clone;
+    }
 
+    @Override
+    protected String getCacheFilterKey() {
+        return Constant.PRODUCT;
     }
 }

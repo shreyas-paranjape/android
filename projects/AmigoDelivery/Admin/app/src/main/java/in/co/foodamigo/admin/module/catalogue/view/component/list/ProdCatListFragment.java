@@ -8,7 +8,6 @@ import com.view.fragment.AbstractRecyclerFragment;
 import com.view.widget.AbstractRecyclerAdapter;
 
 import in.co.foodamigo.admin.R;
-import in.co.foodamigo.admin.module.app.singleton.Constant;
 import in.co.foodamigo.admin.module.catalogue.view.adapter.list.ProdCatListAdapter;
 import model.catalogue.ProductCategory;
 
@@ -35,10 +34,6 @@ public class ProdCatListFragment extends AbstractRecyclerFragment<ProductCategor
                 SugarRecord.listAll(ProductCategory.class));
     }
 
-    @Override
-    protected String getArgumentKey() {
-        return Constant.PRODUCT_CATEGORY;
-    }
 
     @Override
     protected int getMenuId() {

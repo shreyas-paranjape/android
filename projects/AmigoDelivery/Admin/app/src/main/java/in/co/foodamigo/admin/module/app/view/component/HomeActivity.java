@@ -19,15 +19,6 @@ public class HomeActivity extends AbstractActivity {
         startService(new Intent(this, SocketConnectionManager.class));
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (getFragmentManager().getBackStackEntryCount() > 1) {
-//            getFragmentManager().popBackStack(1, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

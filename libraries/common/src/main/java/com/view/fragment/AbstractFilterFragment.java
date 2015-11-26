@@ -27,11 +27,13 @@ public abstract class AbstractFilterFragment<T> extends DialogFragment {
         Dialog dialog = getDialog();
         if (dialog != null) {
             dialog.getWindow().setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
         }
     }
 
-    protected void setupToolbar(Toolbar toolbar, int backDrawable, int menu, Toolbar.OnMenuItemClickListener listener) {
+    protected void setupToolbar(Toolbar toolbar, int backDrawable, int menu,
+                                Toolbar.OnMenuItemClickListener listener) {
         toolbar.setNavigationIcon(getResources().getDrawable(backDrawable));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +52,7 @@ public abstract class AbstractFilterFragment<T> extends DialogFragment {
         dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (getDialogAnimation() != 0) {
-            dialog.getWindow()
-                    .getAttributes().windowAnimations = getDialogAnimation();
+            dialog.getWindow().getAttributes().windowAnimations = getDialogAnimation();
         }
         return dialog;
     }

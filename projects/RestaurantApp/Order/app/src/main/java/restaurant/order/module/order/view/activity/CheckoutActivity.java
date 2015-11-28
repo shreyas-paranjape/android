@@ -1,4 +1,4 @@
-package restaurant.order.module.order.view.component;
+package restaurant.order.module.order.view.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;

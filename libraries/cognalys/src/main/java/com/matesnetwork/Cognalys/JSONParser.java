@@ -1,19 +1,8 @@
 package com.matesnetwork.Cognalys;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
+import java.io.InputStream;
 
 public class JSONParser {
 
@@ -27,8 +16,8 @@ public class JSONParser {
 	}
 
 	public JSONObject getJSONFromUrl(String url) {
-
-		// Making HTTP request
+		//TODO
+		/*// Making HTTP request
 		try {
 			// defaultHttpClient
 			DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -67,7 +56,7 @@ public class JSONParser {
 		} catch (JSONException e) {
 			Log.e("JSON Parser", "Error parsing data " + e.toString());
 			System.out.println("error on parse data in jsonparser.java");
-		}
+		}*/
 
 		// return JSON String
 		return jObj;

@@ -1,4 +1,4 @@
-package restaurant.order.module.catalogue.view.component;
+package restaurant.order.module.catalogue.view.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;

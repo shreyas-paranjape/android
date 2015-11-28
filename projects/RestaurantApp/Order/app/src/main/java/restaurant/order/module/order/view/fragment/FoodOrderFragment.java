@@ -1,4 +1,4 @@
-package restaurant.order.module.order.view.component;
+package restaurant.order.module.order.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

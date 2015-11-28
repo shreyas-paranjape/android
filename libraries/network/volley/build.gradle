@@ -7,8 +7,6 @@ repositories {
 android {
     compileSdkVersion 23
     buildToolsVersion = '23.0.1'
-
-    useLibrary 'org.apache.http.legacy'
 }
 
 if (configurations.findByName("testCompile")) {

@@ -20,17 +20,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.entity.BasicHttpEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHttpResponse;
-import org.apache.http.message.BasicStatusLine;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -106,22 +95,21 @@ public class HurlStack implements HttpStack {
         }
         setConnectionParametersForRequest(connection, request);
         // Initialize HttpResponse with data from the HttpURLConnection.
-        ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 1);
         int responseCode = connection.getResponseCode();
         if (responseCode == -1) {
             // -1 is returned by getResponseCode() if the response code could not be retrieved.
             // Signal to the caller that something was wrong with the connection.
             throw new IOException("Could not retrieve response code from HttpUrlConnection.");
         }
-        StatusLine responseStatus = new BasicStatusLine(protocolVersion,
+        StatusLine responseStatus = new StatusLine(
                 connection.getResponseCode(), connection.getResponseMessage());
-        BasicHttpResponse response = new BasicHttpResponse(responseStatus);
+        HttpResponse response = new HttpResponse(responseStatus);
         if (hasResponseBody(request.getMethod(), responseStatus.getStatusCode())) {
             response.setEntity(entityFromConnection(connection));
         }
         for (Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
             if (header.getKey() != null) {
-                Header h = new BasicHeader(header.getKey(), header.getValue().get(0));
+                Header h = new Header(header.getKey(), header.getValue().get(0));
                 response.addHeader(h);
             }
         }
@@ -137,9 +125,9 @@ public class HurlStack implements HttpStack {
      */
     private static boolean hasResponseBody(int requestMethod, int responseCode) {
         return requestMethod != Request.Method.HEAD
-            && !(HttpStatus.SC_CONTINUE <= responseCode && responseCode < HttpStatus.SC_OK)
-            && responseCode != HttpStatus.SC_NO_CONTENT
-            && responseCode != HttpStatus.SC_NOT_MODIFIED;
+            && !(responseCode < HttpURLConnection.HTTP_OK)
+            && responseCode != HttpURLConnection.HTTP_NO_CONTENT
+            && responseCode != HttpURLConnection.HTTP_NOT_MODIFIED;
     }
 
     /**
@@ -148,7 +136,7 @@ public class HurlStack implements HttpStack {
      * @return an HttpEntity populated with data from <code>connection</code>.
      */
     private static HttpEntity entityFromConnection(HttpURLConnection connection) {
-        BasicHttpEntity entity = new BasicHttpEntity();
+        HttpEntity entity = new HttpEntity();
         InputStream inputStream;
         try {
             inputStream = connection.getInputStream();
@@ -192,28 +180,9 @@ public class HurlStack implements HttpStack {
         return connection;
     }
 
-    @SuppressWarnings("deprecation")
     /* package */ static void setConnectionParametersForRequest(HttpURLConnection connection,
             Request<?> request) throws IOException, AuthFailureError {
         switch (request.getMethod()) {
-            case Method.DEPRECATED_GET_OR_POST:
-                // This is the deprecated way that needs to be handled for backwards compatibility.
-                // If the request's post body is null, then the assumption is that the request is
-                // GET.  Otherwise, it is assumed that the request is a POST.
-                byte[] postBody = request.getPostBody();
-                if (postBody != null) {
-                    // Prepare output. There is no need to set Content-Length explicitly,
-                    // since this is handled by HttpURLConnection using the size of the prepared
-                    // output stream.
-                    connection.setDoOutput(true);
-                    connection.setRequestMethod("POST");
-                    connection.addRequestProperty(HEADER_CONTENT_TYPE,
-                            request.getPostBodyContentType());
-                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-                    out.write(postBody);
-                    out.close();
-                }
-                break;
             case Method.GET:
                 // Not necessary to set the request method because connection defaults to GET but
                 // being explicit here.

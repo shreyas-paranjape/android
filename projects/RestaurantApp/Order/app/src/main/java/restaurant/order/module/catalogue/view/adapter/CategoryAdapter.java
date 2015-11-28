@@ -12,7 +12,7 @@ import java.util.List;
 
 import model.catalogue.ProductCategory;
 import repository.catalogue.ProductCategoryRepo;
-import restaurant.order.module.catalogue.view.component.CategoryFragment;
+import restaurant.order.module.catalogue.view.fragment.CategoryFragment;
 
 
 public class CategoryAdapter extends FragmentStatePagerAdapter {

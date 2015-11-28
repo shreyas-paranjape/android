@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
         android:name=".module.app.singleton.OrderApp"
@@ -33,24 +34,21 @@
             android:name=".module.app.view.activity.LaunchActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="landscape">
-
-        </activity>
-
-        <activity
-            android:name=".module.app.view.activity.HomeActivity"
-            android:screenOrientation="landscape">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity
+            android:name=".module.app.view.activity.HomeActivity"
+            android:screenOrientation="landscape">
         </activity>
 
 
         <activity
-            android:name=".module.order.view.component.CheckoutActivity"
+            android:name=".module.order.view.activity.CheckoutActivity"
             android:screenOrientation="landscape">
 
             <meta-data

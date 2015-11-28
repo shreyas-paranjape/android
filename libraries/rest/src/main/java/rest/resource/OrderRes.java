@@ -24,7 +24,7 @@ public class OrderRes implements IResource {
     public void placeOrder(Order order) {
         queue.add(new GsonRequest<>(
                 Request.Method.POST,
-                baseUri + ORDER,
+                dataBaseUri + ORDER,
                 order,
                 new Response.Listener<Order>() {
                     @Override

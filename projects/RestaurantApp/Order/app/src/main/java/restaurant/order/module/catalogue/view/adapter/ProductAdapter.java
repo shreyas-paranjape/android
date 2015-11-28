@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.order.CurrentOrderManager;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +53,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
         Log.d("ProductAdapter", product.toString());
         if (product.getDetail() != null) {
-            Picasso.with(context)
+           /* Picasso.with(context)
                     .load("file:///android_asset/" + product.getDetail().getImageUrl())
                     .into(viewHolder.productCardView.imgProduct,
                             new Callback.EmptyCallback() {
@@ -63,7 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                                 public void onError() {
                                     Log.d("ProductAdapter", "Could not load image");
                                 }
-                            });
+                            });*/
         }
 
         //TODO Load image from URL

@@ -16,8 +16,8 @@ import com.view.activity.AbstractActivity;
 
 import model.catalogue.ProductCategory;
 import restaurant.order.R;
-import restaurant.order.module.catalogue.view.component.MenuFragment;
-import restaurant.order.module.order.view.component.FoodOrderFragment;
+import restaurant.order.module.catalogue.view.fragment.MenuFragment;
+import restaurant.order.module.order.view.fragment.FoodOrderFragment;
 
 public class HomeActivity extends AbstractActivity {
 
@@ -87,9 +87,6 @@ public class HomeActivity extends AbstractActivity {
         return R.layout.activity_home;
     }
 
-    protected int getDrawerFragmentId() {
-        return R.id.drawer;
-    }
 
     protected int getContentContainerId() {
         return R.id.container;

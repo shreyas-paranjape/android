@@ -14,7 +14,7 @@ import java.util.List;
 
 import model.catalogue.ProductCategory;
 import repository.catalogue.ProductCategoryRepo;
-import restaurant.order.module.catalogue.view.component.MenuFragment;
+import restaurant.order.module.catalogue.view.fragment.MenuFragment;
 
 public class MenuAdapter extends FragmentStatePagerAdapter {
 

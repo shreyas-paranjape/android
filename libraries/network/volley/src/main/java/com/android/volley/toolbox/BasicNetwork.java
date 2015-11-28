@@ -32,23 +32,19 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.impl.cookie.DateUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.SimpleFormatter;
 
 /**
  * A network performing Volley requests over an {@link HttpStack}.
@@ -97,13 +93,13 @@ public class BasicNetwork implements Network {
                 StatusLine statusLine = httpResponse.getStatusLine();
                 int statusCode = statusLine.getStatusCode();
 
-                responseHeaders = convertHeaders(httpResponse.getAllHeaders());
+                responseHeaders = convertHeaders(httpResponse.getHeaders());
                 // Handle cache validation.
-                if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
+                if (statusCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
 
                     Entry entry = request.getCacheEntry();
                     if (entry == null) {
-                        return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED, null,
+                        return new NetworkResponse(HttpURLConnection.HTTP_NOT_MODIFIED, null,
                                 responseHeaders, true,
                                 SystemClock.elapsedRealtime() - requestStart);
                     }
@@ -113,7 +109,7 @@ public class BasicNetwork implements Network {
                     // the new ones from the response.
                     // http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5
                     entry.responseHeaders.putAll(responseHeaders);
-                    return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED, entry.data,
+                    return new NetworkResponse(HttpURLConnection.HTTP_NOT_MODIFIED, entry.data,
                             entry.responseHeaders, true,
                             SystemClock.elapsedRealtime() - requestStart);
                 }
@@ -138,8 +134,6 @@ public class BasicNetwork implements Network {
                         SystemClock.elapsedRealtime() - requestStart);
             } catch (SocketTimeoutException e) {
                 attemptRetryOnException("socket", request, new TimeoutError());
-            } catch (ConnectTimeoutException e) {
-                attemptRetryOnException("connection", request, new TimeoutError());
             } catch (MalformedURLException e) {
                 throw new RuntimeException("Bad URL " + request.getUrl(), e);
             } catch (IOException e) {
@@ -154,8 +148,8 @@ public class BasicNetwork implements Network {
                 if (responseContents != null) {
                     networkResponse = new NetworkResponse(statusCode, responseContents,
                             responseHeaders, false, SystemClock.elapsedRealtime() - requestStart);
-                    if (statusCode == HttpStatus.SC_UNAUTHORIZED ||
-                            statusCode == HttpStatus.SC_FORBIDDEN) {
+                    if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED ||
+                            statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
                         attemptRetryOnException("auth",
                                 request, new AuthFailureError(networkResponse));
                     } else {
@@ -214,7 +208,8 @@ public class BasicNetwork implements Network {
 
         if (entry.lastModified > 0) {
             Date refTime = new Date(entry.lastModified);
-            headers.put("If-Modified-Since", DateUtils.formatDate(refTime));
+            headers.put("If-Modified-Since",
+                    new SimpleDateFormat(HttpHeaderParser.PATTERN_RFC1123).format(refTime));
         }
     }
 

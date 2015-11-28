@@ -9,9 +9,13 @@ public class FontsOverride {
 
     public static void setDefaultFont(Context context,
                                       String staticTypefaceFieldName, String fontAssetName) {
-        final Typeface regular = Typeface.createFromAsset(context.getAssets(),
-                fontAssetName);
-        replaceFont(staticTypefaceFieldName, regular);
+        if (fontAssetName != null) {
+            final Typeface regular =
+                    Typeface.createFromAsset(
+                            context.getAssets(),
+                            fontAssetName);
+            replaceFont(staticTypefaceFieldName, regular);
+        }
     }
 
     protected static void replaceFont(String staticTypefaceFieldName,

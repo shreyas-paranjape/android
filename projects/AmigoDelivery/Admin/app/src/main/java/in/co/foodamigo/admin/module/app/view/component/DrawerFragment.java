@@ -19,6 +19,7 @@ import in.co.foodamigo.admin.module.app.view.adapter.DrawerAdapter;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.ProdCatListFragment;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.ProductListFragment;
 import in.co.foodamigo.admin.module.catalogue.view.component.list.SupplierListFragment;
+import in.co.foodamigo.admin.module.order.view.component.OrderListFragment;
 
 
 public class DrawerFragment extends ListNavigationDrawer {

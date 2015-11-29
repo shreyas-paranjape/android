@@ -4,28 +4,23 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.order.CartItemAdapter;
+import com.view.adapter.list.OrderItemAdapter;
 
 import java.util.List;
 
 import in.co.foodamigo.customer.databinding.ItemOrderCurrentBinding;
 import model.order.OrderItem;
 
-public class FoodCartItemAdapter extends CartItemAdapter {
+public class FoodCartItemAdapter extends OrderItemAdapter {
 
-    public FoodCartItemAdapter(Context context, int resource, List<OrderItem> orderItems) {
-        super(context, resource, orderItems);
+    public FoodCartItemAdapter(Context context, List<OrderItem> orderItems) {
+        super(context, orderItems);
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    protected View getView(final int position, ViewGroup parent) {
         final ItemOrderCurrentBinding rootBinding =
                 ItemOrderCurrentBinding.inflate(inflater, parent, false);
-        initView(rootBinding, position);
-        return rootBinding.getRoot();
-    }
-
-    private void initView(ItemOrderCurrentBinding rootBinding, final int position) {
         rootBinding.setOrderItem(getItem(position));
         rootBinding.btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +34,7 @@ public class FoodCartItemAdapter extends CartItemAdapter {
                 removeItem(getItem(position).getProduct());
             }
         });
+        return rootBinding.getRoot();
     }
 
 }

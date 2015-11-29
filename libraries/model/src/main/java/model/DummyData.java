@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import model.catalogue.Product;
 import model.catalogue.ProductCategory;
+import model.catalogue.ProductDetail;
 import model.party.Party;
 import repository.catalogue.ProductCategoryRepo;
 
@@ -68,9 +69,13 @@ public class DummyData {
                 product.setId(prod_i);
                 product.setName(name);
                 product.setProductCategory(ProductCategoryRepo.getById(prod_i));
-                //product.setDescription("Product Description: " + product.getId());
-                //product.setPrice(prod_i * 1000);
-                //product.setImageUrl("file:///android_asset/1.jpg");
+                ProductDetail detail = new ProductDetail();
+                detail.setId(prod_i);
+                detail.setDescription("Product Description: " + product.getId());
+                detail.setPrice(prod_i * 1000);
+                detail.setImageUrl("file:///android_asset/1.jpg");
+                SugarRecord.save(detail);
+                product.setDetail(detail);
                 SugarRecord.save(product);
             }
 
@@ -89,9 +94,13 @@ public class DummyData {
                 product.setId(i);
                 product.setName("Product : " + product.getId());
                 product.setProductCategory(ProductCategoryRepo.getById(i));
-                //product.setDescription("Product Description: " + product.getId());
-                //product.setPrice(i * 1000);
-                //product.setImageUrl("file:///android_asset/1.jpg");
+                ProductDetail detail = new ProductDetail();
+                detail.setId(i);
+                detail.setDescription("Product Description: " + product.getId());
+                detail.setPrice(i * 1000);
+                detail.setImageUrl("file:///android_asset/1.jpg");
+                SugarRecord.save(detail);
+                product.setDetail(detail);
                 SugarRecord.save(product);
             }
 

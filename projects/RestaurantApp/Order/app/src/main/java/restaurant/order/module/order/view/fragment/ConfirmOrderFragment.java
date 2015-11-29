@@ -1,6 +1,5 @@
 package restaurant.order.module.order.view.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +7,20 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.order.CurrentOrderManager;
+import com.view.fragment.AbstractFragment;
 
+import model.order.OrderItem;
 import restaurant.order.databinding.FragmentConfirmOrderBinding;
 import restaurant.order.databinding.ItemOrderConfirmBinding;
-import restaurant.order.module.app.singleton.OrderApp;
-import model.order.OrderItem;
 
-public class ConfirmOrderFragment extends Fragment {
+public class ConfirmOrderFragment extends AbstractFragment {
 
     private CurrentOrderManager currentOrderManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentOrderManager = ((OrderApp) getActivity().getApplication()).getCurrentOrderManager();
+        currentOrderManager = getApp().getCurrentOrderManager();
     }
 
     @Override

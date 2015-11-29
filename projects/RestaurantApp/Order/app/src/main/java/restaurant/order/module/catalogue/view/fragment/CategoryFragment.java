@@ -1,6 +1,5 @@
 package restaurant.order.module.catalogue.view.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.util.Constant;
+import com.view.fragment.AbstractFragment;
 
 import model.catalogue.ProductCategory;
 import restaurant.order.R;
 import restaurant.order.module.catalogue.view.adapter.ProductAdapter;
 
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends AbstractFragment {
 
     private ProductCategory productCategory;
 
@@ -38,7 +38,6 @@ public class CategoryFragment extends Fragment {
 
     private void initListView(View rootView) {
         RecyclerView productsRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_category);
-        //productsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         productsRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         productsRecyclerView.setAdapter(new ProductAdapter(getActivity(), productCategory));
     }

@@ -1,36 +1,31 @@
 package supplier.module.app.singleton;
 
-import android.app.Application;
+import com.App;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.orm.SugarContext;
-import com.util.FontsOverride;
-
-public class SupplierApp extends Application {
-
-    private RequestQueue queue;
+public class SupplierApp extends App {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        queue = Volley.newRequestQueue(getApplicationContext());
-        SugarContext.init(getApplicationContext());
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "Raleway-Thin.ttf");
-        FontsOverride.setDefaultFont(this, "SERIF", "Raleway-Regular.ttf");
+    public String getBaseUri() {
+        return "";
     }
 
     @Override
-    public void onTerminate() {
-        super.onTerminate();
-        SugarContext.terminate();
+    public String getTag() {
+        return SupplierApp.class.getName();
     }
 
-    public RequestQueue getQueue() {
-        return queue;
+    @Override
+    public String getAccountType() {
+        return "Amigo Delivery";
     }
 
-    public void setQueue(RequestQueue queue) {
-        this.queue = queue;
+    @Override
+    protected String getThinFontAssetName() {
+        return "Raleway-Thin.ttf";
+    }
+
+    @Override
+    protected String getRegularFontAssetName() {
+        return "Raleway-Regular.ttf";
     }
 }

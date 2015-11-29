@@ -2,7 +2,6 @@ package restaurant.order.module.catalogue.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,20 +50,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                                 CurrentOrderManager.CartAction.ADD));
             }
         });
-        Log.d("ProductAdapter", product.toString());
         if (product.getDetail() != null) {
-           /* Picasso.with(context)
-                    .load("file:///android_asset/" + product.getDetail().getImageUrl())
-                    .into(viewHolder.productCardView.imgProduct,
-                            new Callback.EmptyCallback() {
-                                @Override
-                                public void onError() {
-                                    Log.d("ProductAdapter", "Could not load image");
-                                }
-                            });*/
+            //TODO Load image from URL
         }
 
-        //TODO Load image from URL
     }
 
     @Override

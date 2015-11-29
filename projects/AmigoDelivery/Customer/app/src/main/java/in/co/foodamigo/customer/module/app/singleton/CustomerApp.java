@@ -1,36 +1,40 @@
 package in.co.foodamigo.customer.module.app.singleton;
 
-import android.app.Application;
-
-import com.order.CurrentOrderManager;
-import com.orm.SugarContext;
-import com.util.FontsOverride;
+import com.App;
 
 import model.DummyData;
 
 
-public class CustomerApp extends Application {
-
-    private final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
+public class CustomerApp extends App {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        SugarContext.init(getApplicationContext());
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "Raleway-Thin.ttf");
-        FontsOverride.setDefaultFont(this, "SERIF", "Raleway-Regular.ttf");
         DummyData.createDummyData("food.customer");
     }
 
     @Override
-    public void onTerminate() {
-        SugarContext.terminate();
-        super.onTerminate();
+    public String getBaseUri() {
+        return "";
     }
 
-    public CurrentOrderManager getCurrentOrderManager() {
-        return currentOrderManager;
+    @Override
+    public String getTag() {
+        return CustomerApp.class.getName();
     }
 
+    @Override
+    public String getAccountType() {
+        return "Food Amigo";
+    }
 
+    @Override
+    protected String getThinFontAssetName() {
+        return "Raleway-Thin.ttf";
+    }
+
+    @Override
+    protected String getRegularFontAssetName() {
+        return "Raleway-Regular.ttf";
+    }
 }

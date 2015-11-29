@@ -32,8 +32,14 @@ public class Product implements Serializable, Cloneable {
         this.detail = detail;
     }
 
-    public Product clone() {
-        return new Product(id, name, productCategory, detail);
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", productCategory=" + productCategory +
+                ", detail=" + detail +
+                '}';
     }
 
     public ProductDetail getDetail() {

@@ -33,9 +33,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
     compile project(path: ':common')
+    compile project(':rest')
     //compile project(path: ':model')
     //compile project(path: ':map')
+
     compile 'com.wdullaer:materialdatetimepicker:1.5.4'
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
     compile 'me.relex:circleindicator:1.1.5@aar'
@@ -43,8 +46,6 @@ dependencies {
     //compile 'com.google.android.gms:play-services:8.3.0'
     //compile 'com.facebook.android:facebook-android-sdk:4.6.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
-    compile project(':rest')
 }

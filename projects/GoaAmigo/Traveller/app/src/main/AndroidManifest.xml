@@ -2,65 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.goaamigo.traveller">
 
-    <permission
-        android:name="com.goaamigo.traveller.maps.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
-
     <uses-permission android:name="com.goaamigo.traveller.maps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".module.app.singleton.TravellerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_label"
         android:theme="@style/AppTheme">
 
-        <meta-data
-            android:name="DATABASE"
-            android:value="goaamigo.db" />
-        <meta-data
-            android:name="VERSION"
-            android:value="1" />
-        <meta-data
-            android:name="QUERY_LOG"
-            android:value="true" />
-        <meta-data
-            android:name="DOMAIN_PACKAGE_NAME"
-            android:value="model" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity android:name=".module.app.view.activity.SplashActivity">
-
-        </activity>
-
-        <service android:name="rest.common.DataService" android:enabled="true" />
-
-        <activity android:name=".module.app.view.activity.HomeActivity">
+        <activity android:name=".module.app.view.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".module.app.view.activity.HomeActivity">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".module.app.view.adapter.SearchableActivity" />
         </activity>
+
+        <activity android:name=".module.party.view.activity.AuthActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
+        </activity>
+
 
         <!-- <activity android:name=".module.trip.view.component.TripActivity">
              <meta-data
@@ -69,7 +45,7 @@
          </activity>-->
 
         <activity
-            android:name=".module.app.view.component.SearchableActivity"
+            android:name=".module.app.view.activity.SearchableActivity"
             android:label="@string/title_activity_searchable">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -91,20 +67,49 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".module.app.view.component.GoaMapActivity" />-->
+        <activity android:name=".module.product.view.activity.ProductsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
+        </activity>
         <activity
-            android:name=".module.product.view.activity.ProductsActivity"
-            android:parentActivityName=".module.app.view.activity.HomeActivity"></activity>
+            android:name=".module.product.view.activity.ProductDetails"
+            android:label="@string/title_activity_product_details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.product.view.activity.ProductsActivity" />
+        </activity>
         <activity
             android:name=".module.product.view.activity.CheckoutActivity"
             android:label="@string/title_activity_check_out" />
-        <activity
-            android:name=".module.product.view.activity.ProductDetails"
-            android:label="@string/title_activity_product_details"
-            android:parentActivityName=".module.product.view.activity.ProductsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.goaamigo.traveller.module.product.view.activity.ProductsActivity" />
-        </activity>
+
+
+        <meta-data
+            android:name="DATABASE"
+            android:value="goaamigo.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="model" />
+
+        <!--<meta-data-->
+        <!--android:name="com.facebook.sdk.ApplicationId"-->
+        <!--android:value="@string/facebook_app_id" />-->
+        <!--<meta-data-->
+        <!--android:name="com.google.android.geo.API_KEY"-->
+        <!--android:value="@string/google_maps_key" />-->
+
+
+        <!--<permission-->
+        <!--android:name="com.goaamigo.traveller.maps.permission.MAPS_RECEIVE"-->
+        <!--android:protectionLevel="signature" />-->
+
+
     </application>
 
 </manifest>

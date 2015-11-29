@@ -11,14 +11,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import static com.auth.AbstractAuthActivity.ARG_ACCOUNT_NAME;
-import static com.auth.AbstractAuthActivity.ARG_ACCOUNT_TYPE;
-import static com.auth.AbstractAuthActivity.ARG_AUTH_TYPE;
-import static com.auth.AbstractAuthActivity.ARG_IS_ADDING_NEW_ACCOUNT;
-import static com.auth.AbstractAuthActivity.TOKEN_TYPE_FULL_ACCESS;
-import static com.auth.AbstractAuthActivity.TOKEN_TYPE_FULL_ACCESS_LABEL;
-import static com.auth.AbstractAuthActivity.TOKEN_TYPE_READ_ONLY;
-import static com.auth.AbstractAuthActivity.TOKEN_TYPE_READ_ONLY_LABEL;
+import com.view.activity.AbstractAuthActivity;
+
+import static com.view.activity.AbstractAuthActivity.ARG_ACCOUNT_NAME;
+import static com.view.activity.AbstractAuthActivity.ARG_ACCOUNT_TYPE;
+import static com.view.activity.AbstractAuthActivity.ARG_AUTH_TYPE;
+import static com.view.activity.AbstractAuthActivity.ARG_IS_ADDING_NEW_ACCOUNT;
+import static com.view.activity.AbstractAuthActivity.TOKEN_TYPE_FULL_ACCESS;
+import static com.view.activity.AbstractAuthActivity.TOKEN_TYPE_FULL_ACCESS_LABEL;
+import static com.view.activity.AbstractAuthActivity.TOKEN_TYPE_READ_ONLY;
+import static com.view.activity.AbstractAuthActivity.TOKEN_TYPE_READ_ONLY_LABEL;
 
 @SuppressWarnings("unused")
 public class AbstractAuthenticator extends AbstractAccountAuthenticator {

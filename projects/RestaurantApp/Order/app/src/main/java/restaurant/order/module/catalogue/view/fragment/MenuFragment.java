@@ -45,7 +45,7 @@ public class MenuFragment extends Fragment {
     }
 
     private void initTabs(View rootView, ViewPager mPager) {
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabsSecond);
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabsInner);
         tabLayout.setupWithViewPager(mPager);
     }
 

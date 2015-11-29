@@ -57,13 +57,7 @@ public class ProductAdapter
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("PRODUCT", productsList.get(position));
-                EventBus.getDefault().post(
-                        new ChangeContentEvent(ChangeContentEvent.ContentType.ACTIVITY, bundle) {
-                            @Override
-                            public Class getContentClass() {
-                                return ProductDetails.class;
-                            }
-                        });
+                EventBus.getDefault().post(new ChangeContentEvent(ProductDetails.class, bundle));
             }
         });
     }

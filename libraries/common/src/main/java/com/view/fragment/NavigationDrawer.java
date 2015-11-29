@@ -62,6 +62,7 @@ public abstract class NavigationDrawer extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
+    @SuppressWarnings("unused")
     public void onEvent(SetupDrawerEvent event) {
         if (getActivity() != null) {
             mFragmentContainerView = getActivity().findViewById(event.getFragmentId());

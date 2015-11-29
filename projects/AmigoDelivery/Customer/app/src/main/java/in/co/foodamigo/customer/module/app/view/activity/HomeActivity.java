@@ -1,46 +1,25 @@
 package in.co.foodamigo.customer.module.app.view.activity;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 
-import com.order.CartManager;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.activity.AbstractActivity;
 
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
-import in.co.foodamigo.customer.module.order.view.component.FoodOrderFragment;
+import in.co.foodamigo.customer.module.order.view.fragment.FoodOrderFragment;
 
 public class HomeActivity extends AbstractActivity {
-
-    private CartManager cartManager;
-    private final EventListener listener = new EventListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        cartManager.hidePanel();
-        registerListener(cartManager);
-        addCartFragment();
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (cartManager.isCartExpanded()) {
-            cartManager.collapsePanel();
-        } else {
-            super.onBackPressed();
-        }
+        initCart(R.id.sliding_layout, R.id.cartContainer, new FoodOrderFragment());
     }
 
     @Override
     protected void onDestroy() {
-        unRegisterListener(listener, cartManager);
         super.onDestroy();
     }
 
@@ -71,14 +50,5 @@ public class HomeActivity extends AbstractActivity {
 
     protected DrawerLayout getDrawerLayout() {
         return (DrawerLayout) findViewById(R.id.drawer_layout);
-    }
-
-    private void addCartFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new FoodOrderFragment()).commit();
-    }
-
-    private class EventListener {
     }
 }

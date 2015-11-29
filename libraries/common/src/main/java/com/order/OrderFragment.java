@@ -1,19 +1,14 @@
 package com.order;
 
-import android.app.Fragment;
 import android.os.Bundle;
 
-import de.greenrobot.event.EventBus;
+import com.view.adapter.list.OrderItemAdapter;
+import com.view.fragment.AbstractFragment;
 
-public abstract class OrderFragment extends Fragment {
+public abstract class OrderFragment extends AbstractFragment {
 
     protected CurrentOrderManager currentOrderManager;
-    protected CartItemAdapter cartItemsAdapter;
-
-
-    public OrderFragment() {
-        EventBus.getDefault().register(this);
-    }
+    protected OrderItemAdapter cartItemsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,20 +17,8 @@ public abstract class OrderFragment extends Fragment {
         cartItemsAdapter = getAdapter();
     }
 
-    @Override
-    public void onDestroy() {
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
-        super.onDestroy();
-    }
-
-    public void onEvent(CurrentOrderManager.ModifyCartEvent event) {
-        cartItemsAdapter.notifyDataSetChanged();
-    }
-
     protected abstract CurrentOrderManager getOrderManager();
 
-    protected abstract CartItemAdapter getAdapter();
+    protected abstract OrderItemAdapter getAdapter();
 
 }

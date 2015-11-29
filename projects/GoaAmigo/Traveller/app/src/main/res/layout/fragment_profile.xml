@@ -3,28 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.goaamigo.traveller.module.app.view.component.ProfileFragment">
+    tools:context="com.goaamigo.traveller.module.app.view.fragment.ProfileFragment">
 
     <ImageView
         android:layout_width="fill_parent"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_account_circle_black_48dp" />
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/ic_account_circle_black_24dp" />
 
     <TextView
         android:id="@+id/profileName"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:layout_height="wrap_content" />
+        android:paddingTop="20dp" />
 
     <TextView
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:layout_height="wrap_content" />
+        android:paddingTop="20dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -35,8 +35,8 @@
 
         <Button
             android:layout_width="fill_parent"
-            android:background="@color/primary_color"
             android:layout_height="wrap_content"
+            android:background="@color/primary_color"
             android:text="LogOut" />
     </LinearLayout>
 

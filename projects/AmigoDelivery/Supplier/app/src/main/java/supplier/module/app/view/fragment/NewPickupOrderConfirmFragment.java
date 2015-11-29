@@ -1,6 +1,5 @@
 package supplier.module.app.view.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -11,15 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.util.Constant;
+import com.view.fragment.AbstractFragment;
 
-import model.common.Location;
 import model.order.Order;
-import model.party.Party;
 import rest.resource.OrderRes;
 import supplier.R;
 import supplier.module.app.singleton.SupplierApp;
 
-public class NewPickupOrderConfirmFragment extends Fragment {
+public class NewPickupOrderConfirmFragment extends AbstractFragment {
 
     private Order order;
     //private Party party;

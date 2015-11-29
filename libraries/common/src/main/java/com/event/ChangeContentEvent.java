@@ -5,23 +5,22 @@ import android.os.Bundle;
 import java.io.Serializable;
 
 public class ChangeContentEvent implements Serializable {
-    private ContentType newContent;
     private final Class contentClass;
     private final Bundle data;
+    private final boolean addToBackStack;
 
-    public ChangeContentEvent(ContentType newContent, Bundle data) {
-        this.newContent = newContent;
-        this.contentClass = null;
-        this.data = data;
+    public ChangeContentEvent(Class newContentClass) {
+        this(newContentClass, new Bundle(), false);
     }
 
     public ChangeContentEvent(Class newContentClass, Bundle data) {
-        this.contentClass = newContentClass;
-        this.data = data;
+        this(newContentClass, data, false);
     }
 
-    public ContentType getNewContent() {
-        return newContent;
+    public ChangeContentEvent(Class newContentClass, Bundle data, boolean addToBackStack) {
+        this.contentClass = newContentClass;
+        this.data = data;
+        this.addToBackStack = addToBackStack;
     }
 
     public Class getContentClass() {
@@ -32,7 +31,7 @@ public class ChangeContentEvent implements Serializable {
         return data;
     }
 
-    public enum ContentType {
-        ACTIVITY, FRAGMENT
+    public boolean isAddToBackStack() {
+        return addToBackStack;
     }
 }

@@ -1,6 +1,5 @@
 package in.co.foodamigo.customer.module.catalogue.view.component;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
+import com.view.fragment.AbstractFragment;
+
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.catalogue.view.adapter.ProductAdapter;
 import model.catalogue.ProductCategory;
 
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends AbstractFragment {
 
     private ProductCategory productCategory;
 

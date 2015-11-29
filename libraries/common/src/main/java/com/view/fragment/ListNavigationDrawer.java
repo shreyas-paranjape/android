@@ -4,19 +4,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.view.adapter.list.AbstractListAdapter;
 import com.view.model.Item;
-import com.view.widget.NavigationDrawerListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public abstract class ListNavigationDrawer extends NavigationDrawer {
 
-    protected List<Item> drawerItems = new ArrayList<>();
+    protected static final List<Item> drawerItems = new ArrayList<>();
 
     @Override
     protected void initView(View v) {
-        ListView mDrawerListView = (ListView)v.findViewById(getListViewId());
+        ListView mDrawerListView = (ListView) v.findViewById(getListViewId());
         mDrawerListView.setAdapter(getAdapter());
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -28,5 +29,5 @@ public abstract class ListNavigationDrawer extends NavigationDrawer {
 
     protected abstract int getListViewId();
 
-    protected abstract NavigationDrawerListAdapter getAdapter();
+    protected abstract AbstractListAdapter<Item> getAdapter();
 }

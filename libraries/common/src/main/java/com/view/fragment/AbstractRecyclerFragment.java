@@ -14,10 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.event.ChangeContentEvent;
-import com.view.widget.AbstractRecyclerAdapter;
+import com.view.adapter.recycler.AbstractRecyclerAdapter;
 
 import de.greenrobot.event.EventBus;
 
+@SuppressWarnings("unused")
 public abstract class AbstractRecyclerFragment<T> extends Fragment {
 
     protected final static String dialogFragmentTag = "DIALOG";

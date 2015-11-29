@@ -3,15 +3,28 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/beach">
+    android:background="@color/primary_color">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/goa_amigo_200" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@+id/padding"
         android:gravity="center_horizontal"
         android:text="@string/app"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="50sp"
+        android:typeface="serif" />
+
+    <View
+        android:id="@+id/padding"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

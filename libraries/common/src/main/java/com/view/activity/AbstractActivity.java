@@ -6,6 +6,8 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,20 +15,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.App;
 import com.event.ChangeContentEvent;
+import com.order.CartManager;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.view.fragment.NavigationDrawer;
 
 import de.greenrobot.event.EventBus;
 
-//@SuppressWarnings("unused")
-public abstract class AbstractActivity extends AppCompatActivity {
+@SuppressWarnings("unused")
+public abstract class AbstractActivity extends AppCompatActivity implements AppActivity {
 
     protected final EventBus eventBus = EventBus.getDefault();
     private TextView tvTitle;
     protected AccountManager accountManager;
+    private CartManager cartManager;
 
 
     @Override
@@ -57,9 +64,26 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (cartManager != null && cartManager.isCartExpanded()) {
+            cartManager.collapsePanel();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
-        unRegisterListener(this);
+        unRegisterListener(this, cartManager);
         super.onDestroy();
+    }
+
+    protected CartManager initCart(int layoutId, int cartId, Fragment cartContent) {
+        addCartFragment(cartId, cartContent);
+        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(layoutId));
+        cartManager.hidePanel();
+        registerListener(cartManager);
+        return cartManager;
     }
 
     protected void replaceContent(Class newFragmentClass, Bundle data) {
@@ -112,7 +136,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     protected void startNewActivity(Class clazz, Bundle data) {
-        Intent intent = new Intent(AbstractActivity.this, clazz);
+        Intent intent = new Intent(this, clazz);
         intent.putExtras(data);
         startActivity(intent);
     }
@@ -247,6 +271,12 @@ public abstract class AbstractActivity extends AppCompatActivity {
         return 0;
     }
 
+    protected void setFullScreen() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
     protected int getDrawerFragmentId() {
         return 0;
     }
@@ -270,5 +300,12 @@ public abstract class AbstractActivity extends AppCompatActivity {
     protected int getTitleId() {
         return 0;
     }
+
+    private void addCartFragment(int cartContainerId, Fragment cartContentFragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.replace(cartContainerId, cartContentFragment).commit();
+    }
+
 
 }

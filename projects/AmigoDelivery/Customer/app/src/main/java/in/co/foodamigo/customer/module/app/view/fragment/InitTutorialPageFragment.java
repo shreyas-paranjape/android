@@ -3,13 +3,9 @@ package in.co.foodamigo.customer.module.app.view.fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
@@ -21,7 +17,6 @@ import in.co.foodamigo.customer.module.app.view.model.Tutorial;
 public class InitTutorialPageFragment extends Fragment {
 
     private static final String ARG_TUTORIAL = "tutorial";
-    private static final String TAG = InitTutorialPageFragment.class.getName();
     private Tutorial tutorial;
 
     public static InitTutorialPageFragment newInstance(Serializable tutorial) {
@@ -48,14 +43,7 @@ public class InitTutorialPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentInitInfoBinding rootBinding = FragmentInitInfoBinding.inflate(inflater, container, false);
         rootBinding.setTutorial(tutorial);
-        Picasso.with(getActivity())
-                .load(tutorial.getUrl())
-                .into(rootBinding.imgTutorial, new Callback.EmptyCallback() {
-                    @Override
-                    public void onError() {
-                        Log.d(TAG, "Could not load image");
-                    }
-                });
+        //TODO Load Image
         if (tutorial.isShowHome()) {
             rootBinding.btnSkip.setOnClickListener(new View.OnClickListener() {
                 @Override

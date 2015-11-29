@@ -43,7 +43,7 @@ public class AddressFormFragment extends FormFragment {
     private void initView(View root) {
         etAddress = (EditText) root.findViewById(R.id.etAddress);
         acLocality = (AutoCompleteTextView) root.findViewById(R.id.acLocality);
-        acLocality.setAdapter(new ArrayAdapter<String>(getActivity(),
+        acLocality.setAdapter(new ArrayAdapter<>(getActivity(),
                 android.R.layout.select_dialog_item, localities));
         acLocality.setThreshold(2);
     }

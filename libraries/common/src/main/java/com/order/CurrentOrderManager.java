@@ -28,17 +28,31 @@ public class CurrentOrderManager {
     }
 
     public void modifyItem(Product product, int quantity) {
-        OrderItem orderItem = getItemForProduct(product);
-        if (orderItem == null) {
-            orderItem = new OrderItem();
-            orderItem.setProduct(product);
-            orderItem.setOrder(order);
-            order.getOrderItems().add(orderItem);
+        if (productValid(product)) {
+            OrderItem orderItem = getItemForProduct(product);
+            if (orderItem == null) {
+                orderItem = new OrderItem();
+                orderItem.setProduct(product);
+                orderItem.setOrder(order);
+                order.getOrderItems().add(orderItem);
+            }
+            changeProductQuantity(orderItem, quantity);
+            changeTotal();
+            Log.d("Order Manager", "Cart size" + cartSize());
+            size.set(cartSize());
+        } else {
+            Log.e("Order Manager", "Bad product : " + product);
         }
-        changeProductQuantity(orderItem, quantity);
-        changeTotal();
-        Log.d("Order Manager", "Cart size" + cartSize());
-        size.set(cartSize());
+
+    }
+
+    private boolean productValid(Product product) {
+        boolean isValid = true;
+        if (product.getDetail() == null ||
+                product.getDetail().getPrice() <= 0) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     public int cartSize() {
@@ -85,7 +99,7 @@ public class CurrentOrderManager {
         total.set(t);
     }
 
-
+    @SuppressWarnings("unused")
     public void onEvent(ModifyCartEvent event) {
         switch (event.getAction()) {
             case ADD:

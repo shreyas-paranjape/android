@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 
+import com.util.Constant;
+
 import java.util.List;
 
-import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.catalogue.view.component.CategoryFragment;
 import model.catalogue.ProductCategory;
 import repository.catalogue.ProductCategoryRepo;

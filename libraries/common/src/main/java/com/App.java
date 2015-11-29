@@ -97,18 +97,24 @@ public abstract class App extends Application {
 
     public abstract String getTag();
 
-    @NonNull
-    protected abstract String getRegularFontAssetName();
+    protected String getRegularFontAssetName() {
+        return null;
+    }
 
-    @NonNull
-    protected abstract String getThinFontAssetName();
+    protected String getThinFontAssetName() {
+        return null;
+    }
 
     public abstract String getAccountType();
 
 
     private void setAppFonts() {
-        FontsOverride.setDefaultFont(this, "MONOSPACE", getThinFontAssetName());
-        FontsOverride.setDefaultFont(this, "SERIF", getRegularFontAssetName());
+        if (getThinFontAssetName() != null) {
+            FontsOverride.setDefaultFont(this, "MONOSPACE", getThinFontAssetName());
+        }
+        if (getRegularFontAssetName() != null) {
+            FontsOverride.setDefaultFont(this, "SERIF", getRegularFontAssetName());
+        }
     }
 
     private void initSugarDb() {

@@ -67,7 +67,4 @@ public class MenuFragment extends Fragment {
         return mPager;
     }
 
-    public static class ShowOrderStatusEvent {
-    }
-
 }

@@ -1,12 +1,11 @@
 package com.view.fragment;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
+import com.view.adapter.elist.NavigationDrawerAdapter;
 import com.view.model.Item;
 import com.view.model.ItemGroup;
-import com.view.widget.NavigationDrawerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,11 @@ public abstract class ExpandableListNavigationDrawer extends NavigationDrawer {
         ExpandableListView mDrawerListView = (ExpandableListView) v.findViewById(getListViewId());
         expandAllGroups(mDrawerListView);
         disableGroupClick(mDrawerListView);
+        mDrawerListView.setGroupIndicator(null);
+        mDrawerListView.setChildIndicator(null);
+        mDrawerListView.setChildDivider(null);
+        mDrawerListView.setDivider(null);
+        mDrawerListView.setDividerHeight(0);
         mDrawerListView.setGroupIndicator(null);
         mDrawerListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override

@@ -28,6 +28,11 @@ public class OrderApp extends App {
     }
 
     @Override
+    public String getAccountType() {
+        return "in.co.foodamigo.restaurant";
+    }
+
+    @Override
     public String getBaseUri() {
         return baseUri;
     }
@@ -37,18 +42,3 @@ public class OrderApp extends App {
         return TAG;
     }
 }
-
-
-//    @NonNull
-//    private Order newOrder() {
-//        final Order o = new Order();
-//        final Party party = new Party();
-//        final List<OrderItem> orderItems = new ArrayList<>();
-//        orderItems.add(new OrderItem(new Product(), 500, 1, "placed"));
-//        party.setId(5);
-//        o.setCode(UUID.randomUUID().toString());
-//        o.setStatus("placed");
-//        o.setParty(party);
-//        o.setOrderItems(orderItems);
-//        return o;
-//    }

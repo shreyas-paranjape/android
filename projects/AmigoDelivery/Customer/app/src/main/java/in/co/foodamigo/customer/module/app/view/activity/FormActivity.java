@@ -7,13 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.util.Constant;
 import com.view.activity.AbstractActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.profile.view.component.AddressFormFragment;
 import in.co.foodamigo.customer.module.profile.view.component.PersonalDetailsFormFragment;
 

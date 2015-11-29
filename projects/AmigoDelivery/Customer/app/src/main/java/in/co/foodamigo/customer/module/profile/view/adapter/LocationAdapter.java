@@ -1,10 +1,10 @@
 package in.co.foodamigo.customer.module.profile.view.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
+import com.view.adapter.list.AbstractListAdapter;
 
 import java.util.List;
 
@@ -12,18 +12,14 @@ import de.greenrobot.event.EventBus;
 import in.co.foodamigo.customer.databinding.ItemLocationBinding;
 import model.common.Location;
 
-public class LocationAdapter extends ArrayAdapter<Location> {
+public class LocationAdapter extends AbstractListAdapter<Location> {
 
-    protected final LayoutInflater inflater;
-
-    public LocationAdapter(Context context, int resource, List<Location> locationList) {
-        super(context, resource, locationList);
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public LocationAdapter(Context context, List<Location> locationList) {
+        super(context, locationList);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    protected View getView(final int position, ViewGroup parent) {
         ItemLocationBinding rootBinding =
                 ItemLocationBinding.inflate(inflater, parent, false);
         final Location currentAddress = getItem(position);

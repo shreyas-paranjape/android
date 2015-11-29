@@ -3,15 +3,15 @@ package in.co.foodamigo.customer.module.app.view.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 
+import com.view.adapter.list.AbstractListAdapter;
 import com.view.fragment.ListNavigationDrawer;
 import com.view.model.Item;
-import com.view.widget.NavigationDrawerListAdapter;
 
 import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.module.app.view.adapter.DrawerAdapter;
 import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
-import in.co.foodamigo.customer.module.order.view.component.OrderStatusFragment;
-import in.co.foodamigo.customer.module.order.view.component.PastOrderFragment;
+import in.co.foodamigo.customer.module.order.view.fragment.OrderStatusFragment;
+import in.co.foodamigo.customer.module.order.view.fragment.PastOrderFragment;
 import in.co.foodamigo.customer.module.profile.view.component.ProfileFragment;
 
 public class DrawerFragment extends ListNavigationDrawer {
@@ -19,7 +19,6 @@ public class DrawerFragment extends ListNavigationDrawer {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initDrawer();
     }
 
     @Override
@@ -28,8 +27,8 @@ public class DrawerFragment extends ListNavigationDrawer {
     }
 
     @Override
-    protected NavigationDrawerListAdapter getAdapter() {
-        return new DrawerAdapter(getActivity(), R.layout.item_drawer_link, drawerItems);
+    protected AbstractListAdapter<Item> getAdapter() {
+        return new DrawerAdapter(getActivity(), drawerItems);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class DrawerFragment extends ListNavigationDrawer {
         return R.layout.fragment_navigation_drawer;
     }
 
-    private void initDrawer() {
+    static {
         drawerItems.add(new Item("Menu", R.drawable.ic_restaurant_menu_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
@@ -63,6 +62,4 @@ public class DrawerFragment extends ListNavigationDrawer {
             }
         });
     }
-
-
 }

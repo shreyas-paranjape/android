@@ -1,12 +1,12 @@
 package restaurant.order.module.order.view.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.order.CurrentOrderManager;
+import com.view.fragment.AbstractFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -15,10 +15,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import restaurant.order.databinding.FragmentOrderStatusBinding;
-import restaurant.order.module.app.singleton.OrderApp;
 import restaurant.order.module.order.view.model.OrderStatus;
 
-public class OrderStatusFragment extends Fragment {
+public class OrderStatusFragment extends AbstractFragment {
+
     private CurrentOrderManager currentOrderManager;
     private OrderStatus orderStatus = new OrderStatus();
     private int i;
@@ -26,9 +26,7 @@ public class OrderStatusFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        currentOrderManager =
-                ((OrderApp) getActivity().getApplication())
-                        .getCurrentOrderManager();
+        currentOrderManager = getApp().getCurrentOrderManager();
         super.onCreate(savedInstanceState);
     }
 

@@ -63,7 +63,7 @@
                 android:value=".module.app.view.activity.HomeActivity" />
         </activity>
 
-        <activity android:name=".module.order.view.component.CheckoutActivity">
+        <activity android:name=".module.order.view.activity.CheckoutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".module.app.view.activity.HomeActivity" />

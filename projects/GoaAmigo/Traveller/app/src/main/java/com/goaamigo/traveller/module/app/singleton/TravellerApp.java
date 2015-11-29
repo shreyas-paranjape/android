@@ -1,32 +1,34 @@
 package com.goaamigo.traveller.module.app.singleton;
 
-import android.app.Application;
-import android.content.Intent;
+import com.App;
 
-import com.order.CurrentOrderManager;
-import com.orm.SugarContext;
+public class TravellerApp extends App {
 
-import rest.common.DataService;
-
-public class TravellerApp extends Application {
-    private final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
+    private static final String baseUri = "http://192.168.10.172:3000";
+    private static final String accountType = "Goa amigo";
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        SugarContext.init(getApplicationContext());
-        //startService(new Intent(getApplicationContext(), DataService.class));
+    public String getBaseUri() {
+        return baseUri;
     }
 
     @Override
-    public void onTerminate() {
-        SugarContext.terminate();
-        super.onTerminate();
-
+    public String getTag() {
+        return TravellerApp.class.getName();
     }
 
-    public CurrentOrderManager getCurrentOrderManager() {
-        return currentOrderManager;
+    @Override
+    public String getAccountType() {
+        return accountType;
     }
 
+    @Override
+    protected String getThinFontAssetName() {
+        return "Raleway-Thin.ttf";
+    }
+
+    @Override
+    protected String getRegularFontAssetName() {
+        return "Raleway-Regular.ttf";
+    }
 }

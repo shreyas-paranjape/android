@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.goaamigo.traveller.R;
 import com.view.model.Item;
 import com.view.model.ItemGroup;
-import com.view.widget.NavigationDrawerAdapter;
+import com.view.adapter.elist.NavigationDrawerAdapter;
 
 import java.util.List;
 

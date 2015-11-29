@@ -1,15 +1,9 @@
 package restaurant.order.module.app.view.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.order.CartManager;
 import com.orm.SugarRecord;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.util.Constant;
 import com.util.Util;
 import com.view.activity.AbstractActivity;
@@ -17,31 +11,35 @@ import com.view.activity.AbstractActivity;
 import model.catalogue.ProductCategory;
 import restaurant.order.R;
 import restaurant.order.module.catalogue.view.fragment.MenuFragment;
-import restaurant.order.module.order.view.fragment.FoodOrderFragment;
+import restaurant.order.module.order.view.fragment.CartFragment;
 
 public class HomeActivity extends AbstractActivity {
 
-    private CartManager cartManager;
-    //private final EventListener listener = new EventListener();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setFullScreen();
         super.onCreate(savedInstanceState);
-        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        cartManager.hidePanel();
-        initTabs();
-        registerListener(cartManager);
-        addCartFragment();
+        initCart(R.id.sliding_layout, R.id.cartContainer, new CartFragment());
+        initView();
+    }
+
+    protected int getLayoutId() {
+        return R.layout.activity_home;
+    }
+
+    protected int getContentContainerId() {
+        return R.id.container;
+    }
+
+    private void initView() {
+        initToolbar();
         replaceContent(MenuFragment.class,
                 Util.bundleSerializable(
                         Constant.PRODUCT_CATEGORY,
                         SugarRecord.findById(ProductCategory.class, 1)));
     }
 
-    private void initTabs() {
+    private void initToolbar() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.addTab(tabLayout.newTab().setText("Food"));
         tabLayout.addTab(tabLayout.newTab().setText("Drinks"));
@@ -68,54 +66,4 @@ public class HomeActivity extends AbstractActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-        if (cartManager.isCartExpanded()) {
-            cartManager.collapsePanel();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        //unRegisterListener(listener, cartManager);
-        super.onDestroy();
-    }
-
-    protected int getLayoutId() {
-        return R.layout.activity_home;
-    }
-
-
-    protected int getContentContainerId() {
-        return R.id.container;
-    }
-
-    private void addCartFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new FoodOrderFragment()).commit();
-    }
-
-    private class EventListener {
-    }
 }
-
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_home);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MenuAdapter(getFragmentManager()));
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-    }*/

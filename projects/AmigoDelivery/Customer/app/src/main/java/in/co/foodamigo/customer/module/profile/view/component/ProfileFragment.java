@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.util.Constant;
+
 import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
-import in.co.foodamigo.customer.R;
 import in.co.foodamigo.customer.databinding.FragmentProfileBinding;
-import in.co.foodamigo.customer.module.app.singleton.Constant;
 import in.co.foodamigo.customer.module.app.view.activity.FormActivity;
 import in.co.foodamigo.customer.module.profile.view.adapter.LocationAdapter;
 import model.common.Location;
@@ -65,11 +65,11 @@ public class ProfileFragment extends Fragment {
         rootBinding.addresses.setAdapter(
                 // TODO get location for user
                 new LocationAdapter(getActivity(),
-                        R.layout.item_location,
                         new ArrayList<Location>()));
         return rootBinding.getRoot();
     }
 
+    @SuppressWarnings("unused")
     public void onEvent(LocationAdapter.LocationEditClickEvent event) {
         showForm(Constant.ADDRESS);
     }

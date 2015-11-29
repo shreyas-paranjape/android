@@ -1,5 +1,23 @@
 <resources>
-    <string name="app_name">Supplier</string>
+    <string name="app_name">Amigo Delivery</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">setting</string>
+    <string name="btn_place_order">Book</string>
+    <string name="hint_mobile">Mobile</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_amount">Amount</string>
+    <string name="time">Pick up time</string>
+    <string name="cd_name">Icon enter name</string>
+    <string name="cd_phone">Icon enter phone number</string>
+    <string name="cd_address">Icon enter address</string>
+    <string name="cd_amount">Icon enter amount</string>
+    <string name="cd_pickup_time">Icon select pickup time</string>
+    <string name="hint_enter_locality">Enter locality</string>
+    <string name="hint_house">House</string>
+    <string name="hint_society">Society</string>
+    <string name="btn_done">Done</string>
+    <string name="hint_enter_street">Street</string>
+    <string name="hint_landmark">Nearest landmark</string>
+    <string name="btn_save">Save</string>
 </resources>

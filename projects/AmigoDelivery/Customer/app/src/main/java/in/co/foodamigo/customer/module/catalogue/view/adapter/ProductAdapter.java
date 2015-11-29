@@ -2,14 +2,11 @@ package in.co.foodamigo.customer.module.catalogue.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.order.CurrentOrderManager;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,15 +50,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                                 CurrentOrderManager.CartAction.ADD));
             }
         });
-        Picasso.with(context)
-                .load(product.getImageUrl())
-                .into(viewHolder.productCardView.imgProduct,
-                        new Callback.EmptyCallback() {
-                            @Override
-                            public void onError() {
-                                Log.d("ProductAdapter", "Could not load image");
-                            }
-                        });
         //TODO Load image from URL
     }
 

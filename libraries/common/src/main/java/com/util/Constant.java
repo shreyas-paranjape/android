@@ -15,4 +15,5 @@ public interface Constant {
     String PRODUCT = "PRODUCT";
     String SUPPLIER = "SUPPLIER";
     String FILTER = "FILTER";
+    String PICKER_LISTENER = "PICKER_LISTENER";
 }

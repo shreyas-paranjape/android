@@ -1,6 +1,9 @@
 package com;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -8,6 +11,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.order.CurrentOrderManager;
 import com.orm.SugarContext;
+import com.util.Constant;
 import com.util.FontsOverride;
 
 import java.io.File;
@@ -21,11 +25,17 @@ public abstract class App extends Application {
     protected final EventBus eventBus = EventBus.getDefault();
     protected final CurrentOrderManager currentOrderManager = new CurrentOrderManager();
     protected RequestQueue queue;
+    private SharedPreferences sharedPref;
 
     @Override
     public void onCreate() {
         super.onCreate();
         try {
+            if (null != getSharedPrefKey()) {
+                sharedPref = getSharedPreferences(getSharedPrefKey(), MODE_PRIVATE);
+            } else {
+                throw new RuntimeException("Please specify Shared pref key");
+            }
             initHttpQueue();
             initSugarDb();
             setAppFonts();
@@ -93,6 +103,16 @@ public abstract class App extends Application {
         }
     }
 
+    public void saveToPref(String key, String value) {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public String getFromPref(String key) {
+        return sharedPref.getString(key, null);
+    }
+
     public abstract String getBaseUri();
 
     public abstract String getTag();
@@ -140,5 +160,35 @@ public abstract class App extends Application {
         return "Class: " + className + " ; Method: " + methodName + " ; Message: " + message;
     }
 
+    public String getMetaDataValue(String key) {
+        try {
+            ApplicationInfo ai = getPackageManager()
+                    .getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+            return ai.metaData.getString(key);
+        } catch (Exception e) {
+            logError(App.class.getName(), "getMetaDataValue", "Error : " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    public String getSharedPrefKey() {
+        return "";
+    }
+
+    public String[] getAppCredentials() {
+        return new String[]{
+                "",
+                ""
+        };
+    }
+
+    public String getToken() {
+        return getFromPref(Constant.KEY_USER_TOKEN);
+    }
+
+    public String getSecretKey() {
+        return null;
+    }
 
 }

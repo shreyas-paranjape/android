@@ -33,6 +33,11 @@
             android:name=".module.app.view.activity.HomeActivity"
             android:screenOrientation="landscape" />
 
+        <activity android:name=".module.party.view.activity.AuthActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
+        </activity>
 
         <activity
             android:name=".module.order.view.activity.CheckoutActivity"
@@ -57,6 +62,13 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="model" />
+
+        <meta-data
+            android:name="CLIENT_ID"
+            android:value="KIUGQ3EKFLGUL3DEMF3PU3A3GOOX3OKW" />
+        <meta-data
+            android:name="CLIENT_SECRET"
+            android:value="LTNDIQPTZYOJWZH3HWVYIRNCA62KJDU6" />
 
     </application>
 

@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="supplier">
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+
     <application
         android:name=".module.app.singleton.SupplierApp"
         android:allowBackup="false"
@@ -20,6 +26,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".module.party.view.activity.AuthActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
+        </activity>
 
         <meta-data
             android:name="DATABASE"

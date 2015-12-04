@@ -17,7 +17,7 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="hint_name">First Last</string>
-    <string name="hint_mobile">10 Digits</string>
+    <string name="hint_mobile">Mobile</string>
     <string name="menu_profile">profile</string>
     <string name="use_location">Use current location</string>
     <string name="enter_address">H. no. 007 X street, A-403 X Society</string>
@@ -38,4 +38,9 @@
     <string name="order_status">Order status</string>
     <string name="skip">Skip</string>
     <string name="img_desc_tut">Tutorial image</string>
+    <string name="hint_username">Email / Mobile</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="hint_email">Email</string>
 </resources>

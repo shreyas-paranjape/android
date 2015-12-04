@@ -20,4 +20,11 @@
     <string name="hint_enter_street">Street</string>
     <string name="hint_landmark">Nearest landmark</string>
     <string name="btn_save">Save</string>
+    <string name="hint_username">Email / Mobile</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="hint_email">Email / Mobile</string>
+    <string name="lbl_tnc">By signing up you accept our terms and conditions</string>
+    <string name="btn_signUp">Sign up</string>
 </resources>

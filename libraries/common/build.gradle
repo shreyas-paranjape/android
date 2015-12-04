@@ -40,4 +40,5 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.1'
     compile project(path: ':model')
     compile project(':volley')
+    compile project(':rest')
 }

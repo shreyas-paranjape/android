@@ -16,4 +16,13 @@ public interface Constant {
     String SUPPLIER = "SUPPLIER";
     String FILTER = "FILTER";
     String PICKER_LISTENER = "PICKER_LISTENER";
+
+    String KEY_USER_TOKEN = "KEY_USER_TOKEN";
+    String KEY_CLIENT_TOKEN = "KEY_CLIENT_TOKEN";
+    String KEY_USER_ROL = "KEY_USER_ROL";
+
+    String CONTEXT_SIGNUP = "/signup";
+    String CONTEXT_TOKEN = "/token";
+
+    String GRANT_TYPE_PASSWORD = "password";
 }

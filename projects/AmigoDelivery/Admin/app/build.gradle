@@ -9,7 +9,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "in.co.foodamigo.admin"
+        applicationId "com.admin"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -29,5 +29,6 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile project(path: ':common')
     compile project(path: ':websocket')
+    compile project(path: ':rest')
 
 }

@@ -6,14 +6,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.RequestFuture;
 import com.orm.SugarRecord;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import de.greenrobot.event.EventBus;
+import rest.common.EncodedGsonRequest;
 import rest.common.GsonRequest;
 
 @SuppressWarnings("unused")
@@ -51,32 +50,36 @@ public class RestResource<T> {
                             }
                         }
                         EventBus.getDefault()
-                                .post(new HttpRequestComplete(requestId,
+                                .post(new HttpRequestComplete<>(requestId,
                                         success,
-                                        success ? null : errMessage.toString()));
+                                        success ? null : errMessage.toString(),
+                                        response));
                     }
                 },
                 newErrorListener(requestId),
                 type));
     }
 
-    public void postSync(final int requestId, RequestQueue queue, Type type, T body, boolean sync) {
-        RequestFuture<T> future = RequestFuture.newFuture();
-        queue.add(new GsonRequest<>(
-                Request.Method.POST,
-                uri,
-                body,
-                future,
-                future,
-                type));
-        try {
-            future.get(REQUEST_TIMEOUT, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            EventBus.getDefault().post(new HttpRequestComplete(requestId, false, e.getMessage()));
-        }
-    }
+//    public T postSync(final int requestId, RequestQueue queue, Type type, T body) {
+//        RequestFuture<T> future = RequestFuture.newFuture();
+//        queue.add(new GsonRequest<>(
+//                Request.Method.POST,
+//                uri,
+//                body,
+//                future,
+//                future,
+//                type));
+//        try {
+//            return future.get(REQUEST_TIMEOUT, TimeUnit.SECONDS);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//            //EventBus.getDefault().post(new HttpRequestComplete(requestId, false, e.getMessage()));
+//            //return null;
+//        }
+//    }
 
     public void postAsync(final int requestId, RequestQueue queue, Type type, T body) {
+        Log.e(TAG, "Req : " + body);
         queue.add(new GsonRequest<>(
                 Request.Method.POST,
                 uri,
@@ -84,12 +87,32 @@ public class RestResource<T> {
                 new Response.Listener<T>() {
                     @Override
                     public void onResponse(T response) {
+                        Log.e(TAG, "Res" + response);
                         EventBus.getDefault().post(
-                                new HttpRequestComplete(requestId, true, null));
+                                new HttpRequestComplete<>(requestId, true, null, response));
                     }
                 },
                 newErrorListener(requestId),
                 type));
+    }
+
+    public void postAsync(final int requestId, RequestQueue queue, Type type, T body, String secret) {
+        Log.e(TAG, "Req : " + body);
+        queue.add(new EncodedGsonRequest<>(
+                Request.Method.POST,
+                uri,
+                body,
+                new Response.Listener<T>() {
+                    @Override
+                    public void onResponse(T response) {
+                        Log.e(TAG, "Res" + response);
+                        EventBus.getDefault().post(
+                                new HttpRequestComplete<>(requestId, true, null, response));
+                    }
+                },
+                newErrorListener(requestId),
+                type,
+                secret));
     }
 
     private Response.ErrorListener newErrorListener(final int requestId) {
@@ -97,27 +120,30 @@ public class RestResource<T> {
             @Override
             public void onErrorResponse(VolleyError error) {
                 EventBus.getDefault().post(
-                        new HttpRequestComplete(requestId, false, error.getMessage()));
+                        new HttpRequestComplete<T>(requestId, false, error.getMessage(), null));
             }
         };
     }
 
 
-    public static class HttpRequestComplete {
+    public static class HttpRequestComplete<T> {
         private final int requestId;
         private final boolean successful;
         private final String message;
+        private final T response;
 
-        public HttpRequestComplete(int requestId, boolean success, String message) {
+        public HttpRequestComplete(int requestId, boolean success, String message, T response) {
             this.requestId = requestId;
             this.successful = success;
             this.message = message;
+            this.response = response;
         }
 
         @Override
         public String toString() {
             return "HttpRequestComplete{" +
                     "requestId=" + requestId +
+                    ", response =" + response +
                     ", successful=" + successful +
                     ", message='" + message + '\'' +
                     '}';
@@ -134,6 +160,10 @@ public class RestResource<T> {
 
         public int getRequestId() {
             return requestId;
+        }
+
+        public T getResponse() {
+            return response;
         }
     }
 }

@@ -9,12 +9,16 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -23,7 +27,11 @@ import com.App;
 import com.event.ChangeContentEvent;
 import com.order.CartManager;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.util.Constant;
 import com.view.fragment.NavigationDrawer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -35,6 +43,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements AppA
     protected AccountManager accountManager;
     private CartManager cartManager;
 
+    protected static final int AUTH_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,57 @@ public abstract class AbstractActivity extends AppCompatActivity implements AppA
             getApp().logWarn(AbstractActivity.class.getName(), "onCreate",
                     "Override getLayoutId() to set layout");
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AUTH_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                onLoginSuccess(data);
+            } else if (resultCode == RESULT_CANCELED) {
+                getApp().logWarn(
+                        AbstractActivity.class.getName(),
+                        "onActivityResult",
+                        "Return Cancelled : " + requestCode);
+                //TODO Allow retry
+                finish();
+            } else {
+                getApp().logWarn(
+                        AbstractActivity.class.getName(),
+                        "onActivityResult",
+                        "Return Not ok : " + resultCode);
+                //TODO Allow retry
+                finish();
+            }
+        } else {
+            getApp().logDebug(
+                    AbstractActivity.class.getName(),
+                    "onActivityResult",
+                    "Request code: " + requestCode);
+        }
+    }
+
+    public void requestAuth(Class<? extends AbstractAuthActivity> authActivityClass) {
+        startActivityForResult(new Intent(this, authActivityClass), AUTH_REQUEST_CODE);
+    }
+
+    public boolean isLoggedIn() {
+        return getApp().getFromPref(Constant.KEY_USER_TOKEN) != null;
+    }
+
+    public boolean isSuperAdmin() {
+        return "super_admin".equals(getApp().getFromPref(Constant.KEY_USER_ROL));
+    }
+
+    protected void onLoginSuccess(Intent returnedData) {
+    }
+
+
+
+
+    public void signOut() {
+        getApp().saveToPref(Constant.KEY_USER_TOKEN, null);
     }
 
     @Override

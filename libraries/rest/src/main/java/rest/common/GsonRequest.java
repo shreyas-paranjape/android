@@ -2,6 +2,7 @@ package rest.common;
 
 import android.util.Log;
 
+import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
@@ -17,9 +18,9 @@ import java.lang.reflect.Type;
 
 public class GsonRequest<T> extends JsonRequest<T> {
 
-    private final Gson gson;
-    private final Type type;
-    private String mRequestBody;
+    protected final Gson gson;
+    protected final Type type;
+    protected String mRequestBody;
 
     public GsonRequest(int method, String url, T requestBody,
                        Response.Listener<T> listener,
@@ -37,14 +38,18 @@ public class GsonRequest<T> extends JsonRequest<T> {
         try {
             String json = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers));
-            return (Response<T>) Response.success(
-                    gson.fromJson(json, type),
-                    HttpHeaderParser.parseCacheHeaders(response));
+            return getResponse(json, HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
         } catch (JsonSyntaxException e) {
             return Response.error(new ParseError(e));
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected Response<T> getResponse(String responseString, Cache.Entry cacheHeaders)
+            throws UnsupportedEncodingException {
+        return (Response<T>) Response.success(gson.fromJson(responseString, type), cacheHeaders);
     }
 
     @Override

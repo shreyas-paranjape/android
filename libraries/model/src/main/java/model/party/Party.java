@@ -52,4 +52,5 @@ public class Party implements Serializable {
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
+
 }

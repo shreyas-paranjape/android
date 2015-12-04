@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="admin">
+    package="com.admin">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -27,6 +27,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".module.party.view.activity.AuthActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
+        </activity>
+
         <meta-data
             android:name="DATABASE"
             android:value="admin.db" />
@@ -39,6 +45,7 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="model" />
+
     </application>
 
 </manifest>

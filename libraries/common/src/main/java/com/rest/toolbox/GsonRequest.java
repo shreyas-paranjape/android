@@ -1,4 +1,4 @@
-package rest.common;
+package com.rest.toolbox;
 
 import android.util.Log;
 

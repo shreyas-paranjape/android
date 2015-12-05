@@ -1,4 +1,4 @@
-package com.admin.module.app.infra.socket;
+package com.socket;
 
 import android.util.Log;
 
@@ -108,4 +108,6 @@ public class SocketClient extends WebSocketClient {
             return remote;
         }
     }
+
+
 }

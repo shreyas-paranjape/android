@@ -1,4 +1,4 @@
-package rest.common;
+package com.rest.toolbox;
 
 import com.android.volley.Cache;
 import com.android.volley.Response;

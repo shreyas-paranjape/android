@@ -3,6 +3,7 @@
     package="com.admin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".module.app.singleton.AdminApp"
@@ -12,9 +13,16 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".module.app.infra.socket.SocketConnectionManager"
+            android:name="com.socket.SocketConnectionManager"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver android:name="com.receiver.ConnectionChangeReceiver"
+            android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".module.app.view.activity.HomeActivity"

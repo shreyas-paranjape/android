@@ -11,7 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.util.Constant;
 import com.view.activity.AppActivity;
 
-import rest.RestResource;
+import com.rest.RestResource;
 
 @SuppressWarnings("unused")
 public class AbstractAuthFragment extends AbstractFragment {

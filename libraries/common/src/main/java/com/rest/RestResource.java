@@ -1,4 +1,4 @@
-package rest;
+package com.rest;
 
 import android.util.Log;
 
@@ -7,13 +7,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.orm.SugarRecord;
+import com.rest.toolbox.EncodedGsonRequest;
+import com.rest.toolbox.GsonRequest;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import rest.common.EncodedGsonRequest;
-import rest.common.GsonRequest;
 
 @SuppressWarnings("unused")
 public class RestResource<T> {

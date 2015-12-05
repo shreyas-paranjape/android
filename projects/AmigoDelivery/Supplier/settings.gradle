@@ -10,4 +10,4 @@ project(':rest').projectDir = new File(rootDir, '../../../libraries/rest')
 include ':sugar'
 project(':sugar').projectDir = new File(rootDir, '../../../libraries/persist/sugar')
 include ':websocket'
-project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')
+project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/websocket')

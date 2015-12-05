@@ -5,16 +5,12 @@ import android.os.HandlerThread;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import org.apache.http.*;
-//import org.apache.http.client.HttpResponseException;
-import org.apache.http.message.BasicLineParser;
-import org.apache.http.message.BasicNameValuePair;
 
-import javax.net.SocketFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
+import com.codebutler.http.message.Header;
+import com.codebutler.http.message.HttpException;
+import com.codebutler.http.message.StatusLine;
+import com.codebutler.http.message.BasicLineParser;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,35 +20,42 @@ import java.net.URI;
 import java.security.KeyManagementException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
+import java.util.Map;
 
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+
+@SuppressWarnings("unused")
 public class WebSocketClient {
     private static final String TAG = "WebSocketClient";
 
-    private URI                      mURI;
-    private Listener                 mListener;
-    private Socket                   mSocket;
-    private Thread                   mThread;
-    private HandlerThread            mHandlerThread;
-    private Handler                  mHandler;
-    private List<BasicNameValuePair> mExtraHeaders;
-    private HybiParser               mParser;
+    private URI mURI;
+    private Listener mListener;
+    private Socket mSocket;
+    private Thread mThread;
+    private Handler mHandler;
+    private Map<String, String> mExtraHeaders;
+    private HybiParser mParser;
 
     private final Object mSendLock = new Object();
 
     private static TrustManager[] sTrustManagers;
 
+
     public static void setTrustManagers(TrustManager[] tm) {
         sTrustManagers = tm;
     }
 
-    public WebSocketClient(URI uri, Listener listener, List<BasicNameValuePair> extraHeaders) {
-        mURI          = uri;
+    public WebSocketClient(URI uri, Listener listener, Map<String, String> extraHeaders) {
+        mURI = uri;
         mListener = listener;
         mExtraHeaders = extraHeaders;
-        mParser       = new HybiParser(this);
+        mParser = new HybiParser(this);
 
-        mHandlerThread = new HandlerThread("websocket-thread");
+        HandlerThread mHandlerThread = new HandlerThread("websocket-thread");
         mHandlerThread.start();
         mHandler = new Handler(mHandlerThread.getLooper());
     }
@@ -94,8 +97,8 @@ public class WebSocketClient {
                     out.print("Sec-WebSocket-Key: " + secret + "\r\n");
                     out.print("Sec-WebSocket-Version: 13\r\n");
                     if (mExtraHeaders != null) {
-                        for (NameValuePair pair : mExtraHeaders) {
-                            out.print(String.format("%s: %s\r\n", pair.getName(), pair.getValue()));
+                        for (String headerName : mExtraHeaders.keySet()) {
+                            out.print(String.format("%s: %s\r\n", headerName, mExtraHeaders.get(headerName)));
                         }
                     }
                     out.print("\r\n");
@@ -106,9 +109,9 @@ public class WebSocketClient {
                     // Read HTTP response status line.
                     StatusLine statusLine = parseStatusLine(readLine(stream));
                     if (statusLine == null) {
-                        throw new HttpResponseException("Received no reply from server.");
-                    } else if (statusLine.getStatusCode() != HttpStatus.SC_SWITCHING_PROTOCOLS) {
-                        throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase());
+                        throw new HttpException("Received no reply from server.");
+                    } else if (statusLine.getStatusCode() != 101) {
+                        throw new HttpException(statusLine.getStatusCode() + statusLine.getReasonPhrase());
                     }
 
                     // Read HTTP response headers.
@@ -117,7 +120,7 @@ public class WebSocketClient {
 
                     while (!TextUtils.isEmpty(line = readLine(stream))) {
                         Header header = parseHeader(line);
-                        if (header.getName().equals("Sec-WebSocket-Accept")) {
+                        if (header != null && "Sec-WebSocket-Accept".equals(header.getName())) {
                             String expected = createSecretValidation(secret);
                             String actual = header.getValue().trim();
 
@@ -250,11 +253,15 @@ public class WebSocketClient {
     }
 
     public interface Listener {
-        public void onConnect();
-        public void onMessage(String message);
-        public void onMessage(byte[] data);
-        public void onDisconnect(int code, String reason);
-        public void onError(Exception error);
+        void onConnect();
+
+        void onMessage(String message);
+
+        void onMessage(byte[] data);
+
+        void onDisconnect(int code, String reason);
+
+        void onError(Exception error);
     }
 
     private SSLSocketFactory getSSLSocketFactory() throws NoSuchAlgorithmException, KeyManagementException {

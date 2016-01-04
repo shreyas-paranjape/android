@@ -19,4 +19,8 @@ public class Facility implements Serializable {
     @Column(name = "location_id")
     private Location location;
 
+    public Facility(String name, Location location) {
+        this.name = name;
+        this.location = location;
+    }
 }

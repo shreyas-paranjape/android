@@ -40,7 +40,6 @@ Part of our mission is to:
     Empower and Engage people around the world to collect and develop educational content and either publish it under a free license or dedicate it to the public domain.
     Disseminate this content effectively and globally, free of charge.
 
-
 You are free to:
 
     Read and Print our articles and other media free of charge.
@@ -106,4 +105,11 @@ With the understanding that:
     <string name="hint_confirm_password">Confirm password</string>
     <string name="hint_username">Email / Mobile</string>
     <string name="sign_up">Sign up</string>
+    <string name="title_tab_start_date">Start Date</string>
+    <string name="ttile_tab_end_date">End Date</string>
+    <string name="but_done">Done</string>
+    <string name="filter">filter</string>
+    <string name="apply">Apply</string>
+    <string name="action_reset">Reset</string>
+    <string name="sort">sort</string>
 </resources>

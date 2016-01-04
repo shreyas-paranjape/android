@@ -2,7 +2,9 @@ package com.view.adapter.recycler;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.cache.ObjectCache;
 import com.event.ChangeContentEvent;
@@ -12,6 +14,7 @@ import com.view.model.Filter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -28,7 +31,7 @@ public abstract class
             (List<Filter<T>>) ObjectCache.get(getCacheFilterKey());
     protected LayoutInflater inflater;
     private final List<T> originalList;
-    private final List<T> itemList;
+    protected final List<T> itemList;
 
     protected AbstractRecyclerAdapter(Context context, List<T> itemList) {
         this.originalList = new ArrayList<>(itemList);
@@ -83,6 +86,8 @@ public abstract class
     private void applyFilters() {
         itemList.clear();
         itemList.addAll(originalList);
+//        Log.i("xyz", ":" + Arrays.toString(itemList.toArray()));
+//        Log.i("xyz", ":" + Arrays.toString(cachedFilters.toArray()));
         Iterator<T> it = itemList.iterator();
         while (it.hasNext()) {
             T foo = it.next();
@@ -92,6 +97,7 @@ public abstract class
                 }
             }
         }
+        notifyDataSetChanged();
     }
 
     protected void onClick(Class newView, String dataKey, Serializable data) {
@@ -116,8 +122,5 @@ public abstract class
         public Comparator<T> getComparator() {
             return comparator;
         }
-
     }
-
-
 }

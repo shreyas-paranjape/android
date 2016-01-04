@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:id="@+id/llActivity"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvActivitiesDate"
+        android:layout_width="fill_parent"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:text="15 DEC 2015" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.15"
+            android:text="Number Of people" />
+
+        <TextView
+            android:id="@+id/tvActivitiesMinus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="0.30"
+            android:background="@color/primary_color"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/tvActivitiesCount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="center"
+            android:text="12" />
+
+        <TextView
+            android:id="@+id/tvActivitiesPlus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:background="@color/primary_color"
+            android:gravity="center"
+            android:text="+" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnActivityApply"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply" />
+
+</LinearLayout>

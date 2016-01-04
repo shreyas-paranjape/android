@@ -1,31 +1,63 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.goaamigo.traveller.module.product.view.fragment.ProductFilter">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:orientation="vertical"
+    tools:context=".module.product.view.Filter.fragment.StayFilter">
+    <!--
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/dialogToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"></android.support.v7.widget.Toolbar>
+    -->
     <TextView
+        android:id="@+id/text"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@color/primary_color"
+        android:gravity="center"
+        android:text="Filter"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs"></android.support.v4.view.ViewPager>
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/btnCancel"
             android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:background="@color/mdtp_red_focused"
-            android:text="CANCEL"
-            android:layout_height="wrap_content" />
-        <Button
-            android:layout_width="fill_parent"
-            android:text="APPLY FILTER"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@color/primary_color"
-            android:layout_height="wrap_content" />
+            android:text="CANCEL" />
+
+        <Button
+            android:id="@+id/btnApply"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@color/primary_color"
+            android:text="APPLY FILTER" />
     </LinearLayout>
 
 </RelativeLayout>

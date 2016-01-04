@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.R;
-import com.view.adapter.spinner.AbstractSpinnerAdapter;
 import com.view.model.Item;
 
 import java.util.List;
@@ -32,7 +31,6 @@ public class ItemSpinnerAdapter extends AbstractSpinnerAdapter<Item> {
         return collapsedView;
     }
 
-
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View collapsedView;
@@ -48,6 +46,4 @@ public class ItemSpinnerAdapter extends AbstractSpinnerAdapter<Item> {
         linkImage.setBackgroundResource(getItem(position).getImageId());
         return collapsedView;
     }
-
-
 }

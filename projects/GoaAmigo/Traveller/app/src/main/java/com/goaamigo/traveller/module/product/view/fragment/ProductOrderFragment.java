@@ -22,7 +22,6 @@ public class ProductOrderFragment extends OrderFragment {
         return rootBinding.getRoot();
     }
 
-
     private void initView(FragmentOrderBinding rootBinding) {
         rootBinding.lvCartItems.setAdapter(cartItemsAdapter);
         rootBinding.setOrderManager(currentOrderManager);

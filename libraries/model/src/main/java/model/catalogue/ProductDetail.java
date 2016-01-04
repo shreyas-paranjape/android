@@ -1,12 +1,14 @@
 package model.catalogue;
 
+import android.os.Parcelable;
+
 import com.orm.dsl.Column;
 import com.orm.dsl.Table;
 
 import java.io.Serializable;
 
 @Table
-public class ProductDetail implements Serializable {
+public class ProductDetail implements Serializable, Cloneable{
 
     private static final long serialVersionUID = 1l;
 
@@ -17,6 +19,9 @@ public class ProductDetail implements Serializable {
 
     @Column(name = "price")
     private double price;
+
+//    @Column(name = "rating")
+//    private double rating;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -29,6 +34,13 @@ public class ProductDetail implements Serializable {
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
+//
+//    public double getRating() {
+//        return rating;
+//    }
+//    public void setRating(double rating) {
+//        this.rating = price;
+//    }
 
     public long getId() {
         return id;

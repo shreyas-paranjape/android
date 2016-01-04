@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="10"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="ROOM"
+        android:id="@+id/room"
+        android:layout_weight="1.51" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:text="ADULT"
+        android:layout_weight="0.75" />
+    <TextView
+        android:background="@color/primary_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/adultMinus"
+        android:text="-"
+        android:layout_weight="0.51" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1"
+        android:id="@+id/adultCount"
+        android:layout_weight="0.66" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/adultPlus"
+        android:background="@color/primary_color"
+        android:text="+"
+        android:layout_weight="0.88" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="CHILD"
+        android:layout_weight="1.09" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/primary_color"
+        android:text="-"
+        android:id="@+id/chilsMinus"
+        android:layout_weight="0.51" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/childCount"
+        android:text="1"
+        android:layout_weight="0.51" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/childPlus"
+        android:background="@color/primary_color"
+        android:text="+"
+        android:layout_weight="0.61" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/remove"
+        android:text="*"
+        android:paddingLeft="10dp"
+        android:layout_weight="1.14"
+        android:src="@drawable/ic_clear_black_18dp"/>
+
+</LinearLayout>

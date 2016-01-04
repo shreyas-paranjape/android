@@ -33,7 +33,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements AppA
     protected final EventBus eventBus = EventBus.getDefault();
     private TextView tvTitle;
     protected AccountManager accountManager;
-    private CartManager cartManager;
+    protected CartManager cartManager;
 
 
     @Override
@@ -81,7 +81,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements AppA
     protected CartManager initCart(int layoutId, int cartId, Fragment cartContent) {
         addCartFragment(cartId, cartContent);
         cartManager = new CartManager((SlidingUpPanelLayout) findViewById(layoutId));
-        cartManager.hidePanel();
+//        cartManager.hidePanel();
         registerListener(cartManager);
         return cartManager;
     }
@@ -306,6 +306,4 @@ public abstract class AbstractActivity extends AppCompatActivity implements AppA
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(cartContainerId, cartContentFragment).commit();
     }
-
-
 }

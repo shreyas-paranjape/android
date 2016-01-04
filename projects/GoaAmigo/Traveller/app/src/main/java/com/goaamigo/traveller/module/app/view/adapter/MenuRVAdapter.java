@@ -18,7 +18,8 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHolder> {
+public class MenuRVAdapter extends
+        RecyclerView.Adapter<MenuRVAdapter.dataViewHolder> {
 
     List<MenuData> menuDataList;
     private Context context;
@@ -30,7 +31,8 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
 
     @Override
     public dataViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_layout, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.menu_layout, viewGroup, false);
         dataViewHolder holder = new dataViewHolder(v);
         return holder;
     }
@@ -46,7 +48,8 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
                 EventBus.getDefault().post(
                         new ChangeContentEvent(
                                 menuDataList.get(i).getClazz(),
-                                Util.bundleSerializable("MENUDATA", menuDataList.get(i))));
+                                Util.bundleSerializable
+                                        ("MENUDATA", menuDataList.get(i))));
             }
         });
     }
@@ -56,7 +59,8 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
         return menuDataList.size();
     }
 
-    public static class dataViewHolder extends RecyclerView.ViewHolder {
+    public static class dataViewHolder
+            extends RecyclerView.ViewHolder {
         CardView cv;
         ImageView image;
         TextView title;
@@ -70,17 +74,11 @@ public class MenuRVAdapter extends RecyclerView.Adapter<MenuRVAdapter.dataViewHo
             description = (TextView) itemView.findViewById(R.id.cardDescription);
         }
     }
-
-
-
    /* public static class MenuButtonClicked implements Serializable {
         private final MenuData menuData;
-
-
         public MenuButtonClicked(MenuData menuData) {
             this.menuData = menuData;
         }
-
         public MenuData getMenuData() {
             return menuData;
         }

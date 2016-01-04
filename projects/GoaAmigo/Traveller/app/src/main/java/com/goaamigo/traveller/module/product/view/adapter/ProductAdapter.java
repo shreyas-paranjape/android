@@ -1,5 +1,6 @@
 package com.goaamigo.traveller.module.product.view.adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,108 +12,86 @@ import android.widget.TextView;
 
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
-import com.goaamigo.traveller.module.product.view.activity.ProductDetails;
-import com.order.CurrentOrderManager;
+import com.goaamigo.traveller.module.product.view.fragment.RestaurantFragment;
+import com.util.Constant;
+import com.view.adapter.recycler.AbstractRecyclerAdapter;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import model.catalogue.Product;
 
-//import com.goaamigo.traveller.module.trip.view.component.DetailsFragment;
-
 public class ProductAdapter
-        extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
+        extends AbstractRecyclerAdapter<Product, ProductAdapter.ViewHolder>
         implements Serializable {
 
     private static final long serialVersionUID = 1l;
-    private final List<Product> productsList;
 
-    public ProductAdapter(List<Product> productsList) {
-        this.productsList = productsList;
-    }
-
-    public ProductAdapter() {
-        this.productsList = null;
+    public ProductAdapter(Context context, List<Product> itemList) {
+        super(context, itemList);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
-        ViewHolder phv = new ViewHolder(v);
-        return phv;
+        ViewHolder holder = new ViewHolder(v);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.name.setText(productsList.get(position).getName());
-        //holder.location.setText(productsList.get(position).getProductLocation());
-        //holder.rating.setText(productsList.get(position).getProductRating());
-        //holder.discount.setText("-" + productsList.get(position).getProductDiscount());
-        //holder.price.setText("Rs." + productsList.get(position).getProductPrice());
-        //holder.imageView.setImageResource(productsList.get(position).getProductImage());
+
+        holder.restName.setText(getItem(position).getName());
+        holder.restPrice.setText("Rs." + getItem(position).getDetail().getPrice());
         holder.lv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("PRODUCT", productsList.get(position));
-                EventBus.getDefault().post(new ChangeContentEvent(ProductDetails.class, bundle));
+                bundle.putSerializable("PRODUCT", getItem(position));
+                EventBus.getDefault().post(new
+                        ChangeContentEvent(RestaurantFragment.class, bundle));
             }
         });
-    }
-
-    private void addItem(Product product) {
-        modifyItem(product, CurrentOrderManager.CartAction.ADD);
-    }
-
-    private void modifyItem(Product product, CurrentOrderManager.CartAction action) {
-        EventBus.getDefault().post(
-                new CurrentOrderManager.ModifyCartEvent(product, action));
-    }
-
-    @Override
-    public int getItemCount() {
-        return productsList.size();
-    }
-
-    public List<Product> getProducts() {
-        return productsList;
-    }
-
-//    public void addProduct(Product product){
-//        productsList.add(product);
-//        EventBus.getDefault().post(new ProductDataSetChanged());
-//    }
-
-    /*@Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        EventBus.getDefault().post(new ProductDataSetChanged());
-    }*/
-
-    public static class ProductDataSetChanged {
+        //holder.imageView.setImageResource(productsList.get(position).getProductImage());
+        //holder.location.setText(productsList.get(position).getProductLocation());
+        //holder.rating.setText((int) getItem(position).getDetail().getRating());
+        //holder.discount.setText("-" + productsList.get(position).getProductDiscount());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, location, rating, discount, price;
-        ImageView imageView;
-        LinearLayout lv;
+        protected TextView restName, restLocation, rating, restDiscount, restPrice;
+        protected ImageView restImage;
+        protected LinearLayout lv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.productName);
-            location = (TextView) itemView.findViewById(R.id.productLocation);
+            restName = (TextView) itemView.findViewById(R.id.productName);
+            restLocation = (TextView) itemView.findViewById(R.id.productLocation);
             rating = (TextView) itemView.findViewById(R.id.productRating);
-            discount = (TextView) itemView.findViewById(R.id.productDiscount);
-            price = (TextView) itemView.findViewById(R.id.productPrice);
-            imageView = (ImageView) itemView.findViewById(R.id.product_image);
+            restDiscount = (TextView) itemView.findViewById(R.id.productDiscount);
+            restPrice = (TextView) itemView.findViewById(R.id.productPrice);
+            restImage = (ImageView) itemView.findViewById(R.id.product_image);
             lv = (LinearLayout) itemView.findViewById(R.id.ll_card);
         }
     }
 
-    public class OpenDetailFragmentOnClickEvent implements Serializable {
-        public OpenDetailFragmentOnClickEvent() {
+    @SuppressWarnings("unused")
+    public void onEvent(ProductSort event) {
+        sort(event.getComparator());
+    }
+
+    public static class ProductSort extends AbstractRecyclerAdapter.Sort<Product> {
+
+        public ProductSort(Comparator<Product> comparator) {
+            super(comparator);
         }
+    }
+
+    @Override
+    protected String getCacheFilterKey() {
+        return Constant.PRODUCT;
     }
 }

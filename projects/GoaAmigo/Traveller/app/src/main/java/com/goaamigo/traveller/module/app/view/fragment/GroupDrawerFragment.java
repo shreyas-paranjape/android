@@ -51,10 +51,10 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
                 return new StayFragment();
             }
         });
-        book.getItems().add(new Item("Local travel", R.drawable.ic_notifications_black_24dp) {
+        book.getItems().add(new Item("WishList", R.drawable.ic_notifications_black_24dp) {
             @Override
             public Fragment getDisplayFragment() {
-                return new LocaltravelFragment();
+                return null;
             }
         });
         book.getItems().add(new Item("Activity", R.drawable.ic_notifications_black_24dp) {
@@ -67,7 +67,6 @@ public class GroupDrawerFragment extends ExpandableListNavigationDrawer {
             @Override
             public Fragment getDisplayFragment() {
                 return null;
-                //new SearchTripFragment();
             }
         });
         feedback.getItems().add(new Item("Menu", R.drawable.ic_notifications_black_24dp) {

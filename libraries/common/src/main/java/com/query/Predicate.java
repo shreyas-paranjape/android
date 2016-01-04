@@ -16,19 +16,15 @@ public class Predicate implements Expression, Serializable {
         this.value = value;
     }
 
-
     public String getColumn() {
         return column;
     }
-
 
     public String getOperator() {
         return operator;
     }
 
-
     public String getValue() {
         return value;
     }
-
 }

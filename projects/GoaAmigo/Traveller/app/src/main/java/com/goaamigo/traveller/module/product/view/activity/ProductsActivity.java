@@ -1,184 +1,132 @@
 package com.goaamigo.traveller.module.product.view.activity;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
+import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.cache.ObjectCache;
 import com.event.ChangeContentEvent;
 import com.goaamigo.traveller.R;
+import com.goaamigo.traveller.module.product.view.Filter.fragment.FilterCategory;
+import com.goaamigo.traveller.module.product.view.Filter.fragment.LocalTransportRental;
+import com.goaamigo.traveller.module.product.view.Filter.fragment.LocalTransportTaxi;
 import com.goaamigo.traveller.module.product.view.adapter.ProductAdapter;
-import com.goaamigo.traveller.module.product.view.fragment.ProductFilter;
+import com.goaamigo.traveller.module.product.view.adapter.SingleChoiceDialog;
 import com.goaamigo.traveller.module.product.view.fragment.ProductListFragment;
-import com.goaamigo.traveller.module.product.view.fragment.ProductOrderFragment;
-import com.order.CartManager;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.goaamigo.traveller.module.product.view.fragment.TripFilter;
+import com.util.Constant;
+import com.util.IPredicate;
 import com.view.activity.AbstractActivity;
 import com.view.adapter.spinner.ItemSpinnerAdapter;
+import com.view.model.Filter;
 import com.view.model.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import model.catalogue.Product;
 
 public class ProductsActivity extends AbstractActivity {
-    private boolean mapsIcon = false;
-    private CartManager cartManager;
-    private final ProductAdapter productAdapter = new ProductAdapter();
-    private final EventListener listener = new EventListener();
-    protected final static List<Item> spinnerItems = new ArrayList<>();
 
-    private class EventListener {
+    protected final static List<Item> spinnerItems = new ArrayList<>();
+    protected List<Filter<Product>> filters = new ArrayList<>();
+
+
+    public ProductsActivity() {
+        Object cachedFilters = ObjectCache.get(Constant.PRODUCT);
+        if (cachedFilters != null) {
+            filters = (List<Filter<Product>>) cachedFilters;
+        } else {
+            filters = new ArrayList<>();
+            ObjectCache.put(Constant.PRODUCT, filters);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cartManager = new CartManager((SlidingUpPanelLayout) findViewById(R.id.sliding_layout));
-        cartManager.hidePanel();
-        registerListener(cartManager);
-        addCartFragment();
-
-        spinnerItems.add(new Item("stay", 0) {
-            @Override
-            public Fragment getDisplayFragment() {
-                return null;
-            }
-        });
-        spinnerItems.add(new Item("rent bike/car", 0) {
-            @Override
-            public Fragment getDisplayFragment() {
-                return null;
-            }
-        });
-        spinnerItems.add(new Item("activities", 0) {
-            @Override
-            public Fragment getDisplayFragment() {
-                return null;
-            }
-        });
-        spinnerItems.add(new Item("transport", 0) {
-            @Override
-            public Fragment getDisplayFragment() {
-                return null;
-            }
-        });
-        Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
+        final Spinner spinner = (Spinner) findViewById(R.id.productSpinner);
         final ItemSpinnerAdapter adapter = new ItemSpinnerAdapter(this, spinnerItems);
         spinner.setAdapter(adapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, final int i, long l) {
+                if (spinnerItems.get(i).getName().equals("Trip")) {
+                    EventBus.getDefault().post(new ChangeContentEvent(TripFilter.class));
+                } else {
+                    Bundle b = new Bundle();
+                    FilterCategory filterCategory = new FilterCategory();
+                    b.putString("Key",spinnerItems.get(i).getName());
+                    filterCategory.setArguments(b);
+                    switch (spinnerItems.get(i).getName()) {
+                        case "Stay":
+                            initCart(R.id.sliding_layout, R.id.cartContainer, filterCategory);
+                            cartManager.collapsePanel();
+                            break;
+                        case "Restaurant":
+                            initCart(R.id.sliding_layout, R.id.cartContainer, filterCategory);
+                            cartManager.collapsePanel();
+                            break;
+                        case "Activities":
+                            initCart(R.id.sliding_layout, R.id.cartContainer, filterCategory);
+                            cartManager.collapsePanel();
+                            break;
+                        case "LocalTransport_taxi":
+                            initCart(R.id.sliding_layout, R.id.cartContainer, new LocalTransportTaxi());
+                            cartManager.collapsePanel();
+                            break;
+                        case "LocalTransport_rental":
+                            initCart(R.id.sliding_layout, R.id.cartContainer, new LocalTransportRental());
+                            cartManager.collapsePanel();
+                            break;
+                    }
+                    clearFilter();
+                    addFilter(new Filter<>("xyz", new IPredicate<Product>() {
+                        @Override
+                        public boolean apply(Product product) {
+                            return product.getProductCategory().getName().contains(spinnerItems.get(i).getName());
+                        }
+                    }, null));
+                    EventBus.getDefault().post(new ProductAdapter.FilterEvent());
+                    EventBus.getDefault().post(new ProductListFragment.MessageEvent(spinnerItems.get(i).getName()));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
-    private void addCartFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.cartContainer, new ProductOrderFragment()).commit();
+    public static class SlidingTabDismissEvent {
+
+        public SlidingTabDismissEvent() {
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        unRegisterListener(cartManager);
-        super.onDestroy();
-    }
-
-    protected int getLayoutId() {
-        return R.layout.activity_products;
+    public void onEvent(ProductsActivity.SlidingTabDismissEvent event) {
+        cartManager.collapsePanel();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_filter:
-                EventBus.getDefault().post(new ChangeContentEvent(ProductFilter.class));
-                break;
-            case R.id.action_maps:
-                if (mapsIcon == false) {
-                    replaceContent(new Fragment());
-                    mapsIcon = true;
-                } else {
-                    replaceContent(getListFragment());
-                    mapsIcon = false;
-                }
-                break;
+        switch (item.getItemId()){
+            case R.id.action_sort:
+                SingleChoiceDialog singleChoiceDialog = new SingleChoiceDialog();
+                singleChoiceDialog.show(getFragmentManager(),"Dialog");
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public class DialogProductSort extends DialogFragment {
-        private View view;
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-            view = inflater.inflate(R.layout.dialog_product_sort, null);
-            final CheckBox popularity = (CheckBox) view.findViewById(R.id.cb_popularity);
-            final CheckBox lowToHigh = (CheckBox) view.findViewById(R.id.cb_low_to_high);
-            final CheckBox highToLow = (CheckBox) view.findViewById(R.id.cb_high_to_low);
-            final CheckBox discount = (CheckBox) view.findViewById(R.id.cb_discount);
-
-            if (popularity.isChecked()) {
-                popularity.setChecked(false);
-                dismiss();
-            }
-            if (lowToHigh.isChecked()) {
-                lowToHigh.setChecked(false);
-                dismiss();
-            }
-            if (highToLow.isChecked()) {
-                highToLow.setChecked(false);
-                dismiss();
-            }
-            if (discount.isChecked()) {
-                discount.setChecked(false);
-                dismiss();
-            }
-            return view;
-        }
-
-        public void onRadioButtonClicked(View view) {
-            // Is the button now checked?
-            boolean checked = ((RadioButton) view).isChecked();
-
-            // Check which radio button was clicked
-            switch (view.getId()) {
-                case R.id.rb_low_to_high:
-                    if (checked) {
-                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
-                        dismiss();
-                    }
-                    // Pirates are the best
-                    break;
-                case R.id.rb_discount:
-                    if (checked)
-                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
-                    // Ninjas rule
-                    break;
-                case R.id.rb_high_to_low:
-                    if (checked)
-                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
-                    // Ninjas rule
-                    break;
-                case R.id.rb_popularity:
-                    if (checked)
-                        Toast.makeText(getActivity(), "product booked", Toast.LENGTH_LONG).show();
-                    // Ninjas rule
-                    break;
-            }
-        }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -187,34 +135,67 @@ public class ProductsActivity extends AbstractActivity {
         return true;
     }
 
+    static {
+        spinnerItems.add(new Item("Stay", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("Restaurant", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("Activities", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("LocalTransport_taxi", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("LocalTransport_rental", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+        spinnerItems.add(new Item("Trip", R.drawable.ic_favorite_black_24dp) {
+            @Override
+            public Fragment getDisplayFragment() {
+                return null;
+            }
+        });
+    }
+
+    private void addFilter(Filter filter) {
+        filters.add(filter);
+    }
+
+    private void clearFilter() {
+        filters.clear();
+    }
+
+    protected int getLayoutId() {
+        return R.layout.activity_products;
+    }
+
     protected int getToolbarId() {
         return R.id.toolbar;
     }
 
     protected Fragment getInitContent() {
-        return getListFragment();
-    }
-
-    private void addArguments(Fragment frag) {
-        Bundle b = new Bundle();
-        b.putSerializable("PRODUCT_ADAPTER", productAdapter);
-        frag.setArguments(b);
-    }
-
-    private Fragment getMapFragment() {
-        //ProductMapFragment frag = new ProductMapFragment();
-//        productAdapter.addProduct(new Product());
-        //addArguments(frag);
-        return null;
-    }
-
-    private Fragment getListFragment() {
-        ProductListFragment frag = new ProductListFragment();
-        addArguments(frag);
-        return frag;
+        return new ProductListFragment();
     }
 
     protected int getContentContainerId() {
         return R.id.container;
     }
+
 }

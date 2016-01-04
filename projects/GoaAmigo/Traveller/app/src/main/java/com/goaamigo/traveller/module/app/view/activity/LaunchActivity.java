@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import de.greenrobot.event.util.ThrowableFailureEvent;
-import rest.common.DataService;
 
 public class LaunchActivity extends AbstractActivity {
 
@@ -28,7 +27,7 @@ public class LaunchActivity extends AbstractActivity {
                 startNewActivity(HomeActivity.class, new Bundle());
                 finish();
             }
-        }, 5, TimeUnit.SECONDS);
+        }, 1, TimeUnit.SECONDS);
     }
 
     @Override
@@ -42,11 +41,7 @@ public class LaunchActivity extends AbstractActivity {
         return R.layout.activity_splash;
     }
 
-    @SuppressWarnings("unused")
-    public void onEventMainThread(DataService.SyncCompleteEvent event) {
-        startNewActivity(HomeActivity.class, new Bundle());
-        finish();
-    }
+
 
     @SuppressWarnings("unused")
     public void onEventMainThread(ThrowableFailureEvent event) {

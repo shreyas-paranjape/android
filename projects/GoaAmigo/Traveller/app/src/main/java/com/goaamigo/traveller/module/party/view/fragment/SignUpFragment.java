@@ -18,7 +18,7 @@ public class SignUpFragment extends AbstractAuthFragment {
         v.findViewById(R.id.btnSignUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signup(etUsername.getText().toString(), etPassword.getText().toString());
+                signUp("",etUsername.getText().toString(), etPassword.getText().toString());
             }
         });
     }

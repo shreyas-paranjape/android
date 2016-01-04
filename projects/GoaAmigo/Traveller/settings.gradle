@@ -9,6 +9,8 @@ include ':volley'
 project(':volley').projectDir = new File(rootDir, '../../../libraries/network/volley')
 include ':rest'
 project(':rest').projectDir = new File(rootDir, '../../../libraries/rest')
+//include ':websocket'
+//project(':websocket').projectDir = new File(rootDir, '../../../libraries/network/android-websockets')
 //include ':cog'
 //project(':cog').projectDir = new File(rootDir,'../../../libraries/cognalys')
 //include ':map'

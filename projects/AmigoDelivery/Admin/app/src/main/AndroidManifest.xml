@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="admin">
+    package="com.admin">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".module.app.singleton.AdminApp"
@@ -12,9 +13,16 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".module.app.infra.socket.SocketConnectionManager"
+            android:name="com.socket.SocketConnectionManager"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver android:name="com.receiver.ConnectionChangeReceiver"
+            android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".module.app.view.activity.HomeActivity"
@@ -25,6 +33,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".module.party.view.activity.AuthActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".module.app.view.activity.HomeActivity" />
         </activity>
 
         <meta-data
@@ -39,6 +53,7 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="model" />
+
     </application>
 
 </manifest>

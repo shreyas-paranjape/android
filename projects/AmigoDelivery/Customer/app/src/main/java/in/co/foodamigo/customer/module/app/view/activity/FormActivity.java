@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.co.foodamigo.customer.R;
-import in.co.foodamigo.customer.module.profile.view.component.AddressFormFragment;
-import in.co.foodamigo.customer.module.profile.view.component.PersonalDetailsFormFragment;
+import in.co.foodamigo.customer.module.party.view.component.AddressFormFragment;
+import in.co.foodamigo.customer.module.party.view.component.PersonalDetailsFormFragment;
 
 public class FormActivity extends AbstractActivity {
 

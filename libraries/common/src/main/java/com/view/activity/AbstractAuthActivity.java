@@ -50,6 +50,7 @@ public abstract class AbstractAuthActivity
         delegate.onCreate(savedInstanceState);
         mAccountManager = AccountManager.get(getBaseContext());
         mAuthTokenType = getIntent().getStringExtra(ARG_AUTH_TYPE);
+
         if (mAuthTokenType == null)
             mAuthTokenType = TOKEN_TYPE_FULL_ACCESS;
         if (getLayoutId() != 0) {
@@ -64,6 +65,12 @@ public abstract class AbstractAuthActivity
                     "onCreate",
                     "Override getLayoutId() to set layout");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
     @Override

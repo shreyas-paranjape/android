@@ -31,7 +31,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 public class HttpHeaderParserTest {
@@ -44,12 +47,14 @@ public class HttpHeaderParserTest {
     private NetworkResponse response;
     private Map<String, String> headers;
 
-    @Before public void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         headers = new HashMap<String, String>();
         response = new NetworkResponse(0, null, headers, false);
     }
 
-    @Test public void parseCacheHeaders_noHeaders() {
+    @Test
+    public void parseCacheHeaders_noHeaders() {
         Cache.Entry entry = HttpHeaderParser.parseCacheHeaders(response);
 
         assertNotNull(entry);
@@ -60,7 +65,8 @@ public class HttpHeaderParserTest {
         assertEquals(0, entry.softTtl);
     }
 
-    @Test public void parseCacheHeaders_headersSet() {
+    @Test
+    public void parseCacheHeaders_headersSet() {
         headers.put("MyCustomHeader", "42");
 
         Cache.Entry entry = HttpHeaderParser.parseCacheHeaders(response);
@@ -71,7 +77,8 @@ public class HttpHeaderParserTest {
         assertEquals("42", entry.responseHeaders.get("MyCustomHeader"));
     }
 
-    @Test public void parseCacheHeaders_etag() {
+    @Test
+    public void parseCacheHeaders_etag() {
         headers.put("ETag", "Yow!");
 
         Cache.Entry entry = HttpHeaderParser.parseCacheHeaders(response);
@@ -80,7 +87,8 @@ public class HttpHeaderParserTest {
         assertEquals("Yow!", entry.etag);
     }
 
-    @Test public void parseCacheHeaders_normalExpire() {
+    @Test
+    public void parseCacheHeaders_normalExpire() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Last-Modified", rfc1123Date(now - ONE_DAY_MILLIS));
@@ -96,7 +104,8 @@ public class HttpHeaderParserTest {
         assertTrue(entry.ttl == entry.softTtl);
     }
 
-    @Test public void parseCacheHeaders_expiresInPast() {
+    @Test
+    public void parseCacheHeaders_expiresInPast() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now - ONE_HOUR_MILLIS));
@@ -110,7 +119,8 @@ public class HttpHeaderParserTest {
         assertEquals(0, entry.softTtl);
     }
 
-    @Test public void parseCacheHeaders_serverRelative() {
+    @Test
+    public void parseCacheHeaders_serverRelative() {
 
         long now = System.currentTimeMillis();
         // Set "current" date as one hour in the future
@@ -124,7 +134,8 @@ public class HttpHeaderParserTest {
         assertEquals(entry.softTtl, entry.ttl);
     }
 
-    @Test public void parseCacheHeaders_cacheControlOverridesExpires() {
+    @Test
+    public void parseCacheHeaders_cacheControlOverridesExpires() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -138,7 +149,8 @@ public class HttpHeaderParserTest {
         assertEquals(entry.softTtl, entry.ttl);
     }
 
-    @Test public void testParseCacheHeaders_staleWhileRevalidate() {
+    @Test
+    public void testParseCacheHeaders_staleWhileRevalidate() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -156,7 +168,8 @@ public class HttpHeaderParserTest {
         assertEqualsWithin(now + ONE_DAY_MILLIS + ONE_WEEK_MILLIS, entry.ttl, ONE_MINUTE_MILLIS);
     }
 
-    @Test public void parseCacheHeaders_cacheControlNoCache() {
+    @Test
+    public void parseCacheHeaders_cacheControlNoCache() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -167,7 +180,8 @@ public class HttpHeaderParserTest {
         assertNull(entry);
     }
 
-    @Test public void parseCacheHeaders_cacheControlMustRevalidateNoMaxAge() {
+    @Test
+    public void parseCacheHeaders_cacheControlMustRevalidateNoMaxAge() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -180,7 +194,8 @@ public class HttpHeaderParserTest {
         assertEquals(entry.softTtl, entry.ttl);
     }
 
-    @Test public void parseCacheHeaders_cacheControlMustRevalidateWithMaxAge() {
+    @Test
+    public void parseCacheHeaders_cacheControlMustRevalidateWithMaxAge() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -193,7 +208,8 @@ public class HttpHeaderParserTest {
         assertEquals(entry.softTtl, entry.ttl);
     }
 
-    @Test public void parseCacheHeaders_cacheControlMustRevalidateWithMaxAgeAndStale() {
+    @Test
+    public void parseCacheHeaders_cacheControlMustRevalidateWithMaxAgeAndStale() {
         long now = System.currentTimeMillis();
         headers.put("Date", rfc1123Date(now));
         headers.put("Expires", rfc1123Date(now + ONE_HOUR_MILLIS));
@@ -224,7 +240,8 @@ public class HttpHeaderParserTest {
 
     // --------------------------
 
-    @Test public void parseCharset() {
+    @Test
+    public void parseCharset() {
         // Like the ones we usually see
         headers.put("Content-Type", "text/plain; charset=utf-8");
         assertEquals("utf-8", HttpHeaderParser.parseCharset(headers));
@@ -266,16 +283,18 @@ public class HttpHeaderParserTest {
         assertEquals("ISO-8859-1", HttpHeaderParser.parseCharset(headers));
     }
 
-    @Test public void parseCaseInsensitive() {
+    @Test
+    public void parseCaseInsensitive() {
 
         long now = System.currentTimeMillis();
 
         Header[] headersArray = new Header[5];
-        headersArray[0] = new BasicHeader("eTAG", "Yow!");
-        headersArray[1] = new BasicHeader("DATE", rfc1123Date(now));
-        headersArray[2] = new BasicHeader("expires", rfc1123Date(now + ONE_HOUR_MILLIS));
-        headersArray[3] = new BasicHeader("cache-control", "public, max-age=86400");
-        headersArray[4] = new BasicHeader("content-type", "text/plain");
+        //TODO
+        //headersArray[0] = new BasicHeader("eTAG", "Yow!");
+        // headersArray[1] = new BasicHeader("DATE", rfc1123Date(now));
+        //headersArray[2] = new BasicHeader("expires", rfc1123Date(now + ONE_HOUR_MILLIS));
+        // headersArray[3] = new BasicHeader("cache-control", "public, max-age=86400");
+        //headersArray[4] = new BasicHeader("content-type", "text/plain");
 
         Map<String, String> headers = BasicNetwork.convertHeaders(headersArray);
         NetworkResponse response = new NetworkResponse(0, null, headers, false);

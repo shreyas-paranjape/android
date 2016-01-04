@@ -16,7 +16,16 @@
     <string name="action_settings">settings</string>
     <string name="category">Category</string>
     <string name="title_activity_main">MainActivity</string>
-<string name="filter">Filter</string>
+    <string name="filter">Filter</string>
     <string name="action_reset">Reset</string>
     <string name="apply">Apply</string>
+    <string name="hint_mobile">Mobile</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="lbl_tnc">By signing up you accept our terms and conditions</string>
+    <string name="btn_signUp">Sign up</string>
+    <string name="hint_username">Email / Mobile</string>
+    <string name="btn_login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="hint_name">Name</string>
 </resources>

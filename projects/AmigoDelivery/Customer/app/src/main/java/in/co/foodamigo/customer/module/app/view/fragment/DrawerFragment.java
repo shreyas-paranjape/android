@@ -12,7 +12,7 @@ import in.co.foodamigo.customer.module.app.view.adapter.DrawerAdapter;
 import in.co.foodamigo.customer.module.catalogue.view.component.MenuFragment;
 import in.co.foodamigo.customer.module.order.view.fragment.OrderStatusFragment;
 import in.co.foodamigo.customer.module.order.view.fragment.PastOrderFragment;
-import in.co.foodamigo.customer.module.profile.view.component.ProfileFragment;
+import in.co.foodamigo.customer.module.party.view.component.ProfileFragment;
 
 public class DrawerFragment extends ListNavigationDrawer {
 

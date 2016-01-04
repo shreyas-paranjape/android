@@ -41,7 +41,6 @@ public class MockRequest extends Request<byte[]> {
         mPostParams = postParams;
     }
 
-    @Override
     public Map<String, String> getPostParams() {
         return mPostParams;
     }
